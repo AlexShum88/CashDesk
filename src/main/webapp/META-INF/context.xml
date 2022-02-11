@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+
+<Context>
+
+
+    <Resource url="jdbc:mysql://localhost:3306/cash_deck"
+              defaultTransactionIsolation="READ_COMMITTED" defaultAutoCommit="true"
+              driverClassName="com.mysql.cj.jdbc.Driver" password="root" username="root" maxWait="10000" maxIdle="30"
+              maxTotal="8" type="javax.sql.DataSource" auth="Container" name="jdbc/mysql"/>
+
+    <!-- MySQL resource name -->
+
+
+    <Resource type="java.lang.String" auth="Container" name="jdbc/mysqlResource"/>
+
+</Context>
