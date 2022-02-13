@@ -28,26 +28,24 @@ public class User implements Serializable {
         this.login = login;
     }
 
-    public String getPassword() {
-//
-//        var enigma = password.toCharArray();
-//        for (int i = 0; i< enigma.length;i++){
-//            enigma[i] = (char) (enigma[i]/3);
-//        }
-//
-//        return Arrays.toString(enigma);
-        return this.password;
+    public String incriptPassword(){
+        var sub1 = password.replace('[','a');
+        var sub2= sub1.replace(']', 'e');
+        var sub3 = sub2.replace('{', 'o');
+        var sub4 = sub3.replace('$', 's');
+        return sub4;
+    }
 
+    public String getPassword() {
+        return this.password;
     }
 
     public void setPassword(String password) {
-//        var enigma = password.toCharArray();
-//        for (int i = 0; i< enigma.length;i++){
-//            enigma[i] = (char) (enigma[i]*3);
-//        }
-//        System.out.println(enigma.toString());
-//        this.password = Arrays.toString(enigma);
-        this.password = password;
+        var sub1 = password.replace('a','[');
+        var sub2= sub1.replace('e', ']');
+        var sub3 = sub2.replace('o', '{');
+        var sub4 = sub3.replace('s', '$');
+        this.password = sub4;
 
     }
 

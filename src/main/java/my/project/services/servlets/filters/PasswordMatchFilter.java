@@ -20,7 +20,8 @@ public class PasswordMatchFilter extends HttpFilter {
        var pass = (String) req.getParameter("password");
         System.out.println("password from user = " +pass);
         System.out.println("password from db = "+ user.getPassword());
-       if (pass.equals(user.getPassword())){
+        System.out.println("password after incript = "+ user.incriptPassword());
+       if (pass.equals(user.incriptPassword())){
            chain.doFilter(req, res);
        }else {
            ((HttpServletResponse) res).sendRedirect("index.html");

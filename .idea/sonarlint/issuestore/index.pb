@@ -17,7 +17,5 @@ I
 src/test/java/TestDb.java,d\f\df5625db3b341ef89708e9afee6e2463f73b5a12
 `
 0src/main/java/my/project/entity/Transaction.java,6\e\6ef871b8ce8c003837757dcbfce2ae49da5d4b93
-Y
-)src/main/java/my/project/entity/User.java,a\3\a32258016ffe2cbe0ebf793c2cdf753f6becce67
 O
 src/main/webapp/views/admin.jsp,4\9\4988ec7195cfc9096b58e6ade3105ca6abc2b5d2
