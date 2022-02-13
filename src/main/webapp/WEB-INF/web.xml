@@ -13,7 +13,7 @@
     <listener-class>my.project.services.servlets.ContextListener</listener-class>
   </listener>
 
-
+<!--servlet block-->
   <servlet>
     <servlet-name>AuthorizationServlet</servlet-name>
     <servlet-class>my.project.services.servlets.AuthorizationServlet</servlet-class>
@@ -32,12 +32,42 @@
     <url-pattern>/admin</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>RegistrationServlet</servlet-name>
+    <servlet-class>my.project.services.servlets.RegistrationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegistrationServlet</servlet-name>
+    <url-pattern>/registration</url-pattern>
+  </servlet-mapping>
+
+
+<!--filter block-->
+  <filter>
+    <filter-name>UserIsPresent</filter-name>
+    <filter-class>my.project.services.servlets.filters.UserIsPresentFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>UserIsPresent</filter-name>
+    <url-pattern>/authorization</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>PasswordMatch</filter-name>
+    <filter-class>my.project.services.servlets.filters.PasswordMatchFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>PasswordMatch</filter-name>
+    <url-pattern>/authorization</url-pattern>
+  </filter-mapping>
+
   <filter>
     <filter-name>authFilter</filter-name>
-    <filter-class>my.project.services.servlets.filters.AuthFilter</filter-class>
+    <filter-class>my.project.services.servlets.filters.AdminFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>authFilter</filter-name>
     <url-pattern>/authorization</url-pattern>
   </filter-mapping>
+
 </web-app>

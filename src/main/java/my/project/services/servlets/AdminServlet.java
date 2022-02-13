@@ -11,6 +11,7 @@ import java.io.IOException;
 public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("in Admin Servlet");
         var manager =(DbManager) getServletContext().getAttribute("dbManager");
         var ss = manager.getAllUsers();
         req.setAttribute("users", ss);

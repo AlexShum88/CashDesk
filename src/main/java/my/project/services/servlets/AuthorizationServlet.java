@@ -16,16 +16,17 @@ public class AuthorizationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        var manager =(DbManager) getServletContext().getAttribute("dbManager");
-        System.out.println(req.getParameter("login"));
-        System.out.println(req.getParameter("password"));
-        User user = new User(
-                req.getParameter("login"),
-                req.getParameter("password"),
-                "guest"
-        );
-
-        manager.InsertUser(user);
+        System.out.println("in auth servlet");
+//        var manager =(DbManager) getServletContext().getAttribute("dbManager");
+//        System.out.println(req.getParameter("login"));
+//        System.out.println(req.getParameter("password"));
+//        User user = new User(
+//                req.getParameter("login"),
+//                req.getParameter("password"),
+//                "guest"
+//        );
+//
+//        manager.InsertUser(user);
 
         req.getRequestDispatcher("views/guest.html").forward(req, resp);
 

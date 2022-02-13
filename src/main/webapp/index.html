@@ -5,14 +5,24 @@
     <title>Title</title>
 </head>
 <body>
+<br>
+<hr>
+<br>
 <form method="post" action="authorization">
     <label>Login</label><br>
-    <input type="text" name="login"><br>
+    <input type="text" required minlength="4" maxlength="16" name="login" pattern="[A-Z,a-z, А-Я,а-я][a-z,а-я]+"><br>
 
     <label>Password</label><br>
-    <input type="password" name="password"><br>
+    <input type="password" required minlength="4" maxlength="30" name="password" pattern="[A-Z,a-z, А-Я,а-я,0-9][a-z,а-я,0-9]+"><br>
+    <br>
     <input type="submit" value="log in"><br>
 
 </form>
+<br>
+<hr>
+<br>
+<button name="registration" onclick="location.href='views/registration.html'">Registration</button>
+<br>
+<hr>
 </body>
 </html>

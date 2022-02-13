@@ -162,7 +162,7 @@ public class DbManager {
         } catch (SQLException | DBException throwables) {
             throwables.printStackTrace();
         }
-        logger.log(Level.ERROR, "cant get user: probably is absent in DB");
+        logger.log(Level.DEBUG, "cant get user: probably is absent in DB");
         return null;
     }
 
