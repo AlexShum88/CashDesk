@@ -1,6 +1,7 @@
 package my.project.services.servlets.filters;
 
 import my.project.entity.User;
+import my.project.services.db.DBException;
 import my.project.services.db.DbManager;
 
 import javax.servlet.FilterChain;
@@ -15,10 +16,10 @@ public class UserIsPresentFilter extends HttpFilter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         System.out.println("in user is present");
-        var dbm = (DbManager) getServletContext().getAttribute("dbManager");
-        System.out.println(req.getParameter("login"));
-        System.out.println(req.getParameter("password"));
-        var user = (User) dbm.getUser(req.getParameter("login"));
+
+        System.out.println("get login"+req.getParameter("login"));
+        System.out.println("get password"+req.getParameter("password"));
+        var user = createUser(req.getParameter("login"));
 
         if (user==null) {
             ((HttpServletResponse) res).sendRedirect("index.html");
@@ -29,5 +30,15 @@ public class UserIsPresentFilter extends HttpFilter {
         req.setAttribute("user", user);
 
         chain.doFilter(req, res);
+    }
+
+    private User createUser(String login){
+        var dbm = (DbManager) getServletContext().getAttribute("dbManager");
+        try {
+            return (User) dbm.getUser(login);
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -11,6 +11,8 @@ import java.io.IOException;
 import my.project.entity.User;
 import my.project.services.db.DbManager;
 
+import static my.project.entity.Roles.ADMIN;
+
 
 public class AdminFilter extends HttpFilter {
 
@@ -20,9 +22,11 @@ public class AdminFilter extends HttpFilter {
         System.out.println("in is admin testing");
         var user = (User) req.getAttribute("user");
         System.out.println("user role = "+ user.getRole());
-        if ("admin".equals(user.getRole())) {
-            System.out.println("admin==admin");
+        if (ADMIN.name.equals(user.getRole())) {
+            System.out.println("user==admin");
             ((HttpServletResponse) res).sendRedirect("admin");
         }else chain.doFilter(req, res);
     }
+
+
 }

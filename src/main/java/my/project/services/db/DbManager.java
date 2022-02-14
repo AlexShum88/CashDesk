@@ -100,6 +100,16 @@ public class DbManager {
         return 0;
     }
 
+    private int roleID(String roleName, Connection conn) throws SQLException {
+        logger.log(Level.INFO,"roleID");
+        PreparedStatement preparedStatement = conn.prepareStatement(SQL_SELECT_ALL_ROLES);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            if (resultSet.getString("role").equals(roleName)) return resultSet.getInt("id");
+        }
+        return 0;
+    }
+
     public boolean findUserName(String userName) throws DBException {
         try (Connection conn = getConnection()) {
             System.out.println(conn);
@@ -186,6 +196,27 @@ public class DbManager {
             e.printStackTrace();
         }
         return users;
+    }
+
+    public boolean changeRole(String userName, String newRole){
+        try (Connection conn = getConnection()) {
+            int roleID = roleID(newRole, conn);
+            String usname = userName.strip();
+            PreparedStatement preparedStatement = conn.prepareStatement(
+                    "update users set roles_id =? where username = ?;"
+            );
+            System.out.println("form dbm role "+ newRole +"+ role id " + roleID(newRole, conn) + " and username " + usname);
+            preparedStatement.setInt(1, roleID);
+            preparedStatement.setString(2, usname);
+            if (preparedStatement.executeUpdate() > 0) {
+                return true;
+            }
+
+        } catch (DBException | SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
 }

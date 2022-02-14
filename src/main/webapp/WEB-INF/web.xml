@@ -41,6 +41,14 @@
     <url-pattern>/registration</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>ChangeRoleServlet</servlet-name>
+    <servlet-class>my.project.services.servlets.ChangeRoleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangeRoleServlet</servlet-name>
+    <url-pattern>/change_role</url-pattern>
+  </servlet-mapping>
 
 <!--filter block-->
   <filter>
