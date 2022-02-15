@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,9 +6,8 @@
 <body>
 <div>
     <form action="check" method="post" target="_parent">
-        <input type="submit" name="redact"  value="redact as senior">
-
-    </form>
+            <input type="submit" name="redact" value="redact as senior">
+        </form>
 </div>
 </body>
 </html>

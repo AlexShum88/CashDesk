@@ -35,7 +35,7 @@ import java.util.Properties;
 //        }
 
 
-public class DbManager {
+public class DbManager extends DbSuperManager{
     static Logger logger = LogManager.getLogger("dbmLogger");
 
 
@@ -44,18 +44,7 @@ public class DbManager {
 
 
 
-    Connection getConnection() throws DBException {
-        Context context;
-        try {
-            context = (Context) new InitialContext().lookup("java:/comp/env");
-            DataSource dataSource = (DataSource) context.lookup("jdbc/mysql");
 
-            return dataSource.getConnection();
-        } catch (NamingException | SQLException e) {
-            e.printStackTrace();
-            throw new DBException(e);
-        }
-    }
 
 
 
@@ -81,7 +70,7 @@ public class DbManager {
     private static final DbManager instance = new DbManager();
 
     public static synchronized DbManager getInstance() {
-        System.out.println("get db instance");
+        System.out.println("get db manager instance");
         return instance;
     }
 

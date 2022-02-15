@@ -50,6 +50,26 @@
     <url-pattern>/change_role</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>CheckServlet</servlet-name>
+    <servlet-class>my.project.services.servlets.CheckServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckServlet</servlet-name>
+    <url-pattern>/check</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>MerchandiserServlet</servlet-name>
+    <servlet-class>my.project.services.servlets.MerchandiserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MerchandiserServlet</servlet-name>
+    <url-pattern>/merchandiser</url-pattern>
+  </servlet-mapping>
+
+
+
 <!--filter block-->
   <filter>
     <filter-name>UserIsPresent</filter-name>

@@ -9,9 +9,39 @@ e
 5src/main/java/my/project/services/db/DBException.java,b\6\b6f31312c3523b86f7643683cda6f01a0bf80e7b
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
-\
-,src/main/java/my/project/entity/Product.java,a\3\a310b0cc70315dd2113e06fac4dd3a0e19a9f989
 I
 src/test/java/TestDb.java,d\f\df5625db3b341ef89708e9afee6e2463f73b5a12
 `
 0src/main/java/my/project/entity/Transaction.java,6\e\6ef871b8ce8c003837757dcbfce2ae49da5d4b93
+I
+src/main/webapp/hello.jsp,1\b\1b3fb2ce87c3816438f9d4d9c574c9a974a1eb02
+P
+ src/main/webapp/views/wrong.html,6\0\60dc1f05abe211f56546635f087d5a23965a63d5
+P
+ src/main/webapp/views/guest.html,7\a\7ac63a4853c225b47ca78cf349751feb3c59aba7
+W
+'src/main/webapp/views/registration.html,1\e\1ed90659d89997a19cd4ec32a2c0d0303ea13d73
+o
+?src/main/java/my/project/services/servlets/ContextListener.java,6\6\66c73833c4e64a9359ead97fee2fbce4132056e3
+{
+Ksrc/main/java/my/project/services/servlets/filters/PasswordMatchFilter.java,7\0\700a040ee83470718a8ed902ba6742babaf6c01a
+Y
+)src/main/java/my/project/entity/User.java,a\3\a32258016ffe2cbe0ebf793c2cdf753f6becce67
+q
+Asrc/main/java/my/project/services/servlets/ChangeRoleServlet.java,e\1\e1860ab4431e7d09375cd66dc4d7c0f5d1243043
+Z
+*src/main/java/my/project/entity/Roles.java,5\4\5497fdf27c6f58490eb2e68db80141d9413cb3ee
+c
+3src/main/webapp/views/workPlace/senior_cashier.html,c\3\c37b93127b655aa4ac2b336372ced26fc59f8698
+l
+<src/main/java/my/project/services/servlets/AdminServlet.java,2\3\235e46a98d8f23645c7ef45871fb835cf1432908
+{
+Ksrc/main/java/my/project/services/servlets/filters/UserIsPresentFilter.java,e\9\e9ab72c3139937920dbf916e84bb6dd227447058
+s
+Csrc/main/java/my/project/services/servlets/filters/AdminFilter.java,1\3\13a22a05de608e9d93c5151d099a7e46385df8a0
+J
+src/main/webapp/index.html,1\3\1337d72a3b1928dba82aa5210f5cdc0e88ce895b
+Z
+*src/main/webapp/views/workPlace/check.html,6\b\6b89cf2f03a217e25f4b98c0bef3684694dee58f
+O
+src/main/webapp/views/admin.jsp,4\9\4988ec7195cfc9096b58e6ade3105ca6abc2b5d2

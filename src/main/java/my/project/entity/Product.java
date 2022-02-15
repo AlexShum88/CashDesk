@@ -6,12 +6,12 @@ public class Product implements Serializable {
     private String name;
     private Double price;
     private boolean div;
-    private Double count;
+    private Integer count;
 
     public Product() {
     }
 
-    public Product(String name, Double price, boolean div, Double count) {
+    public Product(String name, Double price, Integer count, boolean div) {
         this.name = name;
         this.price = price;
         this.div = div;
@@ -42,11 +42,11 @@ public class Product implements Serializable {
         this.div = div;
     }
 
-    public Double getCount() {
+    public Integer getCount() {
         return count;
     }
 
-    public void setCount(Double count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 
