@@ -35,9 +35,11 @@ public class AuthorizationServlet extends HttpServlet {
         }
         if (GUEST.name.equals(user.getRole())) req.getRequestDispatcher("views/guest.html").forward(req, resp);
 //        resp.sendRedirect("views/guest.html"); PRG pattern (defence against sending form twice)
-//        if (MERCHANDISER.name.equals(user.getRole())) req.getRequestDispatcher("views/workPlace/merch.jsp").forward(req, resp);
+        if (MERCHANDISER.name.equals(user.getRole())) req.getRequestDispatcher("merchandiser").forward(req, resp);
 //        if (CASHIER.name.equals(user.getRole())) req.getRequestDispatcher("views/workPlace/cashier.jsp").forward(req, resp);
 //        if (SENIOR_CASHIER.name.equals(user.getRole())) req.getRequestDispatcher("views/workPlace/senior_cashier.jsp").forward(req, resp);
+
+
 
 
 

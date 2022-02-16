@@ -2,6 +2,8 @@ package my.project.services.servlets;
 
 import my.project.entity.Product;
 import my.project.services.db.DbProductManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class MerchandiserServlet extends HttpServlet {
+    Logger LOG = LogManager.getLogger(MerchandiserServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,20 +31,33 @@ public class MerchandiserServlet extends HttpServlet {
         if (req.getParameter("insert")!=null) insertProduct(req);
         if (req.getParameter("delete")!=null) deleteProduct(req);
         if (req.getParameter("setPrice")!=null) changePrice(req);
+        if (req.getParameter("setNumber")!=null) changeNumber(req);
+
 
 
         req.setAttribute("listOfProduct", viewProduct(req));
         req.getRequestDispatcher("views/workPlace/merch.jsp").forward(req, resp);
     }
 
+    private void changeNumber(HttpServletRequest req) {
+        LOG.debug("in change price");
+        var dbm = (DbProductManager) req.getSession().getAttribute("dbm");
+        String name = req.getParameter("prodName");
+        Double number = Double.valueOf(req.getParameter("number"));
+        dbm.changeProductNumber(name, number);
+
+    }
+
     private List<Product> viewProduct (HttpServletRequest req){
+        LOG.debug("in view product");
         var dbm = (DbProductManager) req.getSession().getAttribute("dbm");
          return dbm.getAllProducts();
     }
 
     private void changePrice(HttpServletRequest req) {
+        LOG.debug("in change price");
         var dbm = (DbProductManager) req.getSession().getAttribute("dbm");
-        String name = req.getParameter("name");
+        String name = req.getParameter("prodName");
         Double price = Double.valueOf(req.getParameter("price"));
         dbm.changeProductPrice(name, price);
 
@@ -49,21 +65,29 @@ public class MerchandiserServlet extends HttpServlet {
 
 
     private void insertProduct(HttpServletRequest req){
+        LOG.debug("in insert product");
+        System.out.println("in insert product");
+        System.out.println(req.getParameter("newName"));
         var dbm = (DbProductManager) req.getSession().getAttribute("dbm");
-        String prName = req.getParameter("name");
-        Double price =  Double.valueOf(req.getParameter("price"));
-        Integer count = Integer.valueOf(req.getParameter("count"));
-        boolean div =   Boolean.parseBoolean(req.getParameter("div"));
-        Product product = new Product(prName, price, count, div);
+        String prName = req.getParameter("newName");
+        Double price =  0.0;
+        Double number =  0.0;
+        Product product = new Product(prName, price, number);
         dbm.insertProduct(product);
 
     }
 
     private void deleteProduct (HttpServletRequest req) {
+        LOG.debug("in delete product");
         var dbm = (DbProductManager) req.getSession().getAttribute("dbm");
         String name = req.getParameter("prodName");
         dbm.deleteProduct(name);
+
+
+
     }
+
+
 
 
 }

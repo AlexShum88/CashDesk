@@ -34,7 +34,6 @@
       <scope>provided</scope>
     </dependency>
 
-
     <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
@@ -43,12 +42,20 @@
     </dependency>
     <dependency>
 
-
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.27</version>
     </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+
   </dependencies>
+
+
 
   <build>
     <finalName>CashDesk</finalName>

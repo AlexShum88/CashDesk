@@ -18,29 +18,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-// от марины подключение к базе данных,т.к подключение надо делать через мета-инф, а не апп.пропертиз
-//public Connection getConnection(){
-//        Context ctx;
-//        Connection c = null;
-//        try {
-//        ctx = new InitialContext();
-//        DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/postgres");
-//        c = ds.getConnection();
-//        } catch (NamingException e) {
-//        e.printStackTrace();
-//        } catch (SQLException e) {
-//        e.printStackTrace();
-//        }
-//        return c;
-//        }
-
 
 public class DbManager extends DbSuperManager{
-    static Logger logger = LogManager.getLogger("dbmLogger");
+    static Logger logger = LogManager.getLogger(DbManager.class);
 
 
     private static final String SQL_INSERT_USER = "insert into users (username, password, roles_id) values (?, ?, ?)";
     private static final String SQL_SELECT_ALL_ROLES = "Select * from roles";
+    private static final String SQL_SELECT_USER_BY_NAME = "select *  " +
+            "from users join roles " +
+            "where users.roles_id = roles.id " +
+            "and " +
+            "username = ?";
+    private static final String SQL_SELECT_ALL_USERS = "select *  " +
+            "from users join roles " +
+            "where users.roles_id = roles.id ";
+    private static final String SQL_UPDATE_USER_ROLE = "update users set roles_id =? where username = ?;";
+    private static final String SQL_FIND_USER_NAME = "Select username" +
+            "from users" +
+            " where login = ?";
 
 
 
@@ -70,7 +66,7 @@ public class DbManager extends DbSuperManager{
     private static final DbManager instance = new DbManager();
 
     public static synchronized DbManager getInstance() {
-        System.out.println("get db manager instance");
+        logger.error( "db manager get instance");
         return instance;
     }
 
@@ -101,10 +97,8 @@ public class DbManager extends DbSuperManager{
 
     public boolean findUserName(String userName) throws DBException {
         try (Connection conn = getConnection()) {
-            System.out.println(conn);
-            PreparedStatement preparedStatement = conn.prepareStatement("Select username" +
-                    "from users" +
-                    " where login = ?");
+            logger.log(Level.INFO,"find user name");
+            PreparedStatement preparedStatement = conn.prepareStatement(SQL_FIND_USER_NAME);
             preparedStatement.setString(1, userName);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
@@ -112,13 +106,14 @@ public class DbManager extends DbSuperManager{
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            logger.error("cant find user by name");
         }
         return false;
     }
 
     public  boolean InsertUser (User user) throws DBException {
         try (Connection conn = getConnection()) {
-            logger.log(Level.TRACE,"insert user");
+            logger.log(Level.INFO,"insert user");
             //__________________
             //check user if user in table. if it so need to send message to user.
             //TODO need to send message to user that he is on table.
@@ -133,21 +128,17 @@ public class DbManager extends DbSuperManager{
             }
         } catch (SQLException | DBException throwables) {
             throwables.printStackTrace();
+            logger.error("cant insert user");
         }
         return false;
     }
 
     public User getUser(String login) throws DBException {
-
         //here new connection getter
         try (Connection conn = getConnection()) {
-            logger.log(Level.TRACE,"get user");
-            System.out.println(conn);
-            PreparedStatement preparedStatement = conn.prepareStatement("select *  " +
-                    "from users join roles " +
-                    "where users.roles_id = roles.id " +
-                    "and " +
-                    "username = ?");
+            logger.log(Level.INFO,"get user");
+
+            PreparedStatement preparedStatement = conn.prepareStatement(SQL_SELECT_USER_BY_NAME);
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
@@ -161,7 +152,7 @@ public class DbManager extends DbSuperManager{
         } catch (SQLException | DBException throwables) {
             throwables.printStackTrace();
         }
-        logger.log(Level.DEBUG, "cant get user: probably is absent in DB");
+        logger.error( "cant get user: probably is absent in DB");
         return null;
     }
 
@@ -169,9 +160,7 @@ public class DbManager extends DbSuperManager{
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         try (Connection conn = getConnection()) {
-            PreparedStatement preparedStatement = conn.prepareStatement("select *  " +
-                    "from users join roles " +
-                    "where users.roles_id = roles.id ");
+            PreparedStatement preparedStatement = conn.prepareStatement(SQL_SELECT_ALL_USERS);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -183,6 +172,7 @@ public class DbManager extends DbSuperManager{
             }
         } catch (DBException | SQLException e) {
             e.printStackTrace();
+            logger.error( "get all user exception");
         }
         return users;
     }
@@ -191,10 +181,10 @@ public class DbManager extends DbSuperManager{
         try (Connection conn = getConnection()) {
             int roleID = roleID(newRole, conn);
             String usname = userName.strip();
-            PreparedStatement preparedStatement = conn.prepareStatement(
-                    "update users set roles_id =? where username = ?;"
-            );
-            System.out.println("form dbm role "+ newRole +"+ role id " + roleID(newRole, conn) + " and username " + usname);
+            PreparedStatement preparedStatement = conn.prepareStatement(SQL_UPDATE_USER_ROLE);
+
+            logger.log(Level.INFO,"form dbm role  "+newRole +"+ role id " + roleID(newRole, conn) + " and username " + usname);
+
             preparedStatement.setInt(1, roleID);
             preparedStatement.setString(2, usname);
             if (preparedStatement.executeUpdate() > 0) {
@@ -203,6 +193,7 @@ public class DbManager extends DbSuperManager{
 
         } catch (DBException | SQLException e) {
             e.printStackTrace();
+            logger.error( "cant change role");
         }
 
         return false;

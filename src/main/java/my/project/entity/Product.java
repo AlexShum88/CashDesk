@@ -5,17 +5,16 @@ import java.io.Serializable;
 public class Product implements Serializable {
     private String name;
     private Double price;
-    private boolean div;
-    private Integer count;
+
+    private Double number;
 
     public Product() {
     }
 
-    public Product(String name, Double price, Integer count, boolean div) {
+    public Product(String name, Double price, Double number) {
         this.name = name;
         this.price = price;
-        this.div = div;
-        this.count = count;
+        this.number = number;
     }
 
     public String getName() {
@@ -34,20 +33,12 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public boolean isDiv() {
-        return div;
+    public Double getNumber() {
+        return number;
     }
 
-    public void setDiv(boolean div) {
-        this.div = div;
-    }
-
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
+    public void setNumber(Double number) {
+        this.number = number;
     }
 
     @Override
