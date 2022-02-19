@@ -38,21 +38,24 @@
         </form>
     </tr>
     </c:forEach>
-    <tr>
-        <td>
-            <form action="check" method="get">
-                <label for="product">choose product</label><br>
-                <input list="product" name="product">
-                <datalist id="product">
-                    <c:forEach var="product" items="${requestScope.allProducts}">
-                        <option value="${product.name} ${product.id}">
-                    </c:forEach>
-                </datalist>
-                <input type="submit" name="selectedProduct" value="get it">
-            </form>
-        </td>
-    </tr>
 </table>
+
+<%--product choose--%>
+<form action="check" method="get">
+    <label for="product">choose product</label><br>
+    <input list="product" name="product">
+    <datalist id="product">
+        <c:forEach var="product" items="${requestScope.allProducts}">
+            <option value="${product.name} ${product.id}">
+        </c:forEach>
+    </datalist>
+    <input type="submit" name="selectedProduct" value="get it">
+</form>
+<%--total sum--%>
+<div>
+    <label>Total sum = ${totalSum}</label>
+</div>
+
 <%--form to edit check--%>
 <form action="check_edit.jsp">
 <input type="submit" value="edit check by senior"/>

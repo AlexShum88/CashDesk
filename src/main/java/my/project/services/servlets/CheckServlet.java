@@ -66,6 +66,8 @@ public class CheckServlet extends HttpServlet {
                     )
             );
         }
+        //set total sum to db
+        setTotalSumToDB(setTotalSum(productsAndCurrentPrise), dbm, check.getId());
         //make attribute to translate to jsp
         //______________________________
         //for prod list on jsp
@@ -73,8 +75,22 @@ public class CheckServlet extends HttpServlet {
         //for choose product on jsp
         List<Product> allProducts = DbProductManager.getInstance().getAllProducts();
         req.setAttribute("allProducts", allProducts);
+
+        //for total sum
+        req.setAttribute("totalSum", dbm.getTotalSum(check.getId()));
         //send
         req.getRequestDispatcher("/views/workPlace/check.jsp").forward(req, resp);
+    }
+
+    private Double setTotalSum (Map<Product, Double> productDoubleMap){
+        return productDoubleMap.entrySet().stream()
+                .map(Map.Entry::getValue)
+                .reduce(Double::sum)
+                .orElse(0d);
+    }
+
+    private void setTotalSumToDB(Double totalSum , DbCheckManager dbm, Integer checkId){
+        dbm.setTotalSum(totalSum, checkId);
     }
 
     private void setPriceByNumber(HttpServletRequest req, DbCheckManager dbm) {
