@@ -9,16 +9,23 @@ public class Transaction implements Serializable {
     private List<Product> list;
     private int autorId;
     private boolean isCanceled;
+    private Integer canselAutor;
+    private boolean isClosed;
 
     public Transaction() {
     }
 
-    public Transaction(int id, Double total, List<Product> list, int autorId, boolean isCanceled) {
+    public Transaction(int autorId) {
+        this.autorId = autorId;
+    }
+
+    public Transaction(int id, Double total, int autorId, boolean isCanceled, int canselAutor) {
         this.id = id;
         this.total = total;
-        this.list = list;
         this.autorId = autorId;
         this.isCanceled = isCanceled;
+        this.canselAutor = canselAutor;
+        this.isClosed = false;
     }
 
     public int getId() {
@@ -61,6 +68,20 @@ public class Transaction implements Serializable {
         isCanceled = canceled;
     }
 
+    public Integer getCanselAutor() {
+        return canselAutor;
+    }
+
+    public void setCanselAutor(Integer canselAutor) {
+        this.canselAutor = canselAutor;
+    }
+    public boolean isClosed() {
+        return isClosed;
+    }
+
+    public void setClosed(boolean closed) {
+        isClosed = closed;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

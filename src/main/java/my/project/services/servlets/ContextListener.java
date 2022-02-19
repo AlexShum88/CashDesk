@@ -1,7 +1,6 @@
 package my.project.services.servlets;
 
 import my.project.services.db.DbManager;
-
 import javax.servlet.*;
 
 public class ContextListener implements ServletContextListener, ServletContextAttributeListener {

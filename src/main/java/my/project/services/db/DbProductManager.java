@@ -13,7 +13,8 @@ import java.util.List;
 public class DbProductManager extends DbSuperManager{
 
     private static final String SQL_GET_ALL_PRODUCTS = "select * from products;";
-    private static final String SQL_GET_PRODUCT = "select * from product where name = ?;";
+    private static final String SQL_GET_PRODUCT = "select * from products where name = ?;";
+    private static final String SQL_GET_PRODUCT_BY_ID = "select * from products where id = ?;";
     private static final String SQL_INSERT_PRODUCT = "insert into products (name, price, number) values ( ?, ?, ?)";
     private static final String SQL_DELETE_PRODUCT = "delete from products where name = ?";
     private static final String SQL_CHANGE_PROD_NUMBER = "update products set number = number + ? where name = ? ;";
@@ -42,7 +43,8 @@ public class DbProductManager extends DbSuperManager{
                 String prName = resultSet.getString("name");
                 Double price = resultSet.getDouble("price");
                 Double number = resultSet.getDouble("number");
-                Product product = new Product(prName, price, number);
+                Integer id = resultSet.getInt("id");
+                Product product = new Product(prName, price, number, id);
                 products.add(product);
             }
 
@@ -62,7 +64,8 @@ public class DbProductManager extends DbSuperManager{
                 String prName = resultSet.getString("name");
                 Double price = resultSet.getDouble("price");
                 Double number = resultSet.getDouble("number");
-                product = new Product(prName, price, number);
+                Integer id = resultSet.getInt("id");
+                product = new Product(prName, price, number, id);
             }
         } catch (DBException | SQLException e) {
             e.printStackTrace();
@@ -131,4 +134,22 @@ public class DbProductManager extends DbSuperManager{
         return false;
     }
 
+    public Product getProductById(int id) {
+        Product product = null;
+        try (Connection conn = getConnection()) {
+            PreparedStatement preparedStatement = conn.prepareStatement(SQL_GET_PRODUCT_BY_ID);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                String prName = resultSet.getString("name");
+                Double price = resultSet.getDouble("price");
+                Double number = resultSet.getDouble("number");
+                Integer idp = resultSet.getInt("id");
+                product = new Product(prName, price, number, idp);
+            }
+        } catch (DBException | SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
+    }
 }

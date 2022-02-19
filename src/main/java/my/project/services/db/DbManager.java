@@ -20,7 +20,7 @@ import java.util.Properties;
 
 
 public class DbManager extends DbSuperManager{
-    static Logger logger = LogManager.getLogger(DbManager.class);
+    private static final Logger logger = LogManager.getLogger(DbManager.class);
 
 
     private static final String SQL_INSERT_USER = "insert into users (username, password, roles_id) values (?, ?, ?)";
@@ -38,7 +38,7 @@ public class DbManager extends DbSuperManager{
             "from users" +
             " where login = ?";
 
-
+    private static final String SQL_GET_USER_ID = "select id from users where username = ?";
 
 
 
@@ -75,7 +75,7 @@ public class DbManager extends DbSuperManager{
     }
 
     private int roleID(User user, Connection conn) throws SQLException {
-        logger.log(Level.INFO,"roleID");
+        logger.info("in roleID");
         String role = user.getRole();
         PreparedStatement preparedStatement = conn.prepareStatement(SQL_SELECT_ALL_ROLES);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -86,7 +86,7 @@ public class DbManager extends DbSuperManager{
     }
 
     private int roleID(String roleName, Connection conn) throws SQLException {
-        logger.log(Level.INFO,"roleID");
+        logger.info("in roleID");
         PreparedStatement preparedStatement = conn.prepareStatement(SQL_SELECT_ALL_ROLES);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
@@ -97,7 +97,7 @@ public class DbManager extends DbSuperManager{
 
     public boolean findUserName(String userName) throws DBException {
         try (Connection conn = getConnection()) {
-            logger.log(Level.INFO,"find user name");
+            logger.info("find user name");
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_FIND_USER_NAME);
             preparedStatement.setString(1, userName);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -113,10 +113,10 @@ public class DbManager extends DbSuperManager{
 
     public  boolean InsertUser (User user) throws DBException {
         try (Connection conn = getConnection()) {
-            logger.log(Level.INFO,"insert user");
+            logger.info("insert user");
             //__________________
             //check user if user in table. if it so need to send message to user.
-            //TODO need to send message to user that he is on table.
+            //TODO need to send message to user that he is in table.
             if (findUserName(user.getLogin())){return false;}
             //___________________
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_INSERT_USER);
@@ -136,7 +136,7 @@ public class DbManager extends DbSuperManager{
     public User getUser(String login) throws DBException {
         //here new connection getter
         try (Connection conn = getConnection()) {
-            logger.log(Level.INFO,"get user");
+            logger.debug("get user");
 
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_SELECT_USER_BY_NAME);
             preparedStatement.setString(1, login);
@@ -145,8 +145,9 @@ public class DbManager extends DbSuperManager{
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
                 String role = resultSet.getString("role");
-                logger.log(Level.INFO,"get %s role %s", username, role);
-                return new User(username, password, role);
+                Integer id = resultSet.getInt("id");
+                logger.info("get {} role {}", username, role);
+                return new User(username, password, role, id);
             }
 
         } catch (SQLException | DBException throwables) {
@@ -167,8 +168,9 @@ public class DbManager extends DbSuperManager{
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
                 String role = resultSet.getString("role");
+                Integer id = resultSet.getInt("id");
                 logger.log(Level.INFO, "get %s role %s", username, role);
-                users.add(new User(username, password, role));
+                users.add(new User(username, password, role, id));
             }
         } catch (DBException | SQLException e) {
             e.printStackTrace();
@@ -183,7 +185,7 @@ public class DbManager extends DbSuperManager{
             String usname = userName.strip();
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_UPDATE_USER_ROLE);
 
-            logger.log(Level.INFO,"form dbm role  "+newRole +"+ role id " + roleID(newRole, conn) + " and username " + usname);
+            logger.info("form dbm role {} role id {}, username {}", newRole, roleID(newRole, conn), usname);
 
             preparedStatement.setInt(1, roleID);
             preparedStatement.setString(2, usname);
@@ -197,6 +199,21 @@ public class DbManager extends DbSuperManager{
         }
 
         return false;
+    }
+
+    public Integer UserId(String userName){
+        try (Connection conn = getConnection()) {
+            PreparedStatement preparedStatement = conn.prepareStatement(SQL_GET_USER_ID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return resultSet.getInt("id");
+            }
+        } catch (DBException | SQLException e) {
+            e.printStackTrace();
+            logger.error( "get user id exception");
+        }
+        return -1;
+
     }
 
 }

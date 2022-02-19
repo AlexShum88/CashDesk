@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class Product implements Serializable {
     private String name;
     private Double price;
-
     private Double number;
+    private Integer id;
 
     public Product() {
     }
@@ -15,6 +15,13 @@ public class Product implements Serializable {
         this.name = name;
         this.price = price;
         this.number = number;
+    }
+
+    public Product(String name, Double price, Double number, Integer id) {
+        this.name = name;
+        this.price = price;
+        this.number = number;
+        this.id = id;
     }
 
     public String getName() {
@@ -39,6 +46,14 @@ public class Product implements Serializable {
 
     public void setNumber(Double number) {
         this.number = number;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override

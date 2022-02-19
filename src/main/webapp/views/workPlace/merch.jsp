@@ -36,7 +36,7 @@
                 <td>
                     <label for="number">${product.getNumber()} +</label><br>
                     <input type="text" maxlength="12" size="12" id="number" name="number" value="${product.getNumber()}"
-                           pattern="[-]?[0-9]{1,10}[.]?[0-9]{0,2} " ><br>
+                           pattern="[-]?[0-9]{1,10}[.]?[0-9]{0,2}" ><br>
                     <input type="submit" name="setNumber" value="Accept">
                 </td>
                 <td>

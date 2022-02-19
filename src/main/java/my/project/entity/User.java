@@ -10,13 +10,22 @@ public class User implements Serializable {
     private String login;
     private String password;
     private String role;
+    private Integer id;
+
 
     public User() {
     }
 
-    public User(String login, String password, String role) {
+    public User(String login, String password, String role, Integer id) {
         this.login = login;
         setPassword(password);
+        this.role = role;
+        this.id = id;
+    }
+
+    public User(String login, String password, String role) {
+        this.login = login;
+        this.password = password;
         this.role = role;
     }
 
@@ -28,9 +37,9 @@ public class User implements Serializable {
         this.login = login;
     }
 
-    public String incriptPassword(){
-        var sub1 = password.replace('[','a');
-        var sub2= sub1.replace(']', 'e');
+    public String incriptPassword() {
+        var sub1 = password.replace('[', 'a');
+        var sub2 = sub1.replace(']', 'e');
         var sub3 = sub2.replace('{', 'o');
         var sub4 = sub3.replace('$', 's');
         return sub4;
@@ -41,8 +50,8 @@ public class User implements Serializable {
     }
 
     public void setPassword(String password) {
-        var sub1 = password.replace('a','[');
-        var sub2= sub1.replace('e', ']');
+        var sub1 = password.replace('a', '[');
+        var sub2 = sub1.replace('e', ']');
         var sub3 = sub2.replace('o', '{');
         var sub4 = sub3.replace('s', '$');
         this.password = sub4;
@@ -55,6 +64,14 @@ public class User implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
