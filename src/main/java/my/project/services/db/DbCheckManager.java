@@ -38,6 +38,7 @@ public class DbCheckManager extends DbSuperManager{
     private static final String SQL_CLOSED_CHECK = "update transaction set is_closed = true where id = ?";
     private static final String SQL_SET_TOTAL_SUM = "update transaction set total = ? where id=?;";
     private static final String SQL_GET_TOTAL_SUM = "select total from transaction where id =?";
+    private static final String SQL_GET_CURRENT_NUMBER = "select number from transaction_has_products where transaction_id = ? and products_id = ?;";
 
 
     public static synchronized DbCheckManager getInstance() {
@@ -339,6 +340,22 @@ public class DbCheckManager extends DbSuperManager{
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 return resultSet.getDouble("total");
+            }
+        } catch (DBException | SQLException e) {
+            e.printStackTrace();
+        }
+        return 0d;
+    }
+
+    public Double getNumber(Integer checkId, Integer productId){
+        logger.debug("get number");
+        try (Connection conn = getConnection()) {
+            PreparedStatement preparedStatement = conn.prepareStatement(SQL_GET_CURRENT_NUMBER);
+            preparedStatement.setInt(1, checkId);
+            preparedStatement.setInt(2, productId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                return resultSet.getDouble("number");
             }
         } catch (DBException | SQLException e) {
             e.printStackTrace();

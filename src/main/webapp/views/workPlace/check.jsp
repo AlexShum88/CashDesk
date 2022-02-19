@@ -56,6 +56,12 @@
     <label>Total sum = ${totalSum}</label>
 </div>
 
+<div>
+    <form action="check" method="get">
+        <input type="submit" name="closeCheck" value="Close check">
+    </form>
+</div>
+
 <%--form to edit check--%>
 <form action="check_edit.jsp">
 <input type="submit" value="edit check by senior"/>
