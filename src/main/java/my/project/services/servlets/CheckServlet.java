@@ -151,7 +151,7 @@ public class CheckServlet extends HttpServlet {
         Transaction transaction = (Transaction) req.getSession().getAttribute("check");
         LOG.debug(transaction);
         req.getParameterMap().keySet().forEach(System.out::println);
-        var prodId = req.getParameter("product").split(" ")[1];
+        var prodId = req.getParameter("product").split(" ")[0];
         Integer id = Integer.valueOf(prodId);
         LOG.debug(req.getParameter("product"));
         dbm.addProd(transaction.getId(), id);
