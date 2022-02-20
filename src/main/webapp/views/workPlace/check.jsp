@@ -51,21 +51,24 @@
 
 <%--total sum--%>
 <div>
-    <label>Total sum = ${totalSum}</label>
+    <label>Total sum = ${requestScope.totalSum}</label>
 </div>
-
+<%--prohibits editing the receipt after closing--%>
+<c:if test="${sessionScope.check.isClosed() == false}">
 <%--close check--%>
 <div>
+
     <form action="check" method="get">
         <input type="submit" name="closeCheck" value="Close check">
     </form>
+
 </div>
 
 <%--form to edit check--%>
 <form action="check_edit.jsp">
 <input type="submit" value="edit check by senior"/>
 </form>
-
+</c:if>
 
 </body>
 </html>

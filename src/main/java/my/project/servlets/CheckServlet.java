@@ -50,7 +50,7 @@ public class CheckServlet extends HttpServlet {
         req.getParameterMap().keySet().forEach(LOG::debug);
         LOG.debug("end log param;");
 
-        //chose action first block
+        //chose action
         if (req.getParameter("createCheck") != null) new CreateCheckCommand(req).execute();
         if (req.getParameter("selectedProduct") != null) new AddSelectedProductCommand(req).execute();
         if (req.getParameter("setNumber") != null) new SetPriceByNumberCommand(req).execute();
@@ -58,40 +58,11 @@ public class CheckServlet extends HttpServlet {
             new CloseCheckCommand(req, resp).execute();
         }
 
-        setAttributeToJsp(req);
-
-        LOG.debug("check form servlet {}", req.getSession().getAttribute("check"));
-        //get product + current price
-
         //set total sum to db
         new SetTotalSumCommand(req).execute();
         //make attribute to translate to jsp
-
-        req.getRequestDispatcher("/views/workPlace/check.jsp").forward(req, resp);
+        resp.sendRedirect("CheckRPG");
     }
 
-    private void setAttributeToJsp(HttpServletRequest req) {
-        DbCheckManager dbm = DbCheckManager.getInstance();
-        Transaction check = (Transaction) req.getSession().getAttribute("check");
-        Map<Product, Double> productsAndCurrentPrise = new LinkedHashMap<>();
-        List<Product> products = dbm.getAllProdOfCheck(check.getId());
-        for (int i = 0; i < products.size(); i++) {
-            productsAndCurrentPrise.put(
-                    products.get(i),
-                    dbm.getCurrentPrice(
-                            check.getId(),
-                            products.get(i).getId()
-                    )
-            );
-        }
-        //for prod list on jsp
-        req.setAttribute("products", productsAndCurrentPrise);
-        //for choose product on jsp
-        List<Product> allProducts = DbProductManager.getInstance().getAllProducts();
-        req.setAttribute("allProducts", allProducts);
-        //for total sum
-        req.setAttribute("totalSum", dbm.getTotalSum(check.getId()));
-        //send
-    }
 
 }

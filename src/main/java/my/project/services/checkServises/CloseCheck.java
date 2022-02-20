@@ -39,6 +39,8 @@ public class CloseCheck {
             );
         }
         closeCheck(req,check.getId(),dbm);
+        Transaction check = (Transaction) req.getSession().getAttribute("check");
+        check.setClosed(true);
     }
 
     private void closeCheck(HttpServletRequest req ,Integer checkId, DbCheckManager dbm) throws ServletException, IOException {

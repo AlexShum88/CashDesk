@@ -12,6 +12,7 @@ public class Transaction implements Serializable {
     private Integer canselAutor;
     private boolean isClosed;
 
+
     public Transaction() {
     }
 
@@ -75,6 +76,7 @@ public class Transaction implements Serializable {
     public void setCanselAutor(Integer canselAutor) {
         this.canselAutor = canselAutor;
     }
+
     public boolean isClosed() {
         return isClosed;
     }
@@ -82,6 +84,7 @@ public class Transaction implements Serializable {
     public void setClosed(boolean closed) {
         isClosed = closed;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
