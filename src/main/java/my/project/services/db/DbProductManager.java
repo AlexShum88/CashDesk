@@ -13,12 +13,12 @@ import java.util.List;
 public class DbProductManager extends DbSuperManager{
 
     private static final String SQL_GET_ALL_PRODUCTS = "select * from products;";
-    private static final String SQL_GET_PRODUCT = "select * from products where name = ?;";
+    private static final String SQL_GET_PRODUCT = "select * from products where id = ?;";
     private static final String SQL_GET_PRODUCT_BY_ID = "select * from products where id = ?;";
     private static final String SQL_INSERT_PRODUCT = "insert into products (name, price, number) values ( ?, ?, ?)";
-    private static final String SQL_DELETE_PRODUCT = "delete from products where name = ?";
-    private static final String SQL_CHANGE_PROD_NUMBER = "update products set number = number + ? where name = ? ;";
-    private static final String SQL_CHANGE_PROD_PRICE = "update products set price = price + ? where name = ? ;";
+    private static final String SQL_DELETE_PRODUCT = "update products set is_deleted = true where id = ?";
+    private static final String SQL_CHANGE_PROD_NUMBER = "update products set number = number + ? where id = ? ;";
+    private static final String SQL_CHANGE_PROD_PRICE = "update products set price = ? where id = ? ;";
 
 
     private static final DbProductManager instance = new DbProductManager();
@@ -54,18 +54,18 @@ public class DbProductManager extends DbSuperManager{
         return products;
     }
 
-    public Product getProduct(String prodName){
+    public Product getProductById(Integer id){
         Product product = null;
         try (Connection conn = getConnection()) {
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_GET_PRODUCT);
-            preparedStatement.setString(1, prodName);
+            preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()) {
                 String prName = resultSet.getString("name");
                 Double price = resultSet.getDouble("price");
                 Double number = resultSet.getDouble("number");
-                Integer id = resultSet.getInt("id");
-                product = new Product(prName, price, number, id);
+                Integer id2 = resultSet.getInt("id");
+                product = new Product(prName, price, number, id2);
             }
         } catch (DBException | SQLException e) {
             e.printStackTrace();
@@ -92,10 +92,10 @@ public class DbProductManager extends DbSuperManager{
         return false;
     }
 
-    public boolean deleteProduct(String prodName){
+    public boolean deleteProduct(Integer id){
         try (Connection conn = getConnection()) {
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_DELETE_PRODUCT);
-            preparedStatement.setString(1, prodName);
+            preparedStatement.setInt(1, id);
             if (preparedStatement.executeUpdate()>0){
                 return true;
             }
@@ -105,11 +105,11 @@ public class DbProductManager extends DbSuperManager{
         return false;
     }
 
-    public boolean changeProductNumber(String prodName, Double num){
+    public boolean changeProductNumber(Integer id, Double num){
         try (Connection conn = getConnection()) {
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_CHANGE_PROD_NUMBER);
             preparedStatement.setDouble(1, num);
-            preparedStatement.setString(2, prodName);
+            preparedStatement.setInt(2, id);
             if (preparedStatement.executeUpdate()>0){
                 return true;
             }
@@ -119,11 +119,11 @@ public class DbProductManager extends DbSuperManager{
         return false;
     }
 
-    public boolean changeProductPrice (String prodName, Double num) {
+    public boolean changeProductPrice (Integer id, Double num) {
         try (Connection conn = getConnection()) {
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_CHANGE_PROD_PRICE);
             preparedStatement.setDouble(1, num);
-            preparedStatement.setString(2, prodName);
+            preparedStatement.setInt(2, id);
             if (preparedStatement.executeUpdate()>0){
                 return true;
             }

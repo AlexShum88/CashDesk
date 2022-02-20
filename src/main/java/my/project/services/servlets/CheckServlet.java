@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.*;
 
 
@@ -82,9 +83,10 @@ public class CheckServlet extends HttpServlet {
             req.setAttribute("checkId", check.getId());
             req.setAttribute("cashier", user.getId());
             req.setAttribute("total", dbm.getTotalSum(check.getId()));
-            //todo need to rework date management. its may save to db.
-            req.setAttribute("date", new Date());
-            //todo set current price and current num of prod
+            Date date = new Date();
+            req.setAttribute("date", date);
+            //set date fo closed check to db
+            dbm.setDate(date, check.getId());
             Map<Product, List<Double>> productNumberCurrPrice = new LinkedHashMap<>();
             for (int i = 0; i < products.size(); i++) {
                 productNumberCurrPrice.put(
@@ -143,17 +145,16 @@ public class CheckServlet extends HttpServlet {
         //doing
         dbm.setProdNumber(number, transaction.getId(), productId);
         dbm.setCurrentPrice(transaction.getId(), productId);
-//        req.setAttribute("currentPrice", dbm.getCurrentPrice(transaction.getId(),productId));
     }
 
     private void addSelectedProduct(HttpServletRequest req, DbCheckManager dbm) {
         LOG.debug("add selected product");
         Transaction transaction = (Transaction) req.getSession().getAttribute("check");
-        LOG.debug(transaction);
+        LOG.debug( "transaction = {}",transaction);
         req.getParameterMap().keySet().forEach(System.out::println);
         var prodId = req.getParameter("product").split(" ")[0];
         Integer id = Integer.valueOf(prodId);
-        LOG.debug(req.getParameter("product"));
+        LOG.debug("product = {}",req.getParameter("product"));
         dbm.addProd(transaction.getId(), id);
     }
 
@@ -162,6 +163,8 @@ public class CheckServlet extends HttpServlet {
         LOG.debug("create check");
         User user = (User) req.getSession().getAttribute("user");
         dbm.newCheck(user.getId());
+        Transaction transaction = dbm.getCheck(user.getId());
+        dbm.setDate(new Date(), transaction.getId() );
         req.getSession().setAttribute("check", dbm.getCheck(user.getId()));
         LOG.debug("{} === {}", dbm.getCheckId(user.getId()), req.getSession().getAttribute("check"));
     }

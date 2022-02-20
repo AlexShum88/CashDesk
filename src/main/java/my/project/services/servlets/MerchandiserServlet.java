@@ -42,9 +42,9 @@ public class MerchandiserServlet extends HttpServlet {
     private void changeNumber(HttpServletRequest req) {
         LOG.debug("in change price");
         var dbm = (DbProductManager) req.getSession().getAttribute("dbm");
-        String name = req.getParameter("prodName");
+        Integer id = Integer.parseInt(req.getParameter("prodID"));
         Double number = Double.valueOf(req.getParameter("number"));
-        dbm.changeProductNumber(name, number);
+        dbm.changeProductNumber(id, number);
 
     }
 
@@ -57,9 +57,9 @@ public class MerchandiserServlet extends HttpServlet {
     private void changePrice(HttpServletRequest req) {
         LOG.debug("in change price");
         var dbm = (DbProductManager) req.getSession().getAttribute("dbm");
-        String name = req.getParameter("prodName");
+        Integer id = Integer.parseInt(req.getParameter("prodID"));
         Double price = Double.valueOf(req.getParameter("price"));
-        dbm.changeProductPrice(name, price);
+        dbm.changeProductPrice(id, price);
 
     }
 
@@ -80,8 +80,8 @@ public class MerchandiserServlet extends HttpServlet {
     private void deleteProduct (HttpServletRequest req) {
         LOG.debug("in delete product");
         var dbm = (DbProductManager) req.getSession().getAttribute("dbm");
-        String name = req.getParameter("prodName");
-        dbm.deleteProduct(name);
+        Integer id = Integer.parseInt(req.getParameter("prodID"));
+        dbm.deleteProduct(id);
 
 
 

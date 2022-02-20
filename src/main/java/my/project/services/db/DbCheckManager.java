@@ -22,7 +22,7 @@ public class DbCheckManager extends DbSuperManager{
 
 
     private static final String SQL_NEW_CHECK = "insert into transaction (user_id) values (?);";
-    private static final String SQL_DELETE_CHECK = "update transaction set iscanseled = true where id = ?; ";
+    private static final String SQL_DELETE_CHECK = "update transaction set is_canseled = true where id = ?; ";
     private static final String SQL_ADD_PRODUCT = "insert into transaction_has_products (transaction_id, products_id, price ) values (?, ?, ?);";
     private static final String SQL_GET_PROD_PRICE_BY_ID = "select price from products where id = ?;";
     private static final String SQL_GET_PROD_ID_BY_NAME = "select id from products where name = ?;";
@@ -39,6 +39,7 @@ public class DbCheckManager extends DbSuperManager{
     private static final String SQL_SET_TOTAL_SUM = "update transaction set total = ? where id=?;";
     private static final String SQL_GET_TOTAL_SUM = "select total from transaction where id =?";
     private static final String SQL_GET_CURRENT_NUMBER = "select number from transaction_has_products where transaction_id = ? and products_id = ?;";
+    private static final String SQL_SET_DATE = "update transaction set date = ? where id=?";
 
 
     public static synchronized DbCheckManager getInstance() {
@@ -207,8 +208,7 @@ public class DbCheckManager extends DbSuperManager{
                 Integer id = resultSet.getInt("id");
                 Integer userId = resultSet.getInt("user_id");
                 Double total = resultSet.getDouble("total");
-                Boolean iscanseled = resultSet.getBoolean("iscanseled");
-                Date date = resultSet.getDate("date");
+                Boolean iscanseled = resultSet.getBoolean("is_canseled");
                 Integer cansel_autor = resultSet.getInt("cansel_autor");
                 transaction = new Transaction(id, total, userId, iscanseled, cansel_autor);
             }
@@ -361,5 +361,18 @@ public class DbCheckManager extends DbSuperManager{
             e.printStackTrace();
         }
         return 0d;
+    }
+
+    public void setDate(Date date, int id ) {
+        logger.debug("set date");
+        try (Connection conn = getConnection()) {
+            PreparedStatement preparedStatement = conn.prepareStatement(SQL_SET_DATE);
+            logger.debug("date = {}", date);
+            preparedStatement.setString(1, date.toString());
+            preparedStatement.setInt(2, id);
+        } catch (DBException | SQLException e) {
+            logger.debug("get error");
+            e.printStackTrace();
+        }
     }
 }

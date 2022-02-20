@@ -7,6 +7,10 @@ public class Product implements Serializable {
     private Double price;
     private Double number;
     private Integer id;
+    private Boolean is_deleted = false;
+
+
+
 
     public Product() {
     }
@@ -56,6 +60,13 @@ public class Product implements Serializable {
         this.id = id;
     }
 
+    public Boolean getIs_deleted() {
+        return is_deleted;
+    }
+
+    public void setIs_deleted(Boolean is_deleted) {
+        this.is_deleted = is_deleted;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
