@@ -9,10 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.SplittableRandom;
+import java.util.*;
 
 public class DbCheckManager extends DbSuperManager{
 
@@ -370,6 +367,9 @@ public class DbCheckManager extends DbSuperManager{
             logger.debug("date = {}", date);
             preparedStatement.setString(1, date.toString());
             preparedStatement.setInt(2, id);
+            if (preparedStatement.executeUpdate() > 0) {
+                logger.debug("set total sum = true");
+            }
         } catch (DBException | SQLException e) {
             logger.debug("get error");
             e.printStackTrace();
