@@ -1,4 +1,4 @@
-package my.project.services.servlets;
+package my.project.servlets;
 
 import my.project.services.db.DbManager;
 import javax.servlet.*;
@@ -6,7 +6,6 @@ import javax.servlet.*;
 public class ContextListener implements ServletContextListener, ServletContextAttributeListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        System.out.println("in context listener");
         DbManager dbManager = DbManager.getInstance();
         ServletContext servletContext = sce.getServletContext();
         servletContext.setAttribute("dbManager", dbManager);

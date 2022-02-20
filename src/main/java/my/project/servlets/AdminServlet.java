@@ -1,4 +1,4 @@
-package my.project.services.servlets;
+package my.project.servlets;
 
 import my.project.services.db.DbManager;
 

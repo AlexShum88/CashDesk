@@ -1,4 +1,4 @@
-package my.project.services.servlets.filters;
+package my.project.servlets.filters;
 
 import my.project.entity.User;
 import my.project.services.db.DbManager;

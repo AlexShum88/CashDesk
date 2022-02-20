@@ -10,13 +10,13 @@
 
   <listener>
     <display-name>ContextListener</display-name>
-    <listener-class>my.project.services.servlets.ContextListener</listener-class>
+    <listener-class>my.project.servlets.ContextListener</listener-class>
   </listener>
 
 <!--servlet block-->
   <servlet>
     <servlet-name>AuthorizationServlet</servlet-name>
-    <servlet-class>my.project.services.servlets.AuthorizationServlet</servlet-class>
+    <servlet-class>my.project.servlets.AuthorizationServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AuthorizationServlet</servlet-name>
@@ -25,7 +25,7 @@
 
   <servlet>
     <servlet-name>Admin</servlet-name>
-    <servlet-class>my.project.services.servlets.AdminServlet</servlet-class>
+    <servlet-class>my.project.servlets.AdminServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Admin</servlet-name>
@@ -34,7 +34,7 @@
 
   <servlet>
     <servlet-name>Registration</servlet-name>
-    <servlet-class>my.project.services.servlets.RegistrationServlet</servlet-class>
+    <servlet-class>my.project.servlets.RegistrationServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Registration</servlet-name>
@@ -43,7 +43,7 @@
 
   <servlet>
     <servlet-name>ChangeRoleServlet</servlet-name>
-    <servlet-class>my.project.services.servlets.ChangeRoleServlet</servlet-class>
+    <servlet-class>my.project.servlets.ChangeRoleServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ChangeRoleServlet</servlet-name>
@@ -52,7 +52,7 @@
 
   <servlet>
     <servlet-name>CheckServlet</servlet-name>
-    <servlet-class>my.project.services.servlets.CheckServlet</servlet-class>
+    <servlet-class>my.project.servlets.CheckServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>CheckServlet</servlet-name>
@@ -61,7 +61,7 @@
 
   <servlet>
     <servlet-name>MerchandiserServlet</servlet-name>
-    <servlet-class>my.project.services.servlets.MerchandiserServlet</servlet-class>
+    <servlet-class>my.project.servlets.MerchandiserServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>MerchandiserServlet</servlet-name>
@@ -73,7 +73,7 @@
 <!--filter block-->
   <filter>
     <filter-name>UserIsPresent</filter-name>
-    <filter-class>my.project.services.servlets.filters.UserIsPresentFilter</filter-class>
+    <filter-class>my.project.servlets.filters.UserIsPresentFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>UserIsPresent</filter-name>
@@ -82,7 +82,7 @@
 
   <filter>
     <filter-name>PasswordMatch</filter-name>
-    <filter-class>my.project.services.servlets.filters.PasswordMatchFilter</filter-class>
+    <filter-class>my.project.servlets.filters.PasswordMatchFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>PasswordMatch</filter-name>
@@ -91,7 +91,7 @@
 
   <filter>
     <filter-name>authFilter</filter-name>
-    <filter-class>my.project.services.servlets.filters.AdminFilter</filter-class>
+    <filter-class>my.project.servlets.filters.AdminFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>authFilter</filter-name>

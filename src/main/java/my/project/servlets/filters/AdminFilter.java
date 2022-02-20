@@ -1,4 +1,4 @@
-package my.project.services.servlets.filters;
+package my.project.servlets.filters;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
