@@ -209,8 +209,8 @@ public class DbCheckManager extends DbSuperManager{
                 Integer userId = resultSet.getInt("user_id");
                 Double total = resultSet.getDouble("total");
                 Boolean iscanseled = resultSet.getBoolean("is_canseled");
-                Integer cansel_autor = resultSet.getInt("cansel_autor");
-                transaction = new Transaction(id, total, userId, iscanseled, cansel_autor);
+                Integer canselAutor = resultSet.getInt("cansel_autor");
+                transaction = new Transaction(id, total, userId, iscanseled, canselAutor);
             }
         } catch (SQLException | DBException throwables) {
             throwables.printStackTrace();

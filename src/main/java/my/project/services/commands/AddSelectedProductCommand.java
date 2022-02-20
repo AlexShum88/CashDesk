@@ -1,6 +1,6 @@
 package my.project.services.commands;
 
-import my.project.services.contollers.AddSelectedProduct;
+import my.project.services.checkServises.AddSelectedProduct;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +12,6 @@ public class AddSelectedProductCommand implements Command{
 
     @Override
     public void execute() {
-        new AddSelectedProduct().addSelectedProduct(req, getDbm());
+        new AddSelectedProduct().addSelectedProduct(req, getDbm(req));
     }
 }

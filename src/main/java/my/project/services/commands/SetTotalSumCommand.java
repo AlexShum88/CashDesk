@@ -1,6 +1,6 @@
 package my.project.services.commands;
 
-import my.project.services.contollers.SetTotalSum;
+import my.project.services.checkServises.SetTotalSum;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +12,6 @@ public class SetTotalSumCommand implements Command {
 
     @Override
     public void execute() {
-        new SetTotalSum(req, getDbm());
+        new SetTotalSum(req, getDbm(req));
     }
 }

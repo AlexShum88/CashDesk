@@ -2,9 +2,7 @@ package my.project.servlets;
 
 import my.project.entity.Product;
 import my.project.entity.Transaction;
-import my.project.entity.User;
 import my.project.services.commands.*;
-import my.project.services.contollers.SetTotalSum;
 import my.project.services.db.DbCheckManager;
 import my.project.services.db.DbProductManager;
 import org.apache.logging.log4j.LogManager;

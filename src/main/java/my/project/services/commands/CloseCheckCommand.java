@@ -1,6 +1,6 @@
 package my.project.services.commands;
 
-import my.project.services.contollers.CloseCheck;
+import my.project.services.checkServises.CloseCheck;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +18,7 @@ public class CloseCheckCommand implements Command {
     @Override
     public void execute() {
         try {
-            new CloseCheck(req, resp, getDbm());
+            new CloseCheck(req, resp, getDbm(req));
         } catch (ServletException | IOException e) {
             e.printStackTrace();
         }

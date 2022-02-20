@@ -1,6 +1,6 @@
 package my.project.services.commands;
 
-import my.project.services.contollers.SetPriceByNumber;
+import my.project.services.checkServises.SetPriceByNumber;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +13,6 @@ public class SetPriceByNumberCommand implements Command{
 
     @Override
     public void execute() {
-        new SetPriceByNumber().setPriceByNumber(req, getDbm());
+        new SetPriceByNumber().setPriceByNumber(req, getDbm(req));
     }
 }
