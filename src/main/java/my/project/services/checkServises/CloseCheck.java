@@ -4,6 +4,7 @@ import my.project.entity.Product;
 import my.project.entity.Transaction;
 import my.project.entity.User;
 import my.project.services.db.DbCheckManager;
+import my.project.services.db.DbProductManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -70,5 +71,21 @@ public class CloseCheck {
         req.setAttribute("products", productNumberCurrPrice);
         req.getRequestDispatcher("/views/checkPrint.jsp").forward(req, resp);
         dbm.closedCheck(checkId);
+        minusProductFromDb(check.getId(), dbm, req);
+
+    }
+
+    private void minusProductFromDb(Integer checkId, DbCheckManager dbm, HttpServletRequest req){
+
+        DbProductManager productManager = DbProductManager.getInstance();
+        List<Product> allProdOfCheck = dbm.getAllProdOfCheck(checkId);
+
+
+        for (int i = 0; i < allProdOfCheck.size(); i++) {
+            Integer prodId = allProdOfCheck.get(i).getId();
+            double v = -dbm.getNumber(checkId, prodId);
+            productManager.changeProductNumber(prodId, v );
+        }
+
     }
 }

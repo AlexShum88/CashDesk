@@ -145,6 +145,11 @@ public class DbCheckManager extends DbSuperManager{
 
     public boolean setProdNumber(Double number, Integer transactionID, Integer prodID){
         logger.debug("set prod number");
+        DbProductManager dbProductManager = DbProductManager.getInstance();
+        Double number1 = dbProductManager.getNumber(prodID);
+        if (number1-number<0){
+            return false;
+        }
         try (Connection conn = getConnection()) {
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_SET_PROD_NUMBER);
             preparedStatement.setDouble(1, number);

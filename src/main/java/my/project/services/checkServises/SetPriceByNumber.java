@@ -2,6 +2,7 @@ package my.project.services.checkServises;
 
 import my.project.entity.Transaction;
 import my.project.services.db.DbCheckManager;
+import my.project.services.db.DbProductManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,8 +20,20 @@ public class SetPriceByNumber {
         LOG.debug(req.getParameter("productId"));
         Double number = Double.parseDouble(req.getParameter("number"));
         LOG.debug("number = {}", req.getParameter("number"));
+
         //doing
-        dbm.setProdNumber(number, transaction.getId(), productId);
-        dbm.setCurrentPrice(transaction.getId(), productId);
+        if(
+                !dbm.setProdNumber(
+                number+dbm.getNumber(transaction.getId(), productId),
+                transaction.getId(),
+                productId
+                )
+        ){
+            LOG.debug("can`t set number");
+            req.getSession().setAttribute("cant", productId);
+        }else {
+            dbm.setCurrentPrice(transaction.getId(), productId);
+            req.getSession().setAttribute("cant", null);
+        }
     }
 }

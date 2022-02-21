@@ -22,6 +22,7 @@ public class DbProductManager extends DbSuperManager{
 
 
     private static final DbProductManager instance = new DbProductManager();
+    private static final String SQL_GET_PRODUCT_NUMBER_BY_ID ="select number from products where id = ?;";
 
 
     public static synchronized DbProductManager getInstance() {
@@ -189,5 +190,21 @@ public class DbProductManager extends DbSuperManager{
             e.printStackTrace();
         }
         return product;
+    }
+
+    public Double getNumber(Integer productId){
+        Double number = 0d;
+        try (Connection conn = getConnection()) {
+            PreparedStatement preparedStatement = conn.prepareStatement(SQL_GET_PRODUCT_NUMBER_BY_ID);
+            preparedStatement.setInt(1, productId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                number = resultSet.getDouble("number");
+            }
+
+        } catch (DBException | SQLException e) {
+            e.printStackTrace();
+        }
+        return number;
     }
 }

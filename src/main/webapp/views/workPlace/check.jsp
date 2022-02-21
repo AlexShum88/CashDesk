@@ -27,6 +27,16 @@
                 <input type="text" maxlength="12" size="12" id="number" name="number" value="0"
                        pattern="[-]?[0-9]{1,10}[.]?[0-9]{0,2}" ><br>
                 <input type="submit" name="setNumber" value="Accept">
+                    ${sessionScope.cant}
+                <c:if test="${sessionScope.cant== productEntity.key.id}">
+                    <script>
+                    function cantAlert() {
+                        alert("no such number of ${productEntity.key.name} in stock");
+                    }
+                </script>
+                    <br>
+                    <button onclick="cantAlert()">problem</button>
+                </c:if>
             </td>
             <td>
                 <label>Price = ${productEntity.key.price}</label><br>
