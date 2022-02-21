@@ -1,10 +1,10 @@
-package my.project.services.commands;
+package my.project.services.commands.check;
 
 import my.project.services.checkServises.AddSelectedProduct;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class AddSelectedProductCommand implements Command{
+public class AddSelectedProductCommand implements CommandCheck {
     HttpServletRequest req;
     public AddSelectedProductCommand(HttpServletRequest req) {
         this.req = req;

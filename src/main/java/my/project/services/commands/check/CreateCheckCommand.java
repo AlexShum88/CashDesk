@@ -1,10 +1,10 @@
-package my.project.services.commands;
+package my.project.services.commands.check;
 
 import my.project.services.checkServises.CreateCheck;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class CreateCheckCommand implements Command{
+public class CreateCheckCommand implements CommandCheck {
     HttpServletRequest req;
     public CreateCheckCommand(HttpServletRequest req) {
         this.req = req;

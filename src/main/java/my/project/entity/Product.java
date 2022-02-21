@@ -7,7 +7,7 @@ public class Product implements Serializable {
     private Double price;
     private Double number;
     private Integer id;
-    private Boolean is_deleted = false;
+    private Boolean isDeleted = false;
 
 
 
@@ -21,11 +21,12 @@ public class Product implements Serializable {
         this.number = number;
     }
 
-    public Product(String name, Double price, Double number, Integer id) {
+    public Product(String name, Double price, Double number, Integer id, Boolean isDeleted) {
         this.name = name;
         this.price = price;
         this.number = number;
         this.id = id;
+        this.isDeleted = isDeleted;
     }
 
     public String getName() {
@@ -60,12 +61,12 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    public Boolean getIs_deleted() {
-        return is_deleted;
+    public Boolean getIsDeleted() {
+        return isDeleted;
     }
 
-    public void setIs_deleted(Boolean is_deleted) {
-        this.is_deleted = is_deleted;
+    public void setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
     @Override
     public boolean equals(Object o) {

@@ -2,6 +2,8 @@ package my.project.servlets;
 
 import my.project.services.db.DbCheckManager;
 import my.project.services.db.DbManager;
+import my.project.services.db.DbProductManager;
+
 import javax.servlet.*;
 
 public class ContextListener implements ServletContextListener, ServletContextAttributeListener {
@@ -9,9 +11,12 @@ public class ContextListener implements ServletContextListener, ServletContextAt
     public void contextInitialized(ServletContextEvent sce) {
         DbManager dbManager = DbManager.getInstance();
         DbCheckManager dbCheckManager = DbCheckManager.getInstance();
+        DbProductManager dbProductManager = DbProductManager.getInstance();
         ServletContext servletContext = sce.getServletContext();
         servletContext.setAttribute("dbManager", dbManager);
         servletContext.setAttribute("dbCheckManager", dbCheckManager);
+        servletContext.setAttribute("dbProductManager", dbProductManager);
+
     }
 
     @Override

@@ -1,10 +1,10 @@
-package my.project.services.commands;
+package my.project.services.commands.check;
 
 import my.project.services.checkServises.SetPriceByNumber;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class SetPriceByNumberCommand implements Command{
+public class SetPriceByNumberCommand implements CommandCheck {
     HttpServletRequest req;
 
     public SetPriceByNumberCommand(HttpServletRequest req) {

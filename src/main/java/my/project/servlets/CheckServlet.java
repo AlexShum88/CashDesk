@@ -1,10 +1,6 @@
 package my.project.servlets;
 
-import my.project.entity.Product;
-import my.project.entity.Transaction;
-import my.project.services.commands.*;
-import my.project.services.db.DbCheckManager;
-import my.project.services.db.DbProductManager;
+import my.project.services.commands.check.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.*;
 
 
 public class CheckServlet extends HttpServlet {

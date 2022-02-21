@@ -21,6 +21,7 @@
 
     </tr>
     <c:forEach var="product" items="${requestScope.listOfProduct}">
+        <c:if test="${}"></c:if>
         <tr>
             <form method="get" action="merchandiser">
                 <input type="hidden" name="prodID" value="${product.getId()}">
