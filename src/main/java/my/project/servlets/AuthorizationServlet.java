@@ -26,6 +26,16 @@ public class AuthorizationServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8"); //для нормальной работы с кирилицей в пост запросах;
         // этот функционал можно/лучше вынести в фильтр (колесников покаывает в конце лекции)
 
+        if (GUEST.name.equals(user.getRole())) req.getRequestDispatcher("views/guest.html").forward(req, resp);
+//        resp.sendRedirect("views/guest.html"); PRG pattern (defence against sending form twice)
+        if (MERCHANDISER.name.equals(user.getRole())) req.getRequestDispatcher("merchandiser").forward(req, resp);
+        if (CASHIER.name.equals(user.getRole())) req.getRequestDispatcher("views/workPlace/cashier.jsp").forward(req, resp);
+        if (SENIOR_CASHIER.name.equals(user.getRole())) {
+            req.getRequestDispatcher("senior").forward(req, resp);
+            return;
+        }
+
+
         req.getSession().setAttribute("user", user);
 
         LOG.debug(" user {} role {}",req.getSession().getAttribute("senior"), SENIOR_CASHIER.name.equals(user.getRole()));
@@ -35,11 +45,7 @@ public class AuthorizationServlet extends HttpServlet {
             LOG.debug(req.getSession().getAttribute("senior"));
             req.getRequestDispatcher("check").forward(req,resp);
         }
-        if (GUEST.name.equals(user.getRole())) req.getRequestDispatcher("views/guest.html").forward(req, resp);
-//        resp.sendRedirect("views/guest.html"); PRG pattern (defence against sending form twice)
-        if (MERCHANDISER.name.equals(user.getRole())) req.getRequestDispatcher("merchandiser").forward(req, resp);
-        if (CASHIER.name.equals(user.getRole())) req.getRequestDispatcher("views/workPlace/cashier.jsp").forward(req, resp);
-//        if (SENIOR_CASHIER.name.equals(user.getRole())) req.getRequestDispatcher("views/workPlace/senior_cashier.jsp").forward(req, resp);
+
 
 
 

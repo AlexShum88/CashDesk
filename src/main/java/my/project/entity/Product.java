@@ -68,6 +68,13 @@ public class Product implements Serializable {
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
+
+    public void addCash(Double num){
+        this.price = this.price+num;
+    }
+    public void addNum(Double num){
+        this.number = this.number+num;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

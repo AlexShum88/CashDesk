@@ -68,6 +68,14 @@
     <url-pattern>/merchandiser</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>SeniorServlet</servlet-name>
+    <servlet-class>my.project.servlets.SeniorServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SeniorServlet</servlet-name>
+    <url-pattern>/senior</url-pattern>
+  </servlet-mapping>
 
 
 <!--filter block-->

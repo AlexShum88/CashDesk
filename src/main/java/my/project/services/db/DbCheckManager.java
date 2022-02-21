@@ -37,6 +37,7 @@ public class DbCheckManager extends DbSuperManager{
     private static final String SQL_GET_TOTAL_SUM = "select total from transaction where id =?";
     private static final String SQL_GET_CURRENT_NUMBER = "select number from transaction_has_products where transaction_id = ? and products_id = ?;";
     private static final String SQL_SET_DATE = "update transaction set date = ? where id=?";
+    private static final String SQL_GET_ALL_CHECKS = "select * from transaction ;";
 
 
     public static synchronized DbCheckManager getInstance() {
@@ -380,4 +381,31 @@ public class DbCheckManager extends DbSuperManager{
             e.printStackTrace();
         }
     }
+
+    public List<Transaction> getAllChecks() {
+        List<Transaction> list = new ArrayList<>();
+        logger.debug("set date");
+        try (Connection conn = getConnection()) {
+            PreparedStatement preparedStatement = conn.prepareStatement(SQL_GET_ALL_CHECKS);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                list.add(
+                        new Transaction(
+                                resultSet.getInt("id"),
+                                resultSet.getDouble("total"),
+                                resultSet.getInt("user_id"),
+                                resultSet.getBoolean("is_canseled"),
+                                resultSet.getInt("cansel_autor"),
+                                resultSet.getBoolean("is_closed")
+                        )
+                );
+
+            }
+        } catch (DBException | SQLException e) {
+            e.printStackTrace();
+
+        }
+        return list;
+    }
+
 }

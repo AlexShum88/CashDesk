@@ -29,6 +29,16 @@ public class Transaction implements Serializable {
         this.isClosed = false;
     }
 
+    public Transaction(int id, Double total, int autorId, boolean isCanceled, Integer canselAutor, boolean isClosed) {
+        this.id = id;
+        this.total = total;
+        this.list = list;
+        this.autorId = autorId;
+        this.isCanceled = isCanceled;
+        this.canselAutor = canselAutor;
+        this.isClosed = isClosed;
+    }
+
     public int getId() {
         return id;
     }
