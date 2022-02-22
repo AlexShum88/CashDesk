@@ -1,5 +1,6 @@
 package my.project.servlets;
 
+import my.project.services.commands.senior.CreateCashiersCommand;
 import my.project.services.commands.senior.CreateGoodsReportCommand;
 
 import javax.servlet.ServletException;
@@ -12,7 +13,7 @@ public class SeniorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("goods")!=null) new CreateGoodsReportCommand(req).execute();
-//        if (req.getParameter("cashiers")!=null)
+        if (req.getParameter("cashiers")!=null) new CreateCashiersCommand(req).execute();
         resp.sendRedirect("SeniorRPG");
     }
 

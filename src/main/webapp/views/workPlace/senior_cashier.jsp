@@ -38,8 +38,23 @@
 
 </c:if>
 
-<c:if test="">
-
+<c:if test="${sessionScope.cashiers!=null}">
+<table>
+    <tr>
+        <th>Cashier ID</th>
+        <th>All checks</th>
+        <th>Canceled Checks</th>
+        <th>Sales</th>
+    </tr>
+    <c:forEach var="cashier" items="${sessionScope.cashiers}">
+        <tr>
+            <td>${cashier.id}</td>
+            <td>${cashier.checks}</td>
+            <td>${cashier.isClosed}</td>
+            <td>${cashier.sum}</td>
+        </tr>
+    </c:forEach>
+</table>
 </c:if>
 </body>
 </html>

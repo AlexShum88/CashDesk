@@ -1,6 +1,8 @@
 package my.project.services.seniorServises;
 
-public class TransportProd{
+import java.io.Serializable;
+
+public class TransportProd implements Serializable {
         String name;
         Double cash = 0d;
         Double num = 0d;
