@@ -38,6 +38,7 @@ public class DbCheckManager extends DbSuperManager{
     private static final String SQL_GET_CURRENT_NUMBER = "select number from transaction_has_products where transaction_id = ? and products_id = ?;";
     private static final String SQL_SET_DATE = "update transaction set date = ? where id=?";
     private static final String SQL_GET_ALL_CHECKS = "select * from transaction ;";
+    private static final String SQL_SET_CANSEL_AUTOR = "update transaction set cansel_autor = ? where id=?;";
 
 
     public static synchronized DbCheckManager getInstance() {
@@ -62,10 +63,16 @@ public class DbCheckManager extends DbSuperManager{
         }
         return false;
     }
-
-    public boolean deleteCheck(Integer checkID){
+    private void setCanselAutor(Connection conn, Integer author, Integer checkId) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement(SQL_SET_CANSEL_AUTOR);
+        preparedStatement.setInt(1, author);
+        preparedStatement.setInt(2, checkId);
+        preparedStatement.executeUpdate();
+    }
+    public boolean deleteCheck(Integer checkID, Integer author){
         logger.debug("delete check");
         try (Connection conn = getConnection()) {
+            setCanselAutor(conn, author, checkID);
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_DELETE_CHECK);
             preparedStatement.setInt(1, checkID);
             if (preparedStatement.executeUpdate() > 0) {

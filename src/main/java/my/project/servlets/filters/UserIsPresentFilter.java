@@ -1,8 +1,12 @@
 package my.project.servlets.filters;
 
+import com.mysql.cj.log.Log;
 import my.project.entity.User;
 import my.project.services.db.DBException;
 import my.project.services.db.DbManager;
+import my.project.servlets.AuthorizationServlet;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -13,12 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class UserIsPresentFilter extends HttpFilter {
+    private static final Logger LOG = LogManager.getLogger(UserIsPresentFilter.class);
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        System.out.println("in user is present");
-
-        System.out.println("get login"+req.getParameter("login"));
-        System.out.println("get password"+req.getParameter("password"));
+        LOG.debug("in user is present");
+        LOG.debug("get login"+req.getParameter("login"));
+        LOG.debug("get password"+req.getParameter("password"));
         var user = createUser(req.getParameter("login"));
 
         if (user==null) {
