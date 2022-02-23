@@ -9,11 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 
 public class ChangeNumber {
     private  static final Logger LOG = LogManager.getLogger(MerchandiserServlet.class);
-    public void changeNumber(HttpServletRequest req, DbProductManager dbm) {
+    public void changeNumber(int id, Double number, DbProductManager dbm) {
         LOG.debug("in change price");
-        Integer id = Integer.parseInt(req.getParameter("prodID"));
-        Double number = Double.valueOf(req.getParameter("number"));
         dbm.changeProductNumber(id, number);
-
     }
 }

@@ -13,6 +13,7 @@ public class CreateGoodsReportCommand implements SeniorCommand{
 
     @Override
     public void execute() {
-        new CreateGoodsReport().create(req, getDbm(req));
+        req.getSession().setAttribute("allProd", new CreateGoodsReport().create(getDbm(req)));
+
     }
 }

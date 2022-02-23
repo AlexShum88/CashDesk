@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 
 public class InsertProduct {
     private  static final Logger LOG = LogManager.getLogger(InsertProduct.class);
-    public void insertProduct(HttpServletRequest req, DbProductManager dbm){
+    public void insertProduct(String prName, DbProductManager dbm){
         LOG.debug("in insert product");
-        String prName = req.getParameter("newName");
+
         Double price =  0.0;
         Double number =  0.0;
         Product product = new Product(prName, price, number);

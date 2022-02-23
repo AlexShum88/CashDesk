@@ -1,7 +1,5 @@
 package my.project.services.commands.check;
 
-import my.project.services.checkServises.Exit;
-
 import javax.servlet.http.HttpServletRequest;
 
 public class ExitCommand implements CommandCheck{
@@ -13,6 +11,10 @@ public class ExitCommand implements CommandCheck{
 
     @Override
     public void execute() {
-        new Exit().exit(req);
+        req.getSession().setAttribute("ready", null);
+        req.getSession().setAttribute("redact", null);
+        req.getSession().setAttribute("loginSenior", null);
+        req.getSession().setAttribute("senior", null);
+
     }
 }

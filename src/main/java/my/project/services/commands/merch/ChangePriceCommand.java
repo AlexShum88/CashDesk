@@ -14,6 +14,8 @@ public class ChangePriceCommand implements CommandMerch{
 
     @Override
     public void execute() {
-        new ChangePrice().changePrice(req, getDbm(req));
+        int id = Integer.parseInt(req.getParameter("prodID"));
+        Double price = Double.valueOf(req.getParameter("price"));
+        new ChangePrice().changePrice(id, price, getDbm(req));
     }
 }

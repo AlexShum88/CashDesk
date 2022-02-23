@@ -1,5 +1,7 @@
 package my.project.services.commands.check;
 
+import my.project.entity.Transaction;
+import my.project.entity.User;
 import my.project.services.checkServises.Deletecheck;
 import my.project.services.commands.check.CommandCheck;
 
@@ -14,6 +16,8 @@ public class DeleteCheckCommand implements CommandCheck {
 
     @Override
     public void execute() {
-        new Deletecheck().delete(req, getDbm(req));
+        Transaction transaction=(Transaction)req.getSession().getAttribute("check");
+        User user = (User) req.getSession().getAttribute("senior");
+        new Deletecheck().delete(transaction, user, getDbm(req));
     }
 }

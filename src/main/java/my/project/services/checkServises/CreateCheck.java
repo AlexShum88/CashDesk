@@ -12,13 +12,9 @@ import java.util.Date;
 public class CreateCheck {
     private static final Logger LOG = LogManager.getLogger(CreateCheck.class);
 
-    public void createCheck(HttpServletRequest req, DbCheckManager dbm) {
+    public void createCheck( User user, Transaction check, DbCheckManager dbm) {
         LOG.debug("create check");
-        User user = (User) req.getSession().getAttribute("user");
         dbm.newCheck(user.getId());
-        Transaction transaction = dbm.getCheck(user.getId());
-        dbm.setDate(new Date(), transaction.getId() );
-        req.getSession().setAttribute("check", dbm.getCheck(user.getId()));
-        LOG.debug("{} === {}", dbm.getCheckId(user.getId()), req.getSession().getAttribute("check"));
+        dbm.setDate(new Date(), check.getId());
     }
 }

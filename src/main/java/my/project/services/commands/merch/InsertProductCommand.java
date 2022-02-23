@@ -13,6 +13,7 @@ public class InsertProductCommand implements CommandMerch{
 
     @Override
     public void execute() {
-        new InsertProduct().insertProduct(req, getDbm(req));
+        String prName = req.getParameter("newName");
+        new InsertProduct().insertProduct(prName, getDbm(req));
     }
 }

@@ -7,9 +7,7 @@ import my.project.services.db.DbCheckManager;
 import javax.servlet.http.HttpServletRequest;
 
 public class Deletecheck {
-    public void delete(HttpServletRequest req, DbCheckManager dbm) {
-        Transaction transaction=(Transaction)req.getSession().getAttribute("check");
-        User user = (User) req.getSession().getAttribute("senior");
+    public void delete(Transaction transaction, User user, DbCheckManager dbm) {
         dbm.deleteCheck(transaction.getId(), user.getId());
     }
 }

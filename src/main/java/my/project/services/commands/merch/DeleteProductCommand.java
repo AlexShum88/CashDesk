@@ -13,6 +13,7 @@ public class DeleteProductCommand implements CommandMerch{
 
     @Override
     public void execute() {
-        new DeleteProduct().deleteProduct(req, getDbm(req));
+        Integer id = Integer.parseInt(req.getParameter("prodID"));
+        new DeleteProduct().deleteProduct(id, getDbm(req));
     }
 }
