@@ -1,6 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <%@ page import="java.util.List, java.text.*, my.project.entity.User" %>
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
 
 <html lang="en">
 <head>
@@ -11,40 +12,46 @@
 <h1>Hello Admin</h1>
 <br>
 <table>
-<tr>
-<th>Login</th>
-<th>Role now</th>
-<th>Change role</th>
-<th>Accept change</th>
-</tr>
-<%
-    List<User> ss = (List<User>) request.getAttribute("users");
+    <tr>
+        <th>Login</th>
+        <th>Role now</th>
+        <th>Change role</th>
+        <th>Accept change</th>
+    </tr>
 
-    for (int i=0; i<ss.size();i++){
-        out.println("<tr>");
 
-        out.println("<form action=\"change_role\" method=\"get\">");
-            out.println("<td><input name=\"login\" readonly value=\" " +ss.get(i).getLogin() + "\"/></td>");
-            out.println("<td> " + ss.get(i).getRole() + " </td>");
-            out.println("<td> ");
+    <c:forEach var="user" items="${requestScope.users}">
+        <form action="change_role" method="get">
+            <tr>
+                <input type="hidden" name="login" value="${user.login} "/>
+                <td><label>${user.getLogin()}</label></td>
+                <td>${user.role}</td>
 
-            out.println("<input type=\"radio\" name=\"role\" value=\"guest\">guest</input><br>");
-            out.println("<input type=\"radio\" name=\"role\" value=\"cashier\">cashier</input><br>");
-            out.println("<input type=\"radio\" name=\"role\" value=\"senior_cashier\">senior cashier</input><br> ");
-            out.println("<input type=\"radio\" name=\"role\" value=\"merchandiser\">merchandiser</input><br></td>");
+                <td>
+                    <label>Choose role</label>
+                    <br>
+                    <input list="role" name="role">
+                    <datalist id="role">
+                        <option>guest</option>
+                        <option>cashier</option>
+                        <option>senior_cashier</option>
+                        <option>merchandiser</option>
+                    </datalist>
+                </td>
 
-            out.println("<td> <input type=\"submit\">");
-            out.println("</form>");
-            out.println("</td>");
-            out.println("</tr>");
-    }
-%>
+
+                <td><input type="submit"></td>
+            </tr>
+        </form>
+    </c:forEach>
+
+
+    </tr>
 
 </table>
-<bd>
-<hr>
-<div>
-    <button onclick="location.href='index.html'">To Login</button>
-</div>
+    <hr>
+    <div>
+        <button onclick="location.href='index.html'">To Login</button>
+    </div>
 </body>
 </html>
