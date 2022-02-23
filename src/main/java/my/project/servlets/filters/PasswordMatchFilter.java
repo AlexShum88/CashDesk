@@ -24,7 +24,7 @@ public class PasswordMatchFilter extends HttpFilter {
        if (pass.equals(user.incriptPassword())){
            chain.doFilter(req, res);
        }else {
-           ((HttpServletResponse) res).sendRedirect("index.html");
+           ((HttpServletResponse) res).sendRedirect("index.jsp");
 
        }
     }

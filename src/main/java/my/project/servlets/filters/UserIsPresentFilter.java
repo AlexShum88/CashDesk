@@ -26,7 +26,7 @@ public class UserIsPresentFilter extends HttpFilter {
         var user = createUser(req.getParameter("login"));
 
         if (user==null) {
-            ((HttpServletResponse) res).sendRedirect("index.html");
+            ((HttpServletResponse) res).sendRedirect("index.jsp");
 //            chain.doFilter(req, res);
             return;
         }
