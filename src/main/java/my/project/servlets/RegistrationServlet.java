@@ -19,8 +19,8 @@ public class RegistrationServlet extends HttpServlet {
         var dbm = (DbManager) getServletContext().getAttribute("dbManager");
         User user = new User(req.getParameter("login"), req.getParameter("password"), "guest");
         if(dbm.InsertUser(user)) {
-            req.getRequestDispatcher("views/guest.html").forward(req, resp);
-        }else req.getRequestDispatcher("views/wrong.html").forward(req, resp);
+            req.getRequestDispatcher("views/guest.jsp").forward(req, resp);
+        }else req.getRequestDispatcher("views/wrong.jsp").forward(req, resp);
 
     }
 }

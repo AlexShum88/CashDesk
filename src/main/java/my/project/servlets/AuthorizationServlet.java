@@ -14,7 +14,7 @@ import static my.project.entity.Roles.*;
 
 public class AuthorizationServlet extends HttpServlet {
     private static final Logger LOG = LogManager.getLogger(AuthorizationServlet.class);
-    private final ContextListener conL = new ContextListener();
+
 
 
     @Override
@@ -47,8 +47,8 @@ public class AuthorizationServlet extends HttpServlet {
 //        req.setCharacterEncoding("UTF-8"); //для нормальной работы с кирилицей в пост запросах;
         // этот функционал можно/лучше вынести в фильтр (колесников покаывает в конце лекции)
 
-        if (GUEST.name.equals(user.getRole())) req.getRequestDispatcher("views/guest.html").forward(req, resp);
-//        resp.sendRedirect("views/guest.html"); PRG pattern (defence against sending form twice)
+        if (GUEST.name.equals(user.getRole())) req.getRequestDispatcher("views/guest.jsp").forward(req, resp);
+//        resp.sendRedirect("views/guest.jsp"); PRG pattern (defence against sending form twice)
         if (MERCHANDISER.name.equals(user.getRole())) req.getRequestDispatcher("merchandiser").forward(req, resp);
         if (CASHIER.name.equals(user.getRole())) req.getRequestDispatcher("views/workPlace/cashier.jsp").forward(req, resp);
 
