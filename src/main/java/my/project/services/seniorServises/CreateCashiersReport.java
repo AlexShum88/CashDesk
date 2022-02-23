@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CreateCashiersReport {
-    public void create(HttpServletRequest req, DbCheckManager dbm) {
+    public List<TransportCashiers> create( DbCheckManager dbm) {
 
         List<Transaction> allChecks = dbm.getAllChecks();
         var coll = allChecks.stream()
@@ -35,6 +35,6 @@ public class CreateCashiersReport {
         for (int i = 0; i < id.size(); i++) {
             transportCashiers.add(new TransportCashiers(id.get(i), totalChecks.get(i), isClosed.get(i),sum.get(i) ));
         }
-        req.getSession().setAttribute("cashiers", transportCashiers);
+        return transportCashiers;
     }
 }

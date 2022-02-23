@@ -13,7 +13,9 @@ public class ChangeNumberCommand implements CommandMerch {
 
     @Override
     public void execute() {
-        new  ChangeNumber().changeNumber(req, getDbm(req));
+        Integer id = Integer.parseInt(req.getParameter("prodID"));
+        Double number = Double.valueOf(req.getParameter("number"));
+        new  ChangeNumber().changeNumber(id, number, getDbm(req));
     }
 
 

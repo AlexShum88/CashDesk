@@ -15,10 +15,8 @@ public class SetTotalSum {
     private static final Logger LOG = LogManager.getLogger(SetTotalSum.class);
     List<Product> products;
     Map<Product, Double> productsAndCurrentPrise;
-    Transaction check;
-    public SetTotalSum(HttpServletRequest req, DbCheckManager dbm) {
 
-        check = (Transaction) req.getSession().getAttribute("check");
+    public SetTotalSum(Transaction check, DbCheckManager dbm) {
         productsAndCurrentPrise = new LinkedHashMap<>();
         products = dbm.getAllProdOfCheck(check.getId());
         for (int i = 0; i < products.size(); i++) {

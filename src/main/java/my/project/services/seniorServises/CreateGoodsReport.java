@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CreateGoodsReport {
-    public void create(HttpServletRequest req, DbCheckManager dbm) {
+    public List<TransportProd> create( DbCheckManager dbm) {
         List<Transaction> allChecks = dbm.getAllChecks();
         for (int i = 0; i < allChecks.size(); i++) {
             allChecks.get(i).setList(dbm.getAllProdOfCheck(allChecks.get(i).getId()));
@@ -52,7 +52,7 @@ public class CreateGoodsReport {
             transport.add(new TransportProd(key.get(i), cash.get(i), num.get(i)));
         }
 
-        req.getSession().setAttribute("allProd", transport);
+        return transport;
 
     }
 }

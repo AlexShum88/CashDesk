@@ -10,16 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 public class AddSelectedProduct {
     private static final Logger LOG = LogManager.getLogger(AddSelectedProduct.class);
 
-    public void addSelectedProduct(HttpServletRequest req, DbCheckManager dbm) {
+    public void addSelectedProduct(Transaction transaction, Integer prodId, DbCheckManager dbm) {
         LOG.debug("add selected product");
-        Transaction transaction = (Transaction) req.getSession().getAttribute("check");
         LOG.debug( "transaction = {}",transaction);
-
-        req.getParameterMap().keySet().forEach(System.out::println);
-
-        var prodId = req.getParameter("product").split(" ")[0];
-        Integer id = Integer.valueOf(prodId);
-        LOG.debug("product = {}",req.getParameter("product"));
-        dbm.addProd(transaction.getId(), id);
+        dbm.addProd(transaction.getId(), prodId);
     }
 }
