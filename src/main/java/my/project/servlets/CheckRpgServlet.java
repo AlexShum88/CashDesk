@@ -29,6 +29,7 @@ public class CheckRpgServlet extends HttpServlet {
         Map<Product, Double> productsAndCurrentPrise = new LinkedHashMap<>();
         List<Product> products = dbm.getAllProdOfCheck(check.getId());
         for (int i = 0; i < products.size(); i++) {
+            products.get(i).setNumber(dbm.getNumber(check.getId(), products.get(i).getId()));
             productsAndCurrentPrise.put(
                     products.get(i),
                     dbm.getCurrentPrice(

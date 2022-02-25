@@ -16,8 +16,9 @@
 
 <f:bundle basename="locale">
     <%--frame to login as senior--%>
+    ${sessionScope.loginSenior}
     <c:if test="${sessionScope.loginSenior !=null}">
-
+        <jsp:include page="/index.jsp"/>
     </c:if>
     <table>
         <tr>
@@ -40,6 +41,8 @@
                     </td>
                     <td>
                             <%--number--%>
+                        <label for="number"><f:message key="Number"/> = ${productEntity.key.number}</label>
+                                <br>
                         <input type="text" maxlength="12" size="12" id="number" name="number" value="0"
                                pattern="[-]?[0-9]{1,10}[.]?[0-9]{0,2}"><br>
                         <input type="submit" name="setNumber" value="<f:message key="Accept change" />">

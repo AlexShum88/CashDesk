@@ -20,9 +20,9 @@ public class SetPriceByNumberCommand implements CommandCheck {
         Integer productId = Integer.valueOf(req.getParameter("productId"));
         Double number = Double.parseDouble(req.getParameter("number"));
 
-        var dbm =getDbm(req);
+        var dbm = getDbm(req);
         if(!dbm.setProdNumber(
-                number+dbm.getNumber(transaction.getId(), productId),
+                number,
                 transaction.getId(),
                 productId
         )

@@ -60,6 +60,10 @@ public class CheckServlet extends HttpServlet {
         if (req.getParameter("setNumber") != null) new SetPriceByNumberCommand(req).execute();
         if (req.getParameter("closeCheck") != null) new CloseCheckCommand(req, resp).execute();
         if (req.getParameter("deleteProd") != null) new DeleteProductFromCheckCommand(req).execute();
+        if (req.getParameter("to cashier") != null) {
+            req.getRequestDispatcher("views/workPlace/cashier.jsp").forward(req, resp);
+            return;
+        }
         if (req.getParameter("deleteCheck") != null) {
             new DeleteCheckCommand(req).execute();
             req.getRequestDispatcher("/views/workPlace/cashier.jsp").forward(req, resp);

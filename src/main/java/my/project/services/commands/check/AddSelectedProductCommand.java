@@ -13,7 +13,9 @@ public class AddSelectedProductCommand implements CommandCheck {
 
     @Override
     public void execute() {
-        var prodId = req.getParameter("product").split(" ")[0];
+        var prodId = req.getParameter("product");
+        if(prodId.isBlank() || req.getParameter("product").isEmpty()) return;
+        prodId = prodId.split(" ")[0];
         Integer id = Integer.valueOf(prodId);
         Transaction transaction = (Transaction) req.getSession().getAttribute("check");
         new AddSelectedProduct().addSelectedProduct(transaction, id, getDbm(req));

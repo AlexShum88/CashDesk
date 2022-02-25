@@ -48,7 +48,9 @@
         <hr>
     </div>
     <div>
-        <button onclick="location.href='cashier.jsp'"><f:message key="To cahier"/></button>
+        <form action="check" method="get">
+            <input type="submit" name="to cashier" value="To cashier">
+        </form>
     </div>
 </f:bundle>
 </body>
