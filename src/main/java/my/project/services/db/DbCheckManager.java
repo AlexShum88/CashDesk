@@ -18,26 +18,26 @@ public class DbCheckManager extends DbSuperManager{
 
 
 
-    private static final String SQL_NEW_CHECK = "insert into transaction (user_id) values (?);";
-    private static final String SQL_DELETE_CHECK = "update transaction set is_canseled = true where id = ?; ";
-    private static final String SQL_ADD_PRODUCT = "insert into transaction_has_products (transaction_id, products_id, price ) values (?, ?, ?);";
-    private static final String SQL_GET_PROD_PRICE_BY_ID = "select price from products where id = ?;";
+    public static final String SQL_NEW_CHECK = "insert into transaction (user_id) values (?);";
+    public static final String SQL_DELETE_CHECK = "update transaction set is_canseled = true where id = ?; ";
+    public static final String SQL_ADD_PRODUCT = "insert into transaction_has_products (transaction_id, products_id, price ) values (?, ?, ?);";
+    public static final String SQL_GET_PROD_PRICE_BY_ID = "select price from products where id = ?;";
     private static final String SQL_GET_PROD_ID_BY_NAME = "select id from products where name = ?;";
     private static final String SQL_GET_PROD_NAME_BY_ID = "select name from products where id = ?;";
-    private static final String SQL_SET_PROD_NUMBER = "update  transaction_has_products set number = number + ? where transaction_id = ?  and products_id = ?;";
-    private static final String SQL_SET_PROD_PRICE = "update  transaction_has_products set current_price = ? where transaction_id = ?  and products_id = ?;";
+    public static final String SQL_SET_PROD_NUMBER = "update  transaction_has_products set number = number + ? where transaction_id = ?  and products_id = ?;";
+    public static final String SQL_SET_PROD_PRICE = "update  transaction_has_products set current_price = ? where transaction_id = ?  and products_id = ?;";
     private static final String SQL_GET_PRICE_AND_NUMBER = "select price, number from transaction_has_products where transaction_id = ?  and products_id = ?;";
-    private static final String SQL_GET_CURRENT_PRICE = "select current_price from transaction_has_products where transaction_id = ?  and products_id = ?;";
-    private static final String SQL_DELETE_PROD = "delete from transaction_has_products where transaction_id = ? and products_id = ?;";
-    private static final String SQL_GET_ALL_PROD_OF_THIS_CHECK = "select products_id from transaction_has_products where transaction_id = ?;";
-    private static final String SQL_GET_LAST_CHECK_ID_BY_USER_ID = "select id from transaction where user_id = ? order by id desc; ";
-    private static final String SQL_GET_LAST_CHECK_BY_USER_ID = "select * from transaction where id = ?;";
-    private static final String SQL_CLOSED_CHECK = "update transaction set is_closed = true where id = ?";
-    private static final String SQL_SET_TOTAL_SUM = "update transaction set total = ? where id=?;";
-    private static final String SQL_GET_TOTAL_SUM = "select total from transaction where id =?";
-    private static final String SQL_GET_CURRENT_NUMBER = "select number from transaction_has_products where transaction_id = ? and products_id = ?;";
-    private static final String SQL_SET_DATE = "update transaction set date = ? where id=?";
-    private static final String SQL_GET_ALL_CHECKS = "select * from transaction ;";
+    public static final String SQL_GET_CURRENT_PRICE = "select current_price from transaction_has_products where transaction_id = ?  and products_id = ?;";
+    public static final String SQL_DELETE_PROD = "delete from transaction_has_products where transaction_id = ? and products_id = ?;";
+    public static final String SQL_GET_ALL_PROD_OF_THIS_CHECK = "select products_id from transaction_has_products where transaction_id = ?;";
+    public static final String SQL_GET_LAST_CHECK_ID_BY_USER_ID = "select id from transaction where user_id = ? order by id desc; ";
+    public static final String SQL_GET_LAST_CHECK_BY_USER_ID = "select * from transaction where id = ?;";
+    public static final String SQL_CLOSED_CHECK = "update transaction set is_closed = true where id = ?";
+    public static final String SQL_SET_TOTAL_SUM = "update transaction set total = ? where id=?;";
+    public static final String SQL_GET_TOTAL_SUM = "select total from transaction where id =?";
+    public static final String SQL_GET_CURRENT_NUMBER = "select number from transaction_has_products where transaction_id = ? and products_id = ?;";
+    public static final String SQL_SET_DATE = "update transaction set date = ? where id=?";
+    public static final String SQL_GET_ALL_CHECKS = "select * from transaction ;";
     private static final String SQL_SET_CANSEL_AUTOR = "update transaction set cansel_autor = ? where id=?;";
 
 

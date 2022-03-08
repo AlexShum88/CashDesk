@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class DbSuperManager {
 
-    protected Connection getConnection() throws DBException {
+    public Connection getConnection() throws DBException {
         Context context;
         try {
             context = (Context) new InitialContext().lookup("java:/comp/env");

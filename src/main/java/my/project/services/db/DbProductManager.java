@@ -11,18 +11,18 @@ import java.util.List;
 
 public class DbProductManager extends DbSuperManager{
 
-    private static final String SQL_GET_ALL_PRODUCTS = "select * from products;";
-    private static final String SQL_GET_PRODUCT_BY_ID = "select * from products where id = ?;";
-    private static final String SQL_INSERT_PRODUCT = "insert into products (name, price, number) values ( ?, ?, ?)";
-    private static final String SQL_DELETE_PRODUCT = "update products set is_deleted = true where id = ?";
-    private static final String SQL_CHANGE_PROD_NUMBER = "update products set number = number + ? where id = ? ;";
-    private static final String SQL_CHANGE_PROD_PRICE = "update products set price = ? where id = ? ;";
+    public static final String SQL_GET_ALL_PRODUCTS = "select * from products;";
+    public static final String SQL_GET_PRODUCT_BY_ID = "select * from products where id = ?;";
+    public static final String SQL_INSERT_PRODUCT = "insert into products (name, price, number) values ( ?, ?, ?)";
+    public static final String SQL_DELETE_PRODUCT = "update products set is_deleted = true where id = ?";
+    public static final String SQL_CHANGE_PROD_NUMBER = "update products set number = number + ? where id = ? ;";
+    public static final String SQL_CHANGE_PROD_PRICE = "update products set price = ? where id = ? ;";
     private static final String SQL_PRODUCT_RECOVER = "update products set is_deleted = false where name = ?";
     private static final String SQL_GET_PRODUCT_BY_NAME = "select  * from products where name = ?";
 
 
     private static final DbProductManager instance = new DbProductManager();
-    private static final String SQL_GET_PRODUCT_NUMBER_BY_ID ="select number from products where id = ?;";
+    public static final String SQL_GET_PRODUCT_NUMBER_BY_ID ="select number from products where id = ?;";
 
 
     public static synchronized DbProductManager getInstance() {

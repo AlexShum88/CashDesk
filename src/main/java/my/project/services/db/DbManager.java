@@ -23,45 +23,14 @@ public class DbManager extends DbSuperManager{
     private static final Logger logger = LogManager.getLogger(DbManager.class);
 
 
-    private static final String SQL_INSERT_USER = "insert into users (username, password, roles_id) values (?, ?, ?)";
+    public static final String SQL_INSERT_USER = "insert into users (username, password, roles_id) values (?, ?, ?)";
     private static final String SQL_SELECT_ALL_ROLES = "Select * from roles";
-    private static final String SQL_SELECT_USER_BY_NAME = "select *  " +
-            "from users join roles " +
-            "where users.roles_id = roles.id " +
-            "and " +
-            "username = ?";
-    private static final String SQL_SELECT_ALL_USERS = "select *  " +
-            "from users join roles " +
-            "where users.roles_id = roles.id ";
-    private static final String SQL_UPDATE_USER_ROLE = "update users set roles_id =? where username = ?;";
-    private static final String SQL_FIND_USER_NAME = "Select username" +
-            "from users" +
-            " where login = ?";
-
+    public static final String SQL_SELECT_USER_BY_NAME = "select * from users join roles where users.roles_id = roles.id and username = ?";
+    public static final String SQL_SELECT_ALL_USERS = "select *  from users join roles where users.roles_id = roles.id ";
+    public static final String SQL_UPDATE_USER_ROLE = "update users set roles_id =? where username = ?;";
+    public static final String SQL_FIND_USER_NAME = "Select username from users where login = ?";
     private static final String SQL_GET_USER_ID = "select id from users where username = ?";
 
-
-
-
-
-
-    private static String getURL() {
-        Properties properties = new Properties();
-        try (InputStream in = Files.newInputStream(Paths.get("app.properties"))) {
-            properties.load(in);
-        } catch (IOException exception) {
-            logger.error("Cannot find file.");
-        }
-        return properties.getProperty("connection.url");
-    }
-
-    private static Connection getConnection(String connectionUrl) throws DBException {
-        try {
-            return DriverManager.getConnection(connectionUrl);
-        } catch (SQLException throwables) {
-            throw new DBException("err", throwables);
-        }
-    }
 
     private static final DbManager instance = new DbManager();
 
