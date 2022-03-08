@@ -2,8 +2,7 @@ package my.project.services.commands.check;
 
 import my.project.entity.Transaction;
 import my.project.entity.User;
-import my.project.services.checkServises.Deletecheck;
-import my.project.services.commands.check.CommandCheck;
+import my.project.services.db.DbCheckManager;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +17,7 @@ public class DeleteCheckCommand implements CommandCheck {
     public void execute() {
         Transaction transaction=(Transaction)req.getSession().getAttribute("check");
         User user = (User) req.getSession().getAttribute("senior");
-        new Deletecheck().delete(transaction, user, getDbm(req));
+        DbCheckManager dbm = getDbm(req);
+        dbm.deleteCheck(transaction.getId(), user.getId());
     }
 }

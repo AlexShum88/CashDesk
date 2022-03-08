@@ -12,7 +12,6 @@ public class CreateCashiersCommand implements SeniorCommand {
     }
 
     @Override
-    public void execute() {
-        req.getSession().setAttribute("cashiers", new CreateCashiersReport().create(getDbm(req)));
+    public void execute() {req.getSession().setAttribute("cashiers", new CreateCashiersReport().create(getDbm(req)));
     }
 }

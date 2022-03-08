@@ -1,7 +1,7 @@
 package my.project.services.commands.check;
 
 import my.project.entity.Transaction;
-import my.project.services.checkServises.DeleteProductFromCheck;
+import my.project.services.db.DbCheckManager;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,7 +16,7 @@ public class DeleteProductFromCheckCommand implements CommandCheck {
     public void execute() {
         Transaction transaction=(Transaction)req.getSession().getAttribute("check");
         Integer productId = Integer.valueOf(req.getParameter("productId"));
-
-        new DeleteProductFromCheck().delete(transaction,productId, getDbm(req));
+        DbCheckManager dbm = getDbm(req);
+        dbm.deleteProd(transaction.getId(), productId);
     }
 }

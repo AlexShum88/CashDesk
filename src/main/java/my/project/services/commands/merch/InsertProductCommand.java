@@ -1,12 +1,15 @@
 package my.project.services.commands.merch;
 
-import my.project.services.merchServises.InsertProduct;
+import my.project.entity.Product;
+import my.project.services.db.DbProductManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class InsertProductCommand implements CommandMerch{
     HttpServletRequest req;
-
+    private  static final Logger LOG = LogManager.getLogger(InsertProductCommand.class);
     public InsertProductCommand(HttpServletRequest req) {
         this.req = req;
     }
@@ -14,6 +17,12 @@ public class InsertProductCommand implements CommandMerch{
     @Override
     public void execute() {
         String prName = req.getParameter("newName");
-        new InsertProduct().insertProduct(prName, getDbm(req));
+        LOG.debug("in insert product");
+        Double price =  0.0;
+        Double number =  0.0;
+        Product product = new Product(prName, price, number);
+        DbProductManager dbm = getDbm(req);
+        dbm.insertProduct(product);
+
     }
 }

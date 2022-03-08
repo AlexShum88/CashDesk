@@ -9,13 +9,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CreateGoodsReport {
-    public List<TransportProd> create( DbCheckManager dbm) {
+    public List<TransportProd> create(DbCheckManager dbm) {
         List<Transaction> allChecks = dbm.getAllChecks();
         for (int i = 0; i < allChecks.size(); i++) {
             allChecks.get(i).setList(dbm.getAllProdOfCheck(allChecks.get(i).getId()));
         }
         List<Product> allProd = new ArrayList<>();
-        List<TransportProd> trpr = new ArrayList<>();
         allChecks = allChecks.stream().filter(Transaction::isClosed).toList();
         for (int i = 0; i < allChecks.size(); i++) {
             List<Product> products = allChecks.get(i).getList();
@@ -27,21 +26,21 @@ public class CreateGoodsReport {
 
         }
 
-        Map<String, List<Product>> allProd2=allProd.stream()
-        .collect(Collectors.groupingBy(Product::getName));
+        Map<String, List<Product>> allProd2 = allProd.stream()
+                .collect(Collectors.groupingBy(Product::getName));
 
         var cash = allProd2.values().stream()
-                        .map(r->r.stream()
-                                .map(Product::getPrice)
-                                .reduce(Double::sum))
-                .map(e->e.get())
+                .map(r -> r.stream()
+                        .map(Product::getPrice)
+                        .reduce(Double::sum))
+                .map(e -> e.get())
                 .toList();
 
         var num = allProd2.values().stream()
-                .map(r->r.stream()
+                .map(r -> r.stream()
                         .map(Product::getNumber)
                         .reduce(Double::sum))
-                .map(e->e.get())
+                .map(e -> e.get())
                 .toList();
 
         var key = allProd2.keySet().stream()

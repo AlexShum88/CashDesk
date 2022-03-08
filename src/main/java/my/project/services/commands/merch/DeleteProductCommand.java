@@ -1,6 +1,8 @@
 package my.project.services.commands.merch;
 
-import my.project.services.merchServises.DeleteProduct;
+import my.project.services.db.DbProductManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,10 +12,12 @@ public class DeleteProductCommand implements CommandMerch{
     public DeleteProductCommand(HttpServletRequest req) {
         this.req = req;
     }
-
+    private  static final Logger LOG = LogManager.getLogger(DeleteProductCommand.class);
     @Override
     public void execute() {
         Integer id = Integer.parseInt(req.getParameter("prodID"));
-        new DeleteProduct().deleteProduct(id, getDbm(req));
+        LOG.debug("in delete product");
+        DbProductManager dbm = getDbm(req);
+        dbm.deleteProduct(id);
     }
 }
