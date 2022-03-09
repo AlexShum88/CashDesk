@@ -22,7 +22,7 @@ public class DbProductManagerTest {
 
     @Before
     public void getConn() throws DBException, SQLException {
-        when(dbm.getConnection()).thenReturn(DriverManager.getConnection("jdbc:mysql://localhost:3306/cash_deck?" +
+        when(dbm.getConnection()).thenReturn(DriverManager.getConnection("jdbc:mysql://localhost:3306/cash_deck_test?" +
                 "password=root&" +
                 "user=root"
         ));
@@ -107,7 +107,7 @@ public class DbProductManagerTest {
 
             double number = resultSet.getDouble("number");
 
-            assertEquals(164.2, number, 0.001);
+            assertEquals(200.0, number, 0.001);
 
         } catch (DBException | SQLException e) {
             e.printStackTrace();
@@ -117,13 +117,20 @@ public class DbProductManagerTest {
 
     @Test
     public void changeProductNumber(){
-        Integer id =1;
-        Double num = 1.0;
+        int id =1;
+        double num = 1.0;
         try (Connection conn = dbm.getConnection()) {
             PreparedStatement preparedStatement = conn.prepareStatement(DbProductManager.SQL_CHANGE_PROD_NUMBER);
             preparedStatement.setDouble(1, num);
             preparedStatement.setInt(2, id);
             assertTrue(preparedStatement.executeUpdate()>0);
+
+
+            double num1 = -1.0;
+            preparedStatement = conn.prepareStatement(DbProductManager.SQL_CHANGE_PROD_NUMBER);
+            preparedStatement.setDouble(1, num1);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
         } catch (DBException | SQLException e) {
             e.printStackTrace();
         }
@@ -142,6 +149,8 @@ public class DbProductManagerTest {
         }
 
     }
+
+
     @Test
     public void getProductById() {
         int id = 1;
@@ -158,7 +167,7 @@ public class DbProductManagerTest {
                 boolean isDelete = resultSet.getBoolean("is_deleted");
                 product = new Product(prName, price, number, idp, isDelete);
 
-                Product forTest = new Product("fish", 13.0, 1.0);
+                Product forTest = new Product("fish", 1.0, 1.0);
 
                 assertEquals(forTest, product);
 

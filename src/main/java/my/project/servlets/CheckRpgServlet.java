@@ -2,6 +2,7 @@ package my.project.servlets;
 
 import my.project.entity.Product;
 import my.project.entity.Transaction;
+import my.project.entity.User;
 import my.project.services.db.DbCheckManager;
 import my.project.services.db.DbProductManager;
 
@@ -30,13 +31,7 @@ public class CheckRpgServlet extends HttpServlet {
         List<Product> products = dbm.getAllProdOfCheck(check.getId());
         for (int i = 0; i < products.size(); i++) {
             products.get(i).setNumber(dbm.getNumber(check.getId(), products.get(i).getId()));
-            productsAndCurrentPrise.put(
-                    products.get(i),
-                    dbm.getCurrentPrice(
-                            check.getId(),
-                            products.get(i).getId()
-                    )
-            );
+            productsAndCurrentPrise.put(products.get(i), dbm.getCurrentPrice(check.getId(), products.get(i).getId()));
         }
         //for prod list on jsp
         req.setAttribute("products", productsAndCurrentPrise);

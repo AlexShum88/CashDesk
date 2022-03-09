@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,9 +30,8 @@ public class SetTotalSum {
             );
         }
 
-        setTotalSumToDB(setTotalSum(productsAndCurrentPrise),dbm, check.getId());
+        setTotalSumToDB(setTotalSum(productsAndCurrentPrise), dbm, check.getId());
     }
-
 
 
     private Double setTotalSum(Map<Product, Double> productDoubleMap) {

@@ -301,7 +301,7 @@ public class DbCheckManager extends DbSuperManager{
         } catch (DBException | SQLException e) {
             e.printStackTrace();
         }
-        var res = number * price;
+        Double res = number * price;
         logger.debug("result of mult in #getPriseAndNumber {}",res);
         return res;
     }

@@ -11,10 +11,11 @@ import java.util.Date;
 
 public class CreateCheckCommand implements CommandCheck {
     HttpServletRequest req;
+    private static final Logger LOG = LogManager.getLogger(CreateCheckCommand.class);
     public CreateCheckCommand(HttpServletRequest req) {
         this.req = req;
     }
-    private static final Logger LOG = LogManager.getLogger(CreateCheckCommand.class);
+
     @Override
     public void execute() {
         //initialised
@@ -26,7 +27,7 @@ public class CreateCheckCommand implements CommandCheck {
         LOG.debug("create check");
 
         dbm.newCheck(user.getId());
-        dbm.setDate(new Date(), transaction.getId());
+        dbm.setDate(new Date(), getDbm(req).getCheck(user.getId()).getId());
 
     }
 }

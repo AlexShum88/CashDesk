@@ -3,8 +3,6 @@ package my.project;
 import my.project.entity.User;
 import my.project.services.db.DBException;
 import my.project.services.db.DbManager;
-import my.project.services.db.DbProductManager;
-import org.apache.logging.log4j.Level;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +22,7 @@ public class DbManagerTest {
 
     @Before
     public void getConn() throws DBException, SQLException {
-        when(dbm.getConnection()).thenReturn(DriverManager.getConnection("jdbc:mysql://localhost:3306/cash_deck?" +
+        when(dbm.getConnection()).thenReturn(DriverManager.getConnection("jdbc:mysql://localhost:3306/cash_deck_test?" +
                 "password=root&" +
                 "user=root"
         ));
@@ -51,7 +49,7 @@ public class DbManagerTest {
     }
 
     @Test
-    public  void InsertUser () throws DBException {
+    public  void InsertUser () {
         try (Connection conn = dbm.getConnection()) {
             User user = new User("vasia", "123456", "admin");
             PreparedStatement preparedStatement = conn.prepareStatement(DbManager.SQL_INSERT_USER);
@@ -69,8 +67,6 @@ public class DbManagerTest {
     public void getUser() throws DBException {
         String login = "vasia";
         try (Connection conn = dbm.getConnection()) {
-
-
             PreparedStatement preparedStatement = conn.prepareStatement(DbManager.SQL_SELECT_USER_BY_NAME);
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -119,7 +115,7 @@ public class DbManagerTest {
     }
     @Test
     public void changeRole(){
-        String userName ="vasia";
+        String userName ="root";
 
         try (Connection conn = dbm.getConnection()) {
             int roleID = 1;

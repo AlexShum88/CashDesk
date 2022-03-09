@@ -37,10 +37,7 @@ public class CheckServlet extends HttpServlet {
             new IsSeniorComand(req).execute();
         }
 
-        User user = (User) req.getSession().getAttribute("user");
-        var dbm = DbCheckManager.getInstance();
-        Transaction transaction = dbm.getCheck(user.getId());
-        req.getSession().setAttribute("check", transaction);
+//        setAttributeCheck(req);
 
 
         resp.sendRedirect("CheckRPG");
@@ -53,7 +50,7 @@ public class CheckServlet extends HttpServlet {
         LOG.debug("start log param:");
         req.getParameterMap().keySet().forEach(LOG::debug);
         LOG.debug("end log param;");
-
+        setAttributeCheck(req);
         //chose action
         if (req.getParameter("createCheck") != null) new CreateCheckCommand(req).execute();
         if (req.getParameter("selectedProduct") != null) new AddSelectedProductCommand(req).execute();
@@ -73,6 +70,13 @@ public class CheckServlet extends HttpServlet {
         new SetTotalSumCommand(req).execute();
         //make attribute to translate to jsp
         resp.sendRedirect("CheckRPG");
+    }
+
+    private void setAttributeCheck(HttpServletRequest req){
+        User user = (User) req.getSession().getAttribute("user");
+        var dbm = DbCheckManager.getInstance();
+        Transaction transaction = dbm.getCheck(user.getId());
+        req.getSession().setAttribute("check", transaction);
     }
 
 }

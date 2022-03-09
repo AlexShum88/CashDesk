@@ -10,47 +10,52 @@
 <html>
 <head>
     <title>Check</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 <f:bundle basename="locale">
-    <div>
-        <label><b>check num --- ${requestScope.checkId}</b></label>
-        <hr>
+    <div class="w3-container">
+    <div class="w3-container w3-border">
+        <label><b>check num:</b>  ${requestScope.checkId}</label>
+
     </div>
-    <div>
-        <label><b>cashier id --- ${requestScope.cashier}</b></label>
-        <hr>
+    <div class="w3-container w3-border">
+        <label><b>cashier id:</b> ${requestScope.cashier}</label>
+
     </div>
-    <div>
-        <label>date --- ${requestScope.date}</label>
-        <hr>
+    <div class="w3-container w3-border">
+        <label><b>date:</b> ${requestScope.date}</label>
     </div>
-    <div>
-        <hr>
-        <label><b>products</b></label>
+    <div class="w3-container w3-border">
+
+        <label><b>Products:</b></label>
+        <br>
         <c:forEach var="product" items="${requestScope.products}">
-            <hr>
+            <div class="w3-panel">
             <label>${product.key.name}</label>
             <br>
-            <label>${product.key.price}x${product.value.get(0)}.......${product.value.get(1)} </label>
+            <label class="w3-margin-left">${product.key.price}x${product.value.get(0)} = ${product.value.get(1)} </label>
+    </div>
         </c:forEach>
-        <hr>
+
     </div>
-    <div>
-        <label><b>total_______${requestScope.total}</b></label>
-        <hr>
+    <div class="w3-container w3-border">
+        <label><b>total = ${requestScope.total}</b></label>
+
     </div>
-    <div>
-        <hr>
+    <div class="w3-container w3-border">
+
         <label><f:message key="Thanks"/></label>
         <br>
         <label><f:message key="wish"/></label>
-        <hr>
+
     </div>
-    <div>
+    <div class="w3-container ">
         <form action="check" method="get">
-            <input type="submit" name="to cashier" value="To cashier">
+            <input class="w3-margin-top" type="submit" name="to cashier" value="To cashier">
         </form>
+    </div>
     </div>
 </f:bundle>
 </body>
