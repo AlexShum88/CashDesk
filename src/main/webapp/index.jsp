@@ -19,22 +19,10 @@
 <f:bundle basename="locale">
 
     <%@include file="/views/localHeader.jsp" %>
+    <%@include file="/views/login.jsp" %>
 
-    <div class="w3-panel w3-border">
-        <form method="post" action="authorization">
-            <label><f:message key="Login">:</f:message></label><br>
-            <input type="text" required minlength="4" maxlength="16" name="login"
-                   pattern="[A-Z,a-z, А-Я,а-я][a-z,а-я]+"><br>
 
-            <label><f:message key="Password">:</f:message></label><br>
-            <input type="password" required minlength="4" maxlength="30" name="password"
-                   pattern="[A-Z,a-z, А-Я,а-я,0-9][a-z,а-я,0-9]+"><br>
-
-            <input class="w3-btn w3-red w3-round-large w3-section" type="submit" value="<f:message key="Enter" />"><br>
-
-        </form>
-    </div>
-    <div class="w3-container">
+    <div class="w3-container w3-section">
         <button class="w3-btn w3-light-green w3-round-large" name="registration"
                 onclick="location.href='views/registration.jsp'"><f:message
                 key="Registration"/></button>

@@ -50,7 +50,7 @@ public class CheckServlet extends HttpServlet {
         LOG.debug("start log param:");
         req.getParameterMap().keySet().forEach(LOG::debug);
         LOG.debug("end log param;");
-        setAttributeCheck(req);
+//        setAttributeCheck(req);
         //chose action
         if (req.getParameter("createCheck") != null) new CreateCheckCommand(req).execute();
         if (req.getParameter("selectedProduct") != null) new AddSelectedProductCommand(req).execute();

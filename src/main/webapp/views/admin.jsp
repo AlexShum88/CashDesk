@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
-<%@ page import="java.util.List, java.text.*, my.project.entity.User" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -41,8 +40,6 @@
                         <td>${user.role}</td>
 
                         <td>
-                                <%--                    <label><f:message key="Choose role" /></label>--%>
-                                <%--                    <br>--%>
                             <input list="role" name="role">
                             <datalist id="role">
                                 <option value="guest"><f:message key="guest"/></option>
@@ -52,9 +49,7 @@
                                 <option value="admin"><f:message key="admin"/></option>
                             </datalist>
                         </td>
-
-
-                        <td><input type="submit" value="<f:message key="Accept change" />"></td>
+                        <td><input class="w3-btn w3-green w3-round-large" type="submit" value="<f:message key="Accept change" />"></td>
                     </tr>
                 </form>
             </c:forEach>
@@ -66,7 +61,7 @@
     </div>
     <hr>
     <div class="w3-container">
-        <button onclick="location.href='index.jsp'"><f:message key="To login"/></button>
+        <button class="w3-btn w3-blue w3-round-large" onclick="location.href='index.jsp'"><f:message key="To login"/></button>
     </div>
 </f:bundle>
 </body>

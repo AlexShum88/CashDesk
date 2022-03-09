@@ -12,18 +12,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Senior cashier</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
+<%@include file="/views/localHeader.jsp" %>
 <f:bundle basename="locale">
+    <div class="w3-container">
     <form action="senior" method="get">
-        <input type="submit" name="goods" value="<f:message key="Goods" />">
-        <input type="submit" name="cashiers" value="<f:message key="Cashiers" />">
+        <input class="w3-btn w3-blue-gray w3-round-large" type="submit" name="goods" value="<f:message key="Goods" />">
+        <input class="w3-btn w3-blue-gray w3-round-large" type="submit" name="cashiers" value="<f:message key="Cashiers" />">
     </form>
-
+    </div>
 
     <c:if test="${sessionScope.allProd!=null}">
-
-        <table>
+    <div class="w3-container">
+        <table class="w3-table w3-striped w3-bordered w3-border w3-sand w3-margin-top" >
             <tr>
                 <th scope="col"><f:message key="Goods"/></th>
                 <th scope="col"><f:message key="Sold"/></th>
@@ -39,11 +43,12 @@
             </c:forEach>
 
         </table>
-
+        </div>
     </c:if>
 
     <c:if test="${sessionScope.cashiers!=null}">
-        <table>
+        <div class="w3-container">
+        <table class="w3-table w3-striped w3-bordered w3-border w3-blue-gray w3-text-black w3-margin-top">
             <tr>
                 <th scope="col"><f:message key="Cashier id"/></th>
                 <th scope="col"><f:message key="All checks"/></th>
@@ -59,10 +64,11 @@
                 </tr>
             </c:forEach>
         </table>
+        </div>
     </c:if>
-    <div>
+    <div class="w3-container w3-margin-top">
         <br>
-        <button onclick="location.href='index.jsp'"><f:message key="To login"/></button>
+        <button class="w3-btn w3-blue w3-round-large" onclick="location.href='index.jsp'"><f:message key="To login"/></button>
     </div>
 </f:bundle>
 </body>

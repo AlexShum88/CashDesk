@@ -17,15 +17,15 @@
 <f:bundle basename="locale">
     <div class="w3-container">
     <div class="w3-container w3-border">
-        <label><b>check num:</b>  ${requestScope.checkId}</label>
+        <label><b>Check num:</b>  ${requestScope.checkId}</label>
 
     </div>
     <div class="w3-container w3-border">
-        <label><b>cashier id:</b> ${requestScope.cashier}</label>
+        <label><b>Cashier id:</b> ${requestScope.cashier}</label>
 
     </div>
     <div class="w3-container w3-border">
-        <label><b>date:</b> ${requestScope.date}</label>
+        <label><b>Date:</b> ${requestScope.date}</label>
     </div>
     <div class="w3-container w3-border">
 
@@ -41,7 +41,7 @@
 
     </div>
     <div class="w3-container w3-border">
-        <label><b>total = ${requestScope.total}</b></label>
+        <label><b>Total = ${requestScope.total}</b></label>
 
     </div>
     <div class="w3-container w3-border">
@@ -51,9 +51,9 @@
         <label><f:message key="wish"/></label>
 
     </div>
-    <div class="w3-container ">
+    <div class="w3-container w3-border ">
         <form action="check" method="get">
-            <input class="w3-margin-top" type="submit" name="to cashier" value="To cashier">
+            <input class="w3-btn w3-red w3-round-large w3-margin-top" type="submit" name="to cashier" value="To cashier">
         </form>
     </div>
     </div>

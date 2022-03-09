@@ -11,18 +11,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Cashier</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 <f:setLocale value="${sessionScope.locale}"/>
 <f:bundle basename="locale">
-<div>
+<div class="w3-container">
     <form action="check" method="get">
-        <input type="submit" name="createCheck" value="<f:message key="createCheck" />">
+        <input class="w3-btn w3-blue w3-round-large w3-margin-top" type="submit" name="createCheck" value="<f:message key="createCheck" />">
     </form>
 </div>
-<div>
-    <button onclick="location.href='index.jsp'"><f:message key="To login" /></button>
-</div>
+    <div class="w3-container">
+        <button class="w3-btn w3-light-green w3-round-large w3-margin-top " onclick="location.href='index.jsp'"><f:message key="To login" /></button>
+    </div>
+
 <br>
 
 <br>
