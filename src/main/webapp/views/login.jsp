@@ -22,7 +22,7 @@
         <form method="post" action="authorization">
             <label><f:message key="Login">:</f:message></label><br>
             <input type="text" required minlength="4" maxlength="16" name="login"
-                   pattern="[A-Z,a-z, А-Я,а-я][a-z,а-я]+"><br>
+                   pattern="[A-Z,a-z, А-Я,а-я,0-9][a-z,а-я,0-9]+"><br>
 
             <label><f:message key="Password">:</f:message></label><br>
             <input type="password" required minlength="4" maxlength="30" name="password"

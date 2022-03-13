@@ -21,12 +21,14 @@ public class UserIsPresentFilter extends HttpFilter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         LOG.debug("in user is present");
-        LOG.debug("get login"+req.getParameter("login"));
-        LOG.debug("get password"+req.getParameter("password"));
+        LOG.debug("get login {}", req.getParameter("login"));
+        LOG.debug("get password {}", req.getParameter("password"));
         var user = createUser(req.getParameter("login"));
 
         if (user==null) {
-            ((HttpServletResponse) res).sendRedirect("index.jsp");
+            if (req.getParameter("registration")!=null) {
+                ((HttpServletResponse) res).sendRedirect("registration.jsp");
+            } else((HttpServletResponse) res).sendRedirect("index.jsp");
 //            chain.doFilter(req, res);
             return;
         }
@@ -39,7 +41,7 @@ public class UserIsPresentFilter extends HttpFilter {
     private User createUser(String login){
         var dbm = (DbManager) getServletContext().getAttribute("dbManager");
         try {
-            return (User) dbm.getUser(login);
+            return dbm.getUser(login);
         } catch (DBException e) {
             e.printStackTrace();
         }

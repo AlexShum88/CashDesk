@@ -23,9 +23,11 @@
 
 
     <div class="w3-container w3-section">
-        <button class="w3-btn w3-light-green w3-round-large" name="registration"
-                onclick="location.href='views/registration.jsp'"><f:message
-                key="Registration"/></button>
+        <form action="authorization" method="post">
+            <input class="w3-btn w3-light-green w3-round-large" type="submit" name="registration"
+                    value='<f:message key="Registration"/>'>
+        </form>
+
     </div>
 </f:bundle>
 </body>

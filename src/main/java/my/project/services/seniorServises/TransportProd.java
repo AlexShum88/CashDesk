@@ -9,8 +9,9 @@ public class TransportProd implements Serializable {
 
         public TransportProd(String name, Double totalCash, Double totalNum) {
             this.name = name;
-            this.cash = totalCash;
-            this.num = totalNum;
+            double scale = Math.pow(10, 2);
+            this.cash = Math.ceil(totalCash * scale) / scale;
+            this.num = Math.ceil(totalNum * scale) / scale;
         }
 
         public String getName() {

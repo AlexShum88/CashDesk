@@ -10,7 +10,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Guest</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <f:bundle basename="locale">
 <body>
@@ -23,7 +25,7 @@
 <hr>
 <br>
 <div>
-    <button onclick="location.href='index.jsp'"><f:message key="To login"/></button>
+    <button class="w3-btn w3-blue w3-round-large" onclick="location.href='index.jsp'"><f:message key="To login"/></button>
 </div>
 </f:bundle>
 </body>
