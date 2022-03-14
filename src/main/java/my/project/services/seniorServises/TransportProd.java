@@ -1,7 +1,9 @@
 package my.project.services.seniorServises;
 
 import java.io.Serializable;
-
+/**
+ * objects for transport to jsp data about sales
+ * */
 public class TransportProd implements Serializable {
         String name;
         Double cash = 0d;

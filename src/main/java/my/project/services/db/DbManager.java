@@ -18,11 +18,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-
+/**
+ * class to work with db to interact with users and their roles
+ */
 public class DbManager extends DbSuperManager{
     private static final Logger logger = LogManager.getLogger(DbManager.class);
 
-
+    /**
+     * section for db commands
+     */
     public static final String SQL_INSERT_USER = "insert into users (username, password, roles_id) values (?, ?, ?)";
     private static final String SQL_SELECT_ALL_ROLES = "Select * from roles";
     public static final String SQL_SELECT_USER_BY_NAME = "select * from users join roles where users.roles_id = roles.id and username = ?";
@@ -63,7 +67,9 @@ public class DbManager extends DbSuperManager{
         }
         return 0;
     }
-
+    /**
+     * find user in db by name
+     * */
     public boolean findUserName(String userName) throws DBException {
         try (Connection conn = getConnection()) {
             logger.info("find user name");
@@ -80,14 +86,15 @@ public class DbManager extends DbSuperManager{
         return false;
     }
 
+    /**
+     * insert user to db
+     * if user is existing user will see error page
+     * @param user get user
+     * */
     public  boolean InsertUser (User user) throws DBException {
         try (Connection conn = getConnection()) {
             logger.info("insert user");
-            //__________________
-            //check user if user in table. if it so need to send message to user.
-            //TODO need to send message to user that he is in table.
             if (findUserName(user.getLogin())){return false;}
-            //___________________
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_INSERT_USER);
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPassword());
@@ -102,8 +109,12 @@ public class DbManager extends DbSuperManager{
         return false;
     }
 
+    /**
+     * get user from db
+     * @return user by name
+     * @param login username
+     * */
     public User getUser(String login) throws DBException {
-        //here new connection getter
         try (Connection conn = getConnection()) {
             logger.debug("get user");
 
@@ -126,7 +137,9 @@ public class DbManager extends DbSuperManager{
         return null;
     }
 
-
+    /**
+     * get all users from db
+     * @return list of users in db */
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         try (Connection conn = getConnection()) {
@@ -148,6 +161,11 @@ public class DbManager extends DbSuperManager{
         return users;
     }
 
+    /**
+     * change role of user
+     * @param newRole new role
+     * @param userName by username
+     * */
     public boolean changeRole(String userName, String newRole){
         try (Connection conn = getConnection()) {
             int roleID = roleID(newRole, conn);
@@ -170,6 +188,9 @@ public class DbManager extends DbSuperManager{
         return false;
     }
 
+    /**
+     * @deprecated
+     */
     public Integer UserId(String userName){
         try (Connection conn = getConnection()) {
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_GET_USER_ID);

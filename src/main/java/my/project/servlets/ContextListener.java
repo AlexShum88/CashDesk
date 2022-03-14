@@ -3,10 +3,15 @@ package my.project.servlets;
 import my.project.services.db.DbCheckManager;
 import my.project.services.db.DbManager;
 import my.project.services.db.DbProductManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
-
+/**
+ * add attributes to context listener
+ * */
 public class ContextListener implements ServletContextListener, ServletContextAttributeListener {
+    private static final Logger LOG = LogManager.getLogger(ContextListener.class);
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         DbManager dbManager = DbManager.getInstance();
@@ -21,6 +26,6 @@ public class ContextListener implements ServletContextListener, ServletContextAt
 
     @Override
     public void attributeAdded(ServletContextAttributeEvent event) {
-        System.out.println("attribute added");
+        LOG.info("attribute added");
     }
 }

@@ -2,10 +2,8 @@ package my.project.servlets;
 
 import my.project.entity.Product;
 import my.project.entity.Transaction;
-import my.project.entity.User;
 import my.project.services.db.DbCheckManager;
 import my.project.services.db.DbProductManager;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,16 +13,22 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-@WebServlet("/CheckRPG")
-public class CheckRpgServlet extends HttpServlet {
+/**
+ * servlet to execute PRG pattern
+ * */
+@WebServlet("/CheckPRG")
+public class CheckPRG extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        setAttributeToJsp(req);
-        req.getRequestDispatcher("/views/workPlace/check.jsp").forward(req, resp);
+        String toCheck = "/views/workPlace/check.jsp";
+        setAttributeForJsp(req);
+        req.getRequestDispatcher(toCheck).forward(req, resp);
     }
 
-    private void setAttributeToJsp(HttpServletRequest req) {
+    /**
+     * prepare attributes to create view
+     * */
+    private void setAttributeForJsp(HttpServletRequest req) {
         DbCheckManager dbm = DbCheckManager.getInstance();
         Transaction check = (Transaction) req.getSession().getAttribute("check");
         Map<Product, Double> productsAndCurrentPrise = new LinkedHashMap<>();
@@ -40,6 +44,5 @@ public class CheckRpgServlet extends HttpServlet {
         req.setAttribute("allProducts", allProducts);
         //for total sum
         req.setAttribute("totalSum", dbm.getTotalSum(check.getId()));
-        //send
     }
 }

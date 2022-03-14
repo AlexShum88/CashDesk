@@ -3,11 +3,13 @@ package my.project.services.seniorServises;
 import my.project.entity.Transaction;
 import my.project.services.db.DbCheckManager;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * create objects for jsp
+ * for create report about cashiers work
+ * */
 public class CreateCashiersReport {
     public List<TransportCashiers> create( DbCheckManager dbm) {
 

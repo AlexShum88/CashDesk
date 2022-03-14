@@ -8,9 +8,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * class for interact with db in case of products
+ * */
 public class DbProductManager extends DbSuperManager{
-
+    /**
+     * section for db commands
+     * */
     public static final String SQL_GET_ALL_PRODUCTS = "select * from products;";
     public static final String SQL_GET_PRODUCT_BY_ID = "select * from products where id = ?;";
     public static final String SQL_INSERT_PRODUCT = "insert into products (name, price, number) values ( ?, ?, ?)";
@@ -20,7 +24,9 @@ public class DbProductManager extends DbSuperManager{
     private static final String SQL_PRODUCT_RECOVER = "update products set is_deleted = false where name = ?";
     private static final String SQL_GET_PRODUCT_BY_NAME = "select  * from products where name = ?";
 
-
+    /**
+     * init section
+     * */
     private static final DbProductManager instance = new DbProductManager();
     public static final String SQL_GET_PRODUCT_NUMBER_BY_ID ="select number from products where id = ?;";
 
@@ -35,7 +41,10 @@ public class DbProductManager extends DbSuperManager{
     }
 
 
-
+    /**
+     * @return all products in db
+     * if product is deleted will ont get it in list
+     * */
     public List<Product> getAllProducts (){
         List<Product>products = new ArrayList<>();
         try (Connection conn = getConnection()) {
@@ -58,6 +67,9 @@ public class DbProductManager extends DbSuperManager{
         return products;
     }
 
+    /**
+     * @deprecated
+     * */
     public Product getProductByName(String name){
         Product product = null;
         try (Connection conn = getConnection()) {
@@ -101,6 +113,9 @@ public class DbProductManager extends DbSuperManager{
         return false;
     }
 
+    /**
+     * insert product to db
+     * */
     public boolean insertProduct(Product product){
         try (Connection conn = getConnection()) {
             if(!ifProductExist(conn, product.getName())){
@@ -121,14 +136,18 @@ public class DbProductManager extends DbSuperManager{
         }
         return false;
     }
-
+    /**
+     * recover deleted product
+     * */
     private void productRecover(Connection conn, Product product) throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement(SQL_PRODUCT_RECOVER);
         preparedStatement.setString(1, product.getName());
         preparedStatement.executeUpdate();
     }
 
-
+    /**
+     * set true for is_deleted field of product
+     * */
     public boolean deleteProduct(Integer id){
         try (Connection conn = getConnection()) {
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_DELETE_PRODUCT);
@@ -142,6 +161,9 @@ public class DbProductManager extends DbSuperManager{
         return false;
     }
 
+    /**
+     * change number of products
+     * */
     public boolean changeProductNumber(Integer id, Double num){
         try (Connection conn = getConnection()) {
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_CHANGE_PROD_NUMBER);
@@ -155,7 +177,9 @@ public class DbProductManager extends DbSuperManager{
         }
         return false;
     }
-
+    /**
+     * change price of products
+     * */
     public boolean changeProductPrice (Integer id, Double num) {
         try (Connection conn = getConnection()) {
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_CHANGE_PROD_PRICE);
@@ -171,6 +195,10 @@ public class DbProductManager extends DbSuperManager{
         return false;
     }
 
+    /**
+     * get product by id
+     * @return product from db
+     * */
     public Product getProductById(int id) {
         Product product = null;
         try (Connection conn = getConnection()) {
@@ -191,7 +219,9 @@ public class DbProductManager extends DbSuperManager{
         }
         return product;
     }
-
+    /**
+     * get number of products
+     * */
     public Double getNumber(Integer productId){
         Double number = 0d;
         try (Connection conn = getConnection()) {

@@ -6,6 +6,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+/**
+ * use for make localisation
+ * */
 @WebServlet(name = "setLocale", value="/setLocale")
 public class LocaleServlet extends HttpServlet {
     @Override

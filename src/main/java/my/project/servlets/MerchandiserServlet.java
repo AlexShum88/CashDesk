@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+/**
+ * servlet to work with merchandiser functional
+ * */
 public class MerchandiserServlet extends HttpServlet {
     private  static final Logger LOG = LogManager.getLogger(MerchandiserServlet.class);
 
@@ -22,7 +24,7 @@ public class MerchandiserServlet extends HttpServlet {
         DbProductManager productManager = DbProductManager.getInstance();
         req.getSession().setAttribute("dbm", productManager);
 
-        resp.sendRedirect("MerchRPG");
+        resp.sendRedirect("MerchPRG");
     }
 
     @Override
@@ -32,7 +34,7 @@ public class MerchandiserServlet extends HttpServlet {
         if (req.getParameter("setPrice")!=null) new ChangePriceCommand(req).execute();
         if (req.getParameter("setNumber")!=null) new ChangeNumberCommand(req).execute();
 
-        resp.sendRedirect("MerchRPG");
+        resp.sendRedirect("MerchPRG");
     }
 
 

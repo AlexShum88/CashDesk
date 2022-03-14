@@ -10,14 +10,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-
+/**
+ * class for interact with db in case of check
+ * */
 public class DbCheckManager extends DbSuperManager{
 
     private static final Logger logger = LogManager.getLogger(DbManager.class);
     private static final DbCheckManager instance = new DbCheckManager();
 
 
-
+    /**
+     * section for db commands
+     * */
     public static final String SQL_NEW_CHECK = "insert into transaction (user_id) values (?);";
     public static final String SQL_DELETE_CHECK = "update transaction set is_canseled = true where id = ?; ";
     public static final String SQL_ADD_PRODUCT = "insert into transaction_has_products (transaction_id, products_id, price ) values (?, ?, ?);";
@@ -40,7 +44,9 @@ public class DbCheckManager extends DbSuperManager{
     public static final String SQL_GET_ALL_CHECKS = "select * from transaction ;";
     private static final String SQL_SET_CANSEL_AUTOR = "update transaction set cansel_autor = ? where id=?;";
 
-
+    /**
+     * init section
+     * */
     public static synchronized DbCheckManager getInstance() {
         logger.debug("get db check manager instance");
         return instance;
@@ -49,6 +55,10 @@ public class DbCheckManager extends DbSuperManager{
     private DbCheckManager() {
     }
 
+    /**
+     * creates a new check in db and connects it with the cashier who creates it
+     * @param cashierID for connect check with cashier
+     * */
     public boolean newCheck(Integer cashierID) {
         logger.debug("new check");
         try (Connection conn = getConnection()) {
@@ -63,12 +73,18 @@ public class DbCheckManager extends DbSuperManager{
         }
         return false;
     }
+
     private void setCanselAutor(Connection conn, Integer author, Integer checkId) throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement(SQL_SET_CANSEL_AUTOR);
         preparedStatement.setInt(1, author);
         preparedStatement.setInt(2, checkId);
         preparedStatement.executeUpdate();
     }
+
+    /**
+     * mark check as deleted
+     * @param author set author of cansel check
+     * */
     public boolean deleteCheck(Integer checkID, Integer author){
         logger.debug("delete check");
         try (Connection conn = getConnection()) {
@@ -84,7 +100,9 @@ public class DbCheckManager extends DbSuperManager{
         }
         return false;
     }
-
+    /**
+     * add product to check
+     * */
     public boolean addProd (Integer transactionID, Integer prodID){
         logger.debug("add prod");
         try (Connection conn = getConnection()) {
@@ -102,6 +120,9 @@ public class DbCheckManager extends DbSuperManager{
         return false;
     }
 
+    /**
+     * get current price of product
+     * */
     private Double getProdPrice(Integer prodID){
         logger.debug("get prod price");
         try (Connection conn = getConnection()) {
@@ -117,6 +138,7 @@ public class DbCheckManager extends DbSuperManager{
         }
         return 0d;
     }
+
 
     private Integer getProdId(String name){
         logger.debug("get prod id");
@@ -151,6 +173,10 @@ public class DbCheckManager extends DbSuperManager{
 
     }
 
+    /**
+     * set number of product in check
+     * @param transactionID check id
+     * */
     public boolean setProdNumber(Double number, Integer transactionID, Integer prodID){
         logger.debug("set prod number");
         DbProductManager dbProductManager = DbProductManager.getInstance();
@@ -173,7 +199,10 @@ public class DbCheckManager extends DbSuperManager{
         }
         return false;
     }
-
+    /**
+     * delete product form check in db
+     * @param transactionID check id
+     * */
     public boolean deleteProd (Integer transactionID, Integer prodID){
         logger.debug("delete prod");
         try (Connection conn = getConnection()) {
@@ -190,6 +219,10 @@ public class DbCheckManager extends DbSuperManager{
         return false;
     }
 
+    /**
+     * get all product form check
+     * @param transactionID check id
+     * */
     public List<Product> getAllProdOfCheck(Integer transactionID){
         logger.debug("get all product of check");
         List<Product> products = new ArrayList<>();
@@ -206,7 +239,9 @@ public class DbCheckManager extends DbSuperManager{
         }
         return products;
     }
-
+    /**
+     * get check
+     * */
     public Transaction getCheck(Integer userID){
         logger.debug("get check");
         Transaction transaction = new Transaction();
@@ -230,6 +265,11 @@ public class DbCheckManager extends DbSuperManager{
 
     }
 
+    /**
+     * get last check for this user
+     * @return check id
+     * @param userID cashier id
+     * */
     public Integer getCheckId(Integer userID){
         logger.debug("get check id");
         try (Connection conn = getConnection()) {
@@ -247,6 +287,9 @@ public class DbCheckManager extends DbSuperManager{
         return -1;
     }
 
+    /**
+     * mark check as closed
+     * */
     public boolean closedCheck(Integer checkID){
         logger.debug("closed check");
         try (Connection conn = getConnection()) {
@@ -263,6 +306,10 @@ public class DbCheckManager extends DbSuperManager{
         return false;
     }
 
+    /**
+     * set current price of product by
+     * @see makeCurrentPrice()
+     * */
     public boolean setCurrentPrice (Integer transactionId, Integer productId) {
         logger.debug("set current price");
         try (Connection conn = getConnection()) {
@@ -273,7 +320,6 @@ public class DbCheckManager extends DbSuperManager{
             preparedStatement.setInt(3, productId);
             if (preparedStatement.executeUpdate() > 0) {
                 logger.debug("current price is {}", currentPrice);
-                logger.debug("current price = true");
                 return true;
             }
         } catch (SQLException | DBException throwables) {
@@ -283,6 +329,11 @@ public class DbCheckManager extends DbSuperManager{
         return false;
 
     }
+
+    /**
+     * make current price of product
+     * by number*price
+     * */
     private Double makeCurrentPrice(Integer transactionId, Integer productId) {
         logger.debug("make current price");
         Double number = 0d;
@@ -306,6 +357,9 @@ public class DbCheckManager extends DbSuperManager{
         return res;
     }
 
+    /**
+     * @return current price
+     * */
     public Double getCurrentPrice(Integer transactionId, Integer productId) {
         logger.debug("get current price");
         Double current_price = 0d;
@@ -325,7 +379,10 @@ public class DbCheckManager extends DbSuperManager{
         return current_price;
     }
 
-
+    /**
+     * set sum of all prices of products in check
+     * and write it to total field in transaction table in db
+     * */
     public boolean setTotalSum(Double totalSum, Integer transactionId) {
         logger.debug("set total sum");
         try (Connection conn = getConnection()) {
@@ -341,7 +398,9 @@ public class DbCheckManager extends DbSuperManager{
         }
         return false;
     }
-
+    /**
+     * get total sum from db
+     * */
     public Double getTotalSum(int id) {
         logger.debug("get total sum");
         try (Connection conn = getConnection()) {
@@ -357,6 +416,9 @@ public class DbCheckManager extends DbSuperManager{
         return 0d;
     }
 
+    /**
+     * get number of such product in check
+     * */
     public Double getNumber(Integer checkId, Integer productId){
         logger.debug("get number");
         try (Connection conn = getConnection()) {
@@ -373,6 +435,9 @@ public class DbCheckManager extends DbSuperManager{
         return 0d;
     }
 
+    /**
+     * set date of create check or close check
+     * */
     public void setDate(Date date, int id ) {
         logger.debug("set date");
         try (Connection conn = getConnection()) {
@@ -389,6 +454,9 @@ public class DbCheckManager extends DbSuperManager{
         }
     }
 
+    /**
+     * @return all checks form db
+     * */
     public List<Transaction> getAllChecks() {
         List<Transaction> list = new ArrayList<>();
         logger.debug("set date");

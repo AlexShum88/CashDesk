@@ -19,11 +19,16 @@
 <f:bundle basename="locale">
 <div class="w3-container">
     <form action="check" method="get">
-        <input class="w3-btn w3-blue w3-round-large w3-margin-top" type="submit" name="createCheck" value="<f:message key="createCheck" />">
+        <input class="w3-btn w3-blue w3-round-large w3-margin-top"
+               type="submit" name="createCheck" value="<f:message key="createCheck" />">
     </form>
 </div>
     <div class="w3-container">
-        <button class="w3-btn w3-light-green w3-round-large w3-margin-top " onclick="location.href='index.jsp'"><f:message key="To login" /></button>
+        <form action="check" method="get">
+            <input class="w3-btn w3-light-green w3-round-large w3-margin-top "
+                   type="submit" name="exitUser" value="<f:message key="To login" />">
+        </form>
+
     </div>
 
 <br>

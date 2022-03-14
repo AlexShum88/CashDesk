@@ -1,13 +1,7 @@
 package my.project.servlets;
 
-import my.project.entity.Transaction;
-import my.project.entity.User;
-import my.project.services.commands.check.ExitCommand;
-import my.project.services.commands.check.DeleteCheckCommand;
-import my.project.services.commands.check.DeleteProductFromCheckCommand;
-import my.project.services.commands.check.IsSeniorComand;
 import my.project.services.commands.check.*;
-import my.project.services.db.DbCheckManager;
+import my.project.services.commands.userExitCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,16 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
+/**
+ * servlet to work with checks
+ * */
 public class CheckServlet extends HttpServlet {
-
-
     private static final Logger LOG = LogManager.getLogger(CheckServlet.class);
-
-
+    /**
+     * look for exit and redact flags end execute its commands
+     * */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LOG.debug("checkServlet#doPost");
+        LOG.info("checkServlet#doPost");
         LOG.debug("session id {}", req.getSession().getId());
         LOG.debug("check is {}", req.getAttribute("check"));
 
@@ -37,20 +32,24 @@ public class CheckServlet extends HttpServlet {
             new IsSeniorComand(req).execute();
         }
 
-//        setAttributeCheck(req);
-
-
-        resp.sendRedirect("CheckRPG");
+        resp.sendRedirect("CheckPRG");
     }
 
+    /**
+     * look for usual command for check redact and execute them
+     * in any case execute
+     * @see SetTotalSumCommand
+     * */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String toCashierWorkPlace ="/views/workPlace/cashier.jsp";
+        String toIndex = "index.jsp";
         LOG.debug("in check#doGet");
         //log param
         LOG.debug("start log param:");
         req.getParameterMap().keySet().forEach(LOG::debug);
         LOG.debug("end log param;");
-//        setAttributeCheck(req);
+
         //chose action
         if (req.getParameter("createCheck") != null) new CreateCheckCommand(req).execute();
         if (req.getParameter("selectedProduct") != null) new AddSelectedProductCommand(req).execute();
@@ -58,25 +57,25 @@ public class CheckServlet extends HttpServlet {
         if (req.getParameter("closeCheck") != null) new CloseCheckCommand(req, resp).execute();
         if (req.getParameter("deleteProd") != null) new DeleteProductFromCheckCommand(req).execute();
         if (req.getParameter("to cashier") != null) {
-            req.getRequestDispatcher("views/workPlace/cashier.jsp").forward(req, resp);
+            req.getRequestDispatcher(toCashierWorkPlace).forward(req, resp);
             return;
         }
         if (req.getParameter("deleteCheck") != null) {
             new DeleteCheckCommand(req).execute();
-            req.getRequestDispatcher("/views/workPlace/cashier.jsp").forward(req, resp);
+            req.getRequestDispatcher(toCashierWorkPlace).forward(req, resp);
+            return;
+        }
+
+        if (req.getParameter("exitUser")!=null) {
+            new userExitCommand(req).execute();
+            req.getRequestDispatcher(toIndex).forward(req, resp);
             return;
         }
         //set total sum to db
         new SetTotalSumCommand(req).execute();
         //make attribute to translate to jsp
-        resp.sendRedirect("CheckRPG");
+        resp.sendRedirect("CheckPRG");
     }
 
-    private void setAttributeCheck(HttpServletRequest req){
-        User user = (User) req.getSession().getAttribute("user");
-        var dbm = DbCheckManager.getInstance();
-        Transaction transaction = dbm.getCheck(user.getId());
-        req.getSession().setAttribute("check", transaction);
-    }
 
 }

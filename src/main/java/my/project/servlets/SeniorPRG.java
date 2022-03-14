@@ -7,12 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
-@WebServlet(name = "SeniorRPG", value = "/SeniorRPG")
-public class SeniorRPG extends HttpServlet {
+/**
+ * servlet to execute PRG pattern
+ * */
+@WebServlet(name = "SeniorPRG", value = "/SeniorPRG")
+public class SeniorPRG extends HttpServlet {
+    String toSenior = "/views/workPlace/senior_cashier.jsp";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        req.getRequestDispatcher("/views/workPlace/senior_cashier.jsp").forward(req, resp);
+        req.getRequestDispatcher(toSenior).forward(req, resp);
     }
 }

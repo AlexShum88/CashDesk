@@ -7,7 +7,10 @@ import my.project.services.db.DbCheckManager;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 import java.util.stream.Collectors;
-
+/**
+ * create objects for jsp
+ * for create report about sales
+ * */
 public class CreateGoodsReport {
     public List<TransportProd> create(DbCheckManager dbm) {
         List<Transaction> allChecks = dbm.getAllChecks();

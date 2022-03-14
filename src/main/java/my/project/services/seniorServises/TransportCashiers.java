@@ -1,7 +1,9 @@
 package my.project.services.seniorServises;
 
 import java.io.Serializable;
-
+/**
+ * object for transport to jsp data about cashiers work
+ * */
 public class TransportCashiers implements Serializable {
     int id;
     int checks;
