@@ -1,10 +1,9 @@
 package my.project.services.seniorServises;
 
-import my.project.entity.Product;
-import my.project.entity.Transaction;
-import my.project.services.db.DbCheckManager;
+import my.project.model.Product;
+import my.project.model.Transaction;
+import my.project.db.DbCheckManager;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 import java.util.stream.Collectors;
 /**

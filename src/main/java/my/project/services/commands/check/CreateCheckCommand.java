@@ -1,8 +1,8 @@
 package my.project.services.commands.check;
 
-import my.project.entity.Transaction;
-import my.project.entity.User;
-import my.project.services.db.DbCheckManager;
+import my.project.model.Transaction;
+import my.project.model.User;
+import my.project.db.DbCheckManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

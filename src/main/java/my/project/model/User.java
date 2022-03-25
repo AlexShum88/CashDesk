@@ -1,17 +1,12 @@
-package my.project.entity;
+package my.project.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public class User implements Serializable {
     private String login;
     private String password;
     private String role;
     private Integer id;
-
 
     public User() {
     }

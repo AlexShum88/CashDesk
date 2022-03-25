@@ -1,10 +1,8 @@
 package my.project.servlets.filters;
 
-import com.mysql.cj.log.Log;
-import my.project.entity.User;
-import my.project.services.db.DBException;
-import my.project.services.db.DbManager;
-import my.project.servlets.AuthorizationServlet;
+import my.project.model.User;
+import my.project.db.DBException;
+import my.project.db.DbManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

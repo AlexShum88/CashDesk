@@ -8,12 +8,11 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import my.project.entity.User;
-import my.project.services.db.DbManager;
+import my.project.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static my.project.entity.Roles.ADMIN;
+import static my.project.model.Roles.ADMIN;
 
 /**
  * check if user is admin

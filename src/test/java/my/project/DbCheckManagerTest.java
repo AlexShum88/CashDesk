@@ -1,10 +1,10 @@
 package my.project;
 
-import my.project.entity.Product;
-import my.project.entity.Transaction;
-import my.project.services.db.DBException;
-import my.project.services.db.DbCheckManager;
-import my.project.services.db.DbProductManager;
+import my.project.model.Product;
+import my.project.model.Transaction;
+import my.project.db.DBException;
+import my.project.db.DbCheckManager;
+import my.project.db.DbProductManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static my.project.services.db.DbCheckManager.*;
+import static my.project.db.DbCheckManager.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;

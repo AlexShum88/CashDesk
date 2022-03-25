@@ -1,12 +1,12 @@
 package my.project.services.commands.check;
 
-import my.project.entity.User;
+import my.project.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static my.project.entity.Roles.SENIOR_CASHIER;
+import static my.project.model.Roles.SENIOR_CASHIER;
 
 public class IsSeniorComand implements CommandCheck {
     HttpServletRequest req;

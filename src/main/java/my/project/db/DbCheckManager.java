@@ -1,7 +1,7 @@
-package my.project.services.db;
+package my.project.db;
 
-import my.project.entity.Product;
-import my.project.entity.Transaction;
+import my.project.model.Product;
+import my.project.model.Transaction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

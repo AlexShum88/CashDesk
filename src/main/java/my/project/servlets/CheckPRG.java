@@ -1,9 +1,9 @@
 package my.project.servlets;
 
-import my.project.entity.Product;
-import my.project.entity.Transaction;
-import my.project.services.db.DbCheckManager;
-import my.project.services.db.DbProductManager;
+import my.project.model.Product;
+import my.project.model.Transaction;
+import my.project.db.DbCheckManager;
+import my.project.db.DbProductManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

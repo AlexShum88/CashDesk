@@ -1,4 +1,4 @@
-package my.project.entity;
+package my.project.model;
 
 public enum Roles {
     GUEST("guest"),

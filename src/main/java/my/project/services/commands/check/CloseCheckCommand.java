@@ -1,8 +1,8 @@
 package my.project.services.commands.check;
 
-import my.project.entity.Product;
-import my.project.entity.Transaction;
-import my.project.entity.User;
+import my.project.model.Product;
+import my.project.model.Transaction;
+import my.project.model.User;
 import my.project.services.checkServises.CloseCheck;
 
 import javax.servlet.ServletException;

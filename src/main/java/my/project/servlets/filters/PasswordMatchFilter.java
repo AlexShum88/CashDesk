@@ -1,6 +1,6 @@
 package my.project.servlets.filters;
 
-import my.project.entity.User;
+import my.project.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

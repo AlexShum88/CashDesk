@@ -1,7 +1,7 @@
 package my.project.services.seniorServises;
 
-import my.project.entity.Transaction;
-import my.project.services.db.DbCheckManager;
+import my.project.model.Transaction;
+import my.project.db.DbCheckManager;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package my.project.services.commands.check;
 
-import my.project.entity.Transaction;
+import my.project.model.Transaction;
 import my.project.services.checkServises.SetTotalSum;
 
 import javax.servlet.http.HttpServletRequest;

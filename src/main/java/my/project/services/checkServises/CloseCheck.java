@@ -1,9 +1,9 @@
 package my.project.services.checkServises;
 
-import my.project.entity.Product;
-import my.project.entity.Transaction;
-import my.project.services.db.DbCheckManager;
-import my.project.services.db.DbProductManager;
+import my.project.model.Product;
+import my.project.model.Transaction;
+import my.project.db.DbCheckManager;
+import my.project.db.DbProductManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,8 +16,7 @@ public class CloseCheck {
     private static final Logger LOG = LogManager.getLogger(CloseCheck.class);
 
 
-    public Map<Product, List<Double>> closeCheck( DbCheckManager dbm, Date date, Transaction check, List<Product> products )
-            {
+    public Map<Product, List<Double>> closeCheck( DbCheckManager dbm, Date date, Transaction check, List<Product> products ) {
         LOG.debug("close check");
 
         dbm.setDate(date, check.getId());

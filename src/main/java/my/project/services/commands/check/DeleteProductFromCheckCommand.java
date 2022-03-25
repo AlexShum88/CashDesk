@@ -1,7 +1,7 @@
 package my.project.services.commands.check;
 
-import my.project.entity.Transaction;
-import my.project.services.db.DbCheckManager;
+import my.project.model.Transaction;
+import my.project.db.DbCheckManager;
 
 import javax.servlet.http.HttpServletRequest;
 

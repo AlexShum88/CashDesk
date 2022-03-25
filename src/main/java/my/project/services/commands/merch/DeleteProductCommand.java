@@ -1,6 +1,6 @@
 package my.project.services.commands.merch;
 
-import my.project.services.db.DbProductManager;
+import my.project.db.DbProductManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

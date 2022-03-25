@@ -1,7 +1,7 @@
 package my.project.servlets;
 
-import my.project.entity.User;
-import my.project.services.db.DbManager;
+import my.project.model.User;
+import my.project.db.DbManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

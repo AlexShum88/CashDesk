@@ -1,6 +1,6 @@
 package my.project.servlets;
 
-import my.project.services.db.DbManager;
+import my.project.db.DbManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

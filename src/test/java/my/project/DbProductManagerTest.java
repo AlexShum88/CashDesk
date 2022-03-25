@@ -1,8 +1,8 @@
 package my.project;
 
-import my.project.entity.Product;
-import my.project.services.db.DBException;
-import my.project.services.db.DbProductManager;
+import my.project.model.Product;
+import my.project.db.DBException;
+import my.project.db.DbProductManager;
 
 import org.junit.After;
 import org.junit.Before;

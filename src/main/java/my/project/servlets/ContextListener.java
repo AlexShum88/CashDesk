@@ -1,8 +1,8 @@
 package my.project.servlets;
 
-import my.project.services.db.DbCheckManager;
-import my.project.services.db.DbManager;
-import my.project.services.db.DbProductManager;
+import my.project.db.DbCheckManager;
+import my.project.db.DbManager;
+import my.project.db.DbProductManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

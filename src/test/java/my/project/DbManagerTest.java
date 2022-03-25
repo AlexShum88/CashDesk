@@ -1,8 +1,8 @@
 package my.project;
 
-import my.project.entity.User;
-import my.project.services.db.DBException;
-import my.project.services.db.DbManager;
+import my.project.model.User;
+import my.project.db.DBException;
+import my.project.db.DbManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

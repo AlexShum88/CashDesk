@@ -1,6 +1,6 @@
-package my.project.services.db;
+package my.project.db;
 
-import my.project.entity.Product;
+import my.project.model.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

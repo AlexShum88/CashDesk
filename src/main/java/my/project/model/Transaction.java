@@ -1,4 +1,4 @@
-package my.project.entity;
+package my.project.model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,7 +11,6 @@ public class Transaction implements Serializable {
     private boolean isCanceled;
     private Integer canselAutor;
     private boolean isClosed;
-
 
     public Transaction() {
     }

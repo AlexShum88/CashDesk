@@ -1,4 +1,4 @@
-package my.project.services.db;
+package my.project.db;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;

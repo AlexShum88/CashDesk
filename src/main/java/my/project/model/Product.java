@@ -1,4 +1,4 @@
-package my.project.entity;
+package my.project.model;
 
 import java.io.Serializable;
 
@@ -8,9 +8,6 @@ public class Product implements Serializable {
     private Double number;
     private Integer id;
     private Boolean isDeleted = false;
-
-
-
 
     public Product() {
     }

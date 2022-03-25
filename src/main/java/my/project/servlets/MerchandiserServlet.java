@@ -4,7 +4,7 @@ import my.project.services.commands.merch.ChangeNumberCommand;
 import my.project.services.commands.merch.ChangePriceCommand;
 import my.project.services.commands.merch.DeleteProductCommand;
 import my.project.services.commands.merch.InsertProductCommand;
-import my.project.services.db.DbProductManager;
+import my.project.db.DbProductManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
