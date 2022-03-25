@@ -136,6 +136,7 @@ public class DbProductManager extends DbSuperManager{
         }
         return false;
     }
+
     /**
      * recover deleted product
      * */
@@ -177,6 +178,7 @@ public class DbProductManager extends DbSuperManager{
         }
         return false;
     }
+
     /**
      * change price of products
      * */
@@ -219,6 +221,7 @@ public class DbProductManager extends DbSuperManager{
         }
         return product;
     }
+
     /**
      * get number of products
      * */

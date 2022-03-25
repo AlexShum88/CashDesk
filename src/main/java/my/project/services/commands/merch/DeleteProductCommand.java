@@ -8,11 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 
 public class DeleteProductCommand implements CommandMerch{
     HttpServletRequest req;
+    private  static final Logger LOG = LogManager.getLogger(DeleteProductCommand.class);
 
     public DeleteProductCommand(HttpServletRequest req) {
         this.req = req;
     }
-    private  static final Logger LOG = LogManager.getLogger(DeleteProductCommand.class);
+
     @Override
     public void execute() {
         Integer id = Integer.parseInt(req.getParameter("prodID"));

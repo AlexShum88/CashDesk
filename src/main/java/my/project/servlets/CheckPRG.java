@@ -18,6 +18,7 @@ import java.util.Map;
  * */
 @WebServlet("/CheckPRG")
 public class CheckPRG extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String toCheck = "/views/workPlace/check.jsp";

@@ -22,6 +22,7 @@ public class CloseCheckCommand implements CommandCheck {
     List<Product> products;
     Map<Product, Double> productsAndCurrentPrise;
     Date date;
+
     public CloseCheckCommand(HttpServletRequest req, HttpServletResponse resp) {
         this.req = req;
         this.resp = resp;

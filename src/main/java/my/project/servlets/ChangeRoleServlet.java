@@ -14,6 +14,7 @@ import java.io.IOException;
  * */
 public class ChangeRoleServlet extends HttpServlet {
     private static final Logger LOG = LogManager.getLogger(ChangeRoleServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOG.info("in change role serv");

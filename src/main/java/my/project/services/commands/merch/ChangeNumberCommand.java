@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ChangeNumberCommand implements CommandMerch {
     HttpServletRequest req;
     private  static final Logger LOG = LogManager.getLogger(ChangeNumberCommand.class);
+
     public ChangeNumberCommand(HttpServletRequest req) {
         this.req = req;
     }

@@ -20,6 +20,7 @@ import java.io.IOException;
 public class PasswordMatchFilter extends HttpFilter {
     private static final Logger LOG = LogManager.getLogger(PasswordMatchFilter.class);
     String loginPage = "index.jsp";
+
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         LOG.info("in pass test");

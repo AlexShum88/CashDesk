@@ -24,6 +24,7 @@ public class UserIsPresentFilter extends HttpFilter {
     private static final Logger LOG = LogManager.getLogger(UserIsPresentFilter.class);
     String registrationPage = "registration.jsp";
     String loginPage = "index.jsp";
+
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         LOG.info("in user is present");

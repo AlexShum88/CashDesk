@@ -58,6 +58,7 @@ public class DbManager extends DbSuperManager{
         }
         return 0;
     }
+
     /**
      * find user in db by name
      * */

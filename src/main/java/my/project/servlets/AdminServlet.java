@@ -15,6 +15,7 @@ import java.io.IOException;
 public class AdminServlet extends HttpServlet {
     String adminPage = "views/admin.jsp";
     private static final Logger LOG = LogManager.getLogger(AdminServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOG.info("in Admin Servlet");

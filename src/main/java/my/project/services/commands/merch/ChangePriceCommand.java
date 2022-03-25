@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 public class ChangePriceCommand implements CommandMerch{
     HttpServletRequest req;
     private  static final Logger LOG = LogManager.getLogger(ChangePriceCommand.class);
+
     public ChangePriceCommand(HttpServletRequest req) {
         this.req = req;
     }
-
 
     @Override
     public void execute() {

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 public class AddSelectedProductCommand implements CommandCheck {
     HttpServletRequest req;
     private static final Logger LOG = LogManager.getLogger(AddSelectedProductCommand.class);
+
     public AddSelectedProductCommand(HttpServletRequest req) {
         this.req = req;
     }

@@ -12,6 +12,7 @@ import java.io.IOException;
  * */
 @WebServlet(name = "setLocale", value="/setLocale")
 public class LocaleServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().setAttribute("locale", req.getParameter("locale"));

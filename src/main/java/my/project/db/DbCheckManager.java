@@ -100,6 +100,7 @@ public class DbCheckManager extends DbSuperManager{
         }
         return false;
     }
+
     /**
      * add product to check
      * */
@@ -199,6 +200,7 @@ public class DbCheckManager extends DbSuperManager{
         }
         return false;
     }
+
     /**
      * delete product form check in db
      * @param transactionID check id
@@ -239,6 +241,7 @@ public class DbCheckManager extends DbSuperManager{
         }
         return products;
     }
+
     /**
      * get check
      * */
@@ -308,7 +311,6 @@ public class DbCheckManager extends DbSuperManager{
 
     /**
      * set current price of product by
-     * @see makeCurrentPrice()
      * */
     public boolean setCurrentPrice (Integer transactionId, Integer productId) {
         logger.debug("set current price");
@@ -398,6 +400,7 @@ public class DbCheckManager extends DbSuperManager{
         }
         return false;
     }
+
     /**
      * get total sum from db
      * */

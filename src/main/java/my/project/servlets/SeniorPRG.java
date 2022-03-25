@@ -13,6 +13,7 @@ import java.io.IOException;
 @WebServlet(name = "SeniorPRG", value = "/SeniorPRG")
 public class SeniorPRG extends HttpServlet {
     String toSenior = "/views/workPlace/senior_cashier.jsp";
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

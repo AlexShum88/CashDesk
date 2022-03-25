@@ -12,6 +12,7 @@ import javax.servlet.*;
  * */
 public class ContextListener implements ServletContextListener, ServletContextAttributeListener {
     private static final Logger LOG = LogManager.getLogger(ContextListener.class);
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         DbManager dbManager = DbManager.getInstance();

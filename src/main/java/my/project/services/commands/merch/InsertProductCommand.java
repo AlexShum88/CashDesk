@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 public class InsertProductCommand implements CommandMerch{
     HttpServletRequest req;
     private  static final Logger LOG = LogManager.getLogger(InsertProductCommand.class);
+
     public InsertProductCommand(HttpServletRequest req) {
         this.req = req;
     }

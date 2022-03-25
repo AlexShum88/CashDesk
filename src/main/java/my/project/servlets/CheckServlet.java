@@ -19,6 +19,7 @@ public class CheckServlet extends HttpServlet {
     /**
      * look for exit and redact flags end execute its commands
      * */
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOG.info("checkServlet#doPost");

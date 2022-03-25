@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 public class SetTotalSumCommand implements CommandCheck {
     HttpServletRequest req;
     Transaction check;
+
     public SetTotalSumCommand(HttpServletRequest req) {
         this.req = req;
         check = (Transaction) req.getSession().getAttribute("check");

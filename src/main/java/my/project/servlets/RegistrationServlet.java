@@ -17,6 +17,7 @@ import java.io.IOException;
  * */
 public class RegistrationServlet extends HttpServlet {
     private static final Logger LOG = LogManager.getLogger(RegistrationServlet.class);
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String toGuest = "views/guest.jsp";

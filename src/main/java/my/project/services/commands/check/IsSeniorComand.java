@@ -11,6 +11,7 @@ import static my.project.model.Roles.SENIOR_CASHIER;
 public class IsSeniorComand implements CommandCheck {
     HttpServletRequest req;
     private static final Logger LOG = LogManager.getLogger(IsSeniorComand.class);
+
     public IsSeniorComand(HttpServletRequest req) {
         this.req = req;
     }
