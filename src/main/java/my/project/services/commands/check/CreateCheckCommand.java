@@ -1,8 +1,7 @@
 package my.project.services.commands.check;
 
-import my.project.model.Transaction;
-import my.project.model.User;
 import my.project.db.DbCheckManager;
+import my.project.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,7 +19,6 @@ public class CreateCheckCommand implements CommandCheck {
     public void execute() {
         //initialised
         User user = (User) req.getSession().getAttribute("user");
-        Transaction transaction = getDbm(req).getCheck(user.getId());
         DbCheckManager dbm = getDbm(req);
         //do
         req.getSession().setAttribute("check", getDbm(req).getCheck(user.getId()));

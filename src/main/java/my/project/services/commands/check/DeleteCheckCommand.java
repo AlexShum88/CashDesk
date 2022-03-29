@@ -15,7 +15,7 @@ public class DeleteCheckCommand implements CommandCheck {
 
     @Override
     public void execute() {
-        Transaction transaction=(Transaction)req.getSession().getAttribute("check");
+        Transaction transaction = (Transaction) req.getSession().getAttribute("check");
         User user = (User) req.getSession().getAttribute("senior");
         DbCheckManager dbm = getDbm(req);
         dbm.deleteCheck(transaction.getId(), user.getId());
