@@ -13,12 +13,13 @@ import java.io.IOException;
 
 /**
  * servlet to work with checks
- * */
+ */
 public class CheckServlet extends HttpServlet {
     private static final Logger LOG = LogManager.getLogger(CheckServlet.class);
+
     /**
      * look for exit and redact flags end execute its commands
-     * */
+     */
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,11 +40,12 @@ public class CheckServlet extends HttpServlet {
     /**
      * look for usual command for check redact and execute them
      * in any case execute
+     *
      * @see SetTotalSumCommand
-     * */
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String toCashierWorkPlace ="/views/workPlace/cashier.jsp";
+        String toCashierWorkPlace = "/views/workPlace/cashier.jsp";
         String toIndex = "index.jsp";
         LOG.debug("in check#doGet");
         //log param
@@ -67,7 +69,7 @@ public class CheckServlet extends HttpServlet {
             return;
         }
 
-        if (req.getParameter("exitUser")!=null) {
+        if (req.getParameter("exitUser") != null) {
             new userExitCommand(req).execute();
             req.getRequestDispatcher(toIndex).forward(req, resp);
             return;

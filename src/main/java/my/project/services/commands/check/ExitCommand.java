@@ -2,7 +2,7 @@ package my.project.services.commands.check;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class ExitCommand implements CommandCheck{
+public class ExitCommand implements CommandCheck {
     HttpServletRequest req;
 
     public ExitCommand(HttpServletRequest req) {

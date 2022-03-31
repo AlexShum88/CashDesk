@@ -21,16 +21,16 @@ public class SetPriceByNumberCommand implements CommandCheck {
         Double number = Double.parseDouble(req.getParameter("number"));
 
         var dbm = getDbm(req);
-        if(!dbm.setProdNumber(
+        if (!dbm.setProdNumber(
                 number,
                 transaction.getId(),
                 productId
         )
-        ){
+        ) {
             req.getSession().setAttribute("cant", productId);
             LOG.debug("can`t set number");
 
-        }else {
+        } else {
             dbm.setCurrentPrice(transaction.getId(), productId);
         }
     }

@@ -1,7 +1,6 @@
 package my.project.services.commands.merch;
 
 import my.project.db.DbProductManager;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class ChangeNumberCommand implements CommandMerch {
     HttpServletRequest req;
-    private  static final Logger LOG = LogManager.getLogger(ChangeNumberCommand.class);
+    private static final Logger LOG = LogManager.getLogger(ChangeNumberCommand.class);
 
     public ChangeNumberCommand(HttpServletRequest req) {
         this.req = req;

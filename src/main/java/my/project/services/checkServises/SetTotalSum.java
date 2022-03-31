@@ -1,8 +1,8 @@
 package my.project.services.checkServises;
 
+import my.project.db.DbCheckManager;
 import my.project.model.Product;
 import my.project.model.Transaction;
-import my.project.db.DbCheckManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

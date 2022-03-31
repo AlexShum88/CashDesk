@@ -16,7 +16,7 @@ import java.io.IOException;
  * second filter
  * check if user enter correct password
  * else return user to login page
- * */
+ */
 public class PasswordMatchFilter extends HttpFilter {
     private static final Logger LOG = LogManager.getLogger(PasswordMatchFilter.class);
     String loginPage = "index.jsp";

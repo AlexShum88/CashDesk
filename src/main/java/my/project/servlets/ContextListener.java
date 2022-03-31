@@ -7,9 +7,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
+
 /**
  * add attributes to context listener
- * */
+ */
 public class ContextListener implements ServletContextListener, ServletContextAttributeListener {
     private static final Logger LOG = LogManager.getLogger(ContextListener.class);
 

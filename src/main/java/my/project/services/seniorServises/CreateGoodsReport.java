@@ -1,15 +1,18 @@
 package my.project.services.seniorServises;
 
+import my.project.db.DbCheckManager;
 import my.project.model.Product;
 import my.project.model.Transaction;
-import my.project.db.DbCheckManager;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+
 /**
  * create objects for jsp
  * for create report about sales
- * */
+ */
 public class CreateGoodsReport {
     public List<TransportProd> create(DbCheckManager dbm) {
         List<Transaction> allChecks = dbm.getAllChecks();

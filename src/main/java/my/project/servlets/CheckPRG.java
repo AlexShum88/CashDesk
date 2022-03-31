@@ -1,9 +1,10 @@
 package my.project.servlets;
 
-import my.project.model.Product;
-import my.project.model.Transaction;
 import my.project.db.DbCheckManager;
 import my.project.db.DbProductManager;
+import my.project.model.Product;
+import my.project.model.Transaction;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,9 +14,10 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 /**
  * servlet to execute PRG pattern
- * */
+ */
 @WebServlet("/CheckPRG")
 public class CheckPRG extends HttpServlet {
 
@@ -28,7 +30,7 @@ public class CheckPRG extends HttpServlet {
 
     /**
      * prepare attributes to create view
-     * */
+     */
     private void setAttributeForJsp(HttpServletRequest req) {
         DbCheckManager dbm = DbCheckManager.getInstance();
         Transaction check = (Transaction) req.getSession().getAttribute("check");

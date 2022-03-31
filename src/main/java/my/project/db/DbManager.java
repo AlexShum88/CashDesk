@@ -5,14 +5,17 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * class to work with db to interact with users and their roles
  */
-public class DbManager extends DbSuperManager{
+public class DbManager extends DbSuperManager {
     private static final Logger logger = LogManager.getLogger(DbManager.class);
 
     /**
@@ -30,7 +33,7 @@ public class DbManager extends DbSuperManager{
     private static final DbManager instance = new DbManager();
 
     public static synchronized DbManager getInstance() {
-        logger.error( "db manager get instance");
+        logger.error("db manager get instance");
         return instance;
     }
 
@@ -61,14 +64,14 @@ public class DbManager extends DbSuperManager{
 
     /**
      * find user in db by name
-     * */
+     */
     public boolean findUserName(String userName) throws DBException {
         try (Connection conn = getConnection()) {
             logger.info("find user name");
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_FIND_USER_NAME);
             preparedStatement.setString(1, userName);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 return true;
             }
         } catch (SQLException throwables) {
@@ -81,12 +84,15 @@ public class DbManager extends DbSuperManager{
     /**
      * insert user to db
      * if user is existing user will see error page
+     *
      * @param user get user
-     * */
-    public  boolean InsertUser (User user) throws DBException {
+     */
+    public boolean InsertUser(User user) throws DBException {
         try (Connection conn = getConnection()) {
             logger.info("insert user");
-            if (findUserName(user.getLogin())){return false;}
+            if (findUserName(user.getLogin())) {
+                return false;
+            }
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_INSERT_USER);
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPassword());
@@ -103,9 +109,10 @@ public class DbManager extends DbSuperManager{
 
     /**
      * get user from db
-     * @return user by name
+     *
      * @param login username
-     * */
+     * @return user by name
+     */
     public User getUser(String login) throws DBException {
         try (Connection conn = getConnection()) {
             logger.debug("get user");
@@ -113,7 +120,7 @@ public class DbManager extends DbSuperManager{
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_SELECT_USER_BY_NAME);
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
                 String role = resultSet.getString("role");
@@ -125,13 +132,15 @@ public class DbManager extends DbSuperManager{
         } catch (SQLException | DBException throwables) {
             throwables.printStackTrace();
         }
-        logger.error( "cant get user: probably is absent in DB");
+        logger.error("cant get user: probably is absent in DB");
         return null;
     }
 
     /**
      * get all users from db
-     * @return list of users in db */
+     *
+     * @return list of users in db
+     */
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         try (Connection conn = getConnection()) {
@@ -148,17 +157,18 @@ public class DbManager extends DbSuperManager{
             }
         } catch (DBException | SQLException e) {
             e.printStackTrace();
-            logger.error( "get all user exception");
+            logger.error("get all user exception");
         }
         return users;
     }
 
     /**
      * change role of user
-     * @param newRole new role
+     *
+     * @param newRole  new role
      * @param userName by username
-     * */
-    public boolean changeRole(String userName, String newRole){
+     */
+    public boolean changeRole(String userName, String newRole) {
         try (Connection conn = getConnection()) {
             int roleID = roleID(newRole, conn);
             String usname = userName.strip();
@@ -174,7 +184,7 @@ public class DbManager extends DbSuperManager{
 
         } catch (DBException | SQLException e) {
             e.printStackTrace();
-            logger.error( "cant change role");
+            logger.error("cant change role");
         }
 
         return false;
@@ -183,7 +193,7 @@ public class DbManager extends DbSuperManager{
     /**
      * @deprecated
      */
-    public Integer UserId(String userName){
+    public Integer UserId(String userName) {
         try (Connection conn = getConnection()) {
             PreparedStatement preparedStatement = conn.prepareStatement(SQL_GET_USER_ID);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -192,7 +202,7 @@ public class DbManager extends DbSuperManager{
             }
         } catch (DBException | SQLException e) {
             e.printStackTrace();
-            logger.error( "get user id exception");
+            logger.error("get user id exception");
         }
         return -1;
 

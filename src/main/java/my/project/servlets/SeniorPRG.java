@@ -9,7 +9,7 @@ import java.io.IOException;
 
 /**
  * servlet to execute PRG pattern
- * */
+ */
 @WebServlet(name = "SeniorPRG", value = "/SeniorPRG")
 public class SeniorPRG extends HttpServlet {
     String toSenior = "/views/workPlace/senior_cashier.jsp";

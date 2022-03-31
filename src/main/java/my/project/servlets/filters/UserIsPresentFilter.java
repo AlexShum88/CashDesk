@@ -1,8 +1,8 @@
 package my.project.servlets.filters;
 
-import my.project.model.User;
 import my.project.db.DBException;
 import my.project.db.DbManager;
+import my.project.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,7 +19,7 @@ import java.io.IOException;
  * its check if user is present in db
  * else its return user to login page
  * if user want registration its redirect to registration page
- * */
+ */
 public class UserIsPresentFilter extends HttpFilter {
     private static final Logger LOG = LogManager.getLogger(UserIsPresentFilter.class);
     String registrationPage = "registration.jsp";
@@ -32,10 +32,10 @@ public class UserIsPresentFilter extends HttpFilter {
         LOG.debug("get password {}", req.getParameter("password"));
         var user = createUser(req.getParameter("login"));
 
-        if (user==null) {
-            if (req.getParameter("registration")!=null) {
+        if (user == null) {
+            if (req.getParameter("registration") != null) {
                 ((HttpServletResponse) res).sendRedirect(registrationPage);
-            } else((HttpServletResponse) res).sendRedirect(loginPage);
+            } else ((HttpServletResponse) res).sendRedirect(loginPage);
 
             return;
         }
@@ -44,11 +44,13 @@ public class UserIsPresentFilter extends HttpFilter {
 
         chain.doFilter(req, res);
     }
+
     /**
      * method to get user from db
+     *
      * @param login login of user
-     * */
-    private User createUser(String login){
+     */
+    private User createUser(String login) {
         var dbm = (DbManager) getServletContext().getAttribute("dbManager");
         try {
             return dbm.getUser(login);

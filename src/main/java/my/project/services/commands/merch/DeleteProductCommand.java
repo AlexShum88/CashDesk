@@ -6,9 +6,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class DeleteProductCommand implements CommandMerch{
+public class DeleteProductCommand implements CommandMerch {
     HttpServletRequest req;
-    private  static final Logger LOG = LogManager.getLogger(DeleteProductCommand.class);
+    private static final Logger LOG = LogManager.getLogger(DeleteProductCommand.class);
 
     public DeleteProductCommand(HttpServletRequest req) {
         this.req = req;

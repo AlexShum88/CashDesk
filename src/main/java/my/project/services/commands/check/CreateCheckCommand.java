@@ -11,6 +11,7 @@ import java.util.Date;
 public class CreateCheckCommand implements CommandCheck {
     HttpServletRequest req;
     private static final Logger LOG = LogManager.getLogger(CreateCheckCommand.class);
+
     public CreateCheckCommand(HttpServletRequest req) {
         this.req = req;
     }

@@ -19,13 +19,12 @@ import static org.mockito.Mockito.when;
 
 public class DbProductManagerTest {
     DbProductManager dbm = mock(DbProductManager.class);
-
+    String base = "jdbc:mysql://localhost:3306/cash_deck_test?" +
+            "password=root&" +
+            "user=root";
     @Before
     public void getConn() throws DBException, SQLException {
-        when(dbm.getConnection()).thenReturn(DriverManager.getConnection("jdbc:mysql://localhost:3306/cash_deck_test?" +
-                "password=root&" +
-                "user=root"
-        ));
+        when(dbm.getConnection()).thenReturn(DriverManager.getConnection(base));
     }
 
     @After

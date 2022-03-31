@@ -1,9 +1,9 @@
 package my.project.services.checkServises;
 
-import my.project.model.Product;
-import my.project.model.Transaction;
 import my.project.db.DbCheckManager;
 import my.project.db.DbProductManager;
+import my.project.model.Product;
+import my.project.model.Transaction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,7 +16,7 @@ public class CloseCheck {
     private static final Logger LOG = LogManager.getLogger(CloseCheck.class);
 
 
-    public Map<Product, List<Double>> closeCheck( DbCheckManager dbm, Date date, Transaction check, List<Product> products ) {
+    public Map<Product, List<Double>> closeCheck(DbCheckManager dbm, Date date, Transaction check, List<Product> products) {
         LOG.debug("close check");
 
         dbm.setDate(date, check.getId());
@@ -40,13 +40,13 @@ public class CloseCheck {
         return productNumberCurrPrice;
     }
 
-    private void minusProductFromDb(Integer checkId, DbCheckManager dbm){
+    private void minusProductFromDb(Integer checkId, DbCheckManager dbm) {
         DbProductManager productManager = DbProductManager.getInstance();
         List<Product> allProdOfCheck = dbm.getAllProdOfCheck(checkId);
         for (int i = 0; i < allProdOfCheck.size(); i++) {
             Integer prodId = allProdOfCheck.get(i).getId();
             double v = -dbm.getNumber(checkId, prodId);
-            productManager.changeProductNumber(prodId, v );
+            productManager.changeProductNumber(prodId, v);
         }
 
     }

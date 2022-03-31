@@ -2,7 +2,7 @@ package my.project.services.commands;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class userExitCommand implements Command{
+public class userExitCommand implements Command {
     HttpServletRequest req;
 
     public userExitCommand(HttpServletRequest req) {

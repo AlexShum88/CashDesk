@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static my.project.model.Roles.*;
+
 /**
  * servlet who redirect users to their workplaces
- * */
+ */
 public class AuthorizationServlet extends HttpServlet {
     private static final Logger LOG = LogManager.getLogger(AuthorizationServlet.class);
 
@@ -30,7 +31,7 @@ public class AuthorizationServlet extends HttpServlet {
      * and its cashier
      * and new user its senior cashier
      * than redirect to check view for redact check as senior
-     * */
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOG.info("in auth servlet");
@@ -40,25 +41,25 @@ public class AuthorizationServlet extends HttpServlet {
 
         LOG.debug(" user {} role {}", req.getSession().getAttribute("senior"), SENIOR_CASHIER.name.equals(user.getRole()));
 
-        User userInSession =(User) req.getSession().getAttribute("user");
+        User userInSession = (User) req.getSession().getAttribute("user");
         if (userInSession == null) {
             userInSession = new User();
         }
-        if (SENIOR_CASHIER.name.equals(user.getRole())){
-            if (CASHIER.name.equals(userInSession.getRole())){
+        if (SENIOR_CASHIER.name.equals(user.getRole())) {
+            if (CASHIER.name.equals(userInSession.getRole())) {
                 req.getSession().setAttribute("user", userInSession);
                 req.getSession().setAttribute("senior", user);
                 req.getSession().setAttribute("cashier", userInSession);
 
                 req.getRequestDispatcher(toCheck).forward(req, resp);
                 return;
-            }else {
+            } else {
                 req.getSession().setAttribute("user", user);
                 req.getRequestDispatcher(seniorPage).forward(req, resp);
                 return;
             }
         }
-            req.getSession().setAttribute("user", user);
+        req.getSession().setAttribute("user", user);
 
         if (GUEST.name.equals(user.getRole())) req.getRequestDispatcher(guestPage).forward(req, resp);
         if (MERCHANDISER.name.equals(user.getRole())) req.getRequestDispatcher(merchandiser).forward(req, resp);

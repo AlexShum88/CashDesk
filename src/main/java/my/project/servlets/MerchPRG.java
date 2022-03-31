@@ -1,7 +1,7 @@
 package my.project.servlets;
 
-import my.project.model.Product;
 import my.project.db.DbProductManager;
+import my.project.model.Product;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,9 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+
 /**
  * servlet to execute PRG pattern
- * */
+ */
 @WebServlet(name = "MerchPRG", value = "/MerchPRG")
 public class MerchPRG extends HttpServlet {
     private static final Logger LOG = LogManager.getLogger(MerchPRG.class);
@@ -27,7 +28,7 @@ public class MerchPRG extends HttpServlet {
 
     /**
      * @return list of product - the main point of merchandiser functional
-     * */
+     */
     private List<Product> viewProduct(HttpServletRequest req) {
         LOG.debug("in view product");
         var dbm = (DbProductManager) req.getSession().getAttribute("dbm");
