@@ -56,6 +56,11 @@
             <input class="w3-btn w3-red w3-round-large w3-margin-top" type="submit" name="to cashier" value="To cashier">
         </form>
     </div>
+    <div>
+        <form action="check" method="get">
+            <input class="w3-btn w3-red w3-round-large w3-margin-top" type="submit" name="print" value="print">
+        </form>
+    </div>
     </div>
 </f:bundle>
 </body>

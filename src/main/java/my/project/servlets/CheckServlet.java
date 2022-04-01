@@ -1,5 +1,9 @@
 package my.project.servlets;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import my.project.services.commands.check.*;
 import my.project.services.commands.userExitCommand;
 import org.apache.logging.log4j.LogManager;
@@ -76,9 +80,17 @@ public class CheckServlet extends HttpServlet {
         }
         //set total sum to db
         new SetTotalSumCommand(req).execute();
+
+        if (req.getParameter("print") != null) {
+            req.getSession().setAttribute("print", "print");
+
+        }
+
         //make attribute to translate to jsp
         resp.sendRedirect("CheckPRG");
     }
+
+
 
 
 }

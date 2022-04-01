@@ -1,5 +1,9 @@
 package my.project.services.commands.check;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import my.project.model.Product;
 import my.project.model.Transaction;
 import my.project.model.User;
