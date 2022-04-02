@@ -1,9 +1,5 @@
 package my.project.services.commands.check;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
 import my.project.model.Product;
 import my.project.model.Transaction;
 import my.project.model.User;
@@ -26,6 +22,7 @@ public class CloseCheckCommand implements CommandCheck {
     List<Product> products;
     Map<Product, Double> productsAndCurrentPrise;
     Date date;
+    String toCheckPrint = "/views/checkPrint.jsp";
 
     public CloseCheckCommand(HttpServletRequest req, HttpServletResponse resp) {
         this.req = req;
@@ -59,7 +56,7 @@ public class CloseCheckCommand implements CommandCheck {
             req.setAttribute("total", getDbm(req).getTotalSum(check.getId()));
             req.setAttribute("date", date);
             //redirect to jsp
-            req.getRequestDispatcher("/views/checkPrint.jsp").forward(req, resp);
+            req.getRequestDispatcher(toCheckPrint).forward(req, resp);
         } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
