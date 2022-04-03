@@ -58,7 +58,8 @@
     </div>
     <div>
         <form action="check" method="get">
-            <input class="w3-btn w3-red w3-round-large w3-margin-top" type="submit" name="print" value="print">
+            <input type="hidden" name="messageForPrint" value="<f:message key="Thanks"/>///<f:message key="wish"/>">
+            <input class="w3-btn w3-red w3-round-large w3-margin-top" type="submit" name="print" value="<f:message key="print"/>">
         </form>
     </div>
     </div>

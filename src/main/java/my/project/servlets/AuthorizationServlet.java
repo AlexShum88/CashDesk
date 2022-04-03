@@ -23,6 +23,7 @@ public class AuthorizationServlet extends HttpServlet {
     private String seniorPage = "views/workPlace/senior_cashier.jsp";
     private String merchandiser = "merchandiser";
     private String toCheck = "check";
+    private String toWrong = "views/wrong.jsp";
 
     /**
      * redirect users to their workplaces
@@ -36,34 +37,37 @@ public class AuthorizationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOG.info("in auth servlet");
         LOG.debug("session id = {} ", req.getSession().getId());
+        try {
+            User user = (User) req.getAttribute("user");
 
-        User user = (User) req.getAttribute("user");
+            LOG.debug(" user {} role {}", req.getSession().getAttribute("senior"), SENIOR_CASHIER.name.equals(user.getRole()));
 
-        LOG.debug(" user {} role {}", req.getSession().getAttribute("senior"), SENIOR_CASHIER.name.equals(user.getRole()));
-
-        User userInSession = (User) req.getSession().getAttribute("user");
-        if (userInSession == null) {
-            userInSession = new User();
-        }
-        if (SENIOR_CASHIER.name.equals(user.getRole())) {
-            if (CASHIER.name.equals(userInSession.getRole())) {
-                req.getSession().setAttribute("user", userInSession);
-                req.getSession().setAttribute("senior", user);
-                req.getSession().setAttribute("cashier", userInSession);
-
-                req.getRequestDispatcher(toCheck).forward(req, resp);
-                return;
-            } else {
-                req.getSession().setAttribute("user", user);
-                req.getRequestDispatcher(seniorPage).forward(req, resp);
-                return;
+            User userInSession = (User) req.getSession().getAttribute("user");
+            if (userInSession == null) {
+                userInSession = new User();
             }
-        }
-        req.getSession().setAttribute("user", user);
+            if (SENIOR_CASHIER.name.equals(user.getRole())) {
+                if (CASHIER.name.equals(userInSession.getRole())) {
+                    req.getSession().setAttribute("user", userInSession);
+                    req.getSession().setAttribute("senior", user);
+                    req.getSession().setAttribute("cashier", userInSession);
 
-        if (GUEST.name.equals(user.getRole())) req.getRequestDispatcher(guestPage).forward(req, resp);
-        if (MERCHANDISER.name.equals(user.getRole())) req.getRequestDispatcher(merchandiser).forward(req, resp);
-        if (CASHIER.name.equals(user.getRole())) req.getRequestDispatcher(cashierPage).forward(req, resp);
+                    req.getRequestDispatcher(toCheck).forward(req, resp);
+                    return;
+                } else {
+                    req.getSession().setAttribute("user", user);
+                    req.getRequestDispatcher(seniorPage).forward(req, resp);
+                    return;
+                }
+            }
+            req.getSession().setAttribute("user", user);
+
+            if (GUEST.name.equals(user.getRole())) req.getRequestDispatcher(guestPage).forward(req, resp);
+            if (MERCHANDISER.name.equals(user.getRole())) req.getRequestDispatcher(merchandiser).forward(req, resp);
+            if (CASHIER.name.equals(user.getRole())) req.getRequestDispatcher(cashierPage).forward(req, resp);
+        } catch (Exception e) {
+            req.getRequestDispatcher(toWrong).forward(req, resp);
+        }
     }
 
 }

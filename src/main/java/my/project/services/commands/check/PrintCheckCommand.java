@@ -1,6 +1,8 @@
 package my.project.services.commands.check;
 
 import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import my.project.model.Product;
 import my.project.model.Transaction;
@@ -16,6 +18,8 @@ import java.util.Map;
 public class PrintCheckCommand implements CommandCheck {
     HttpServletRequest req;
     HttpServletResponse resp;
+    public static final String FONT = "/fonts/arial.ttf";
+    public static final int FONTSIZE = 12;
 
     public PrintCheckCommand(HttpServletRequest req, HttpServletResponse resp) {
         this.req = req;
@@ -46,7 +50,7 @@ public class PrintCheckCommand implements CommandCheck {
         Map<Product, Double> prodWithPrice = (Map<Product, Double>) req.getAttribute("products");
         float pageWidth = 150f;
         float pageHeight = 150f + (30 * prodWithPrice.size());
-        float margin = 2;
+        float margin = 5;
 
         User user = (User) req.getSession().getAttribute("user");
         Transaction check = (Transaction) req.getSession().getAttribute("check");
@@ -61,16 +65,24 @@ public class PrintCheckCommand implements CommandCheck {
             doc.setPageSize(new Rectangle(pageWidth, pageHeight));
             doc.setMargins(margin, margin, margin, margin);
             doc.open();
-            doc.add(new Paragraph(String.format("Check id: %s", check.getId()), new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.ITALIC)));
-            doc.add(new Paragraph(String.format("Cashier id: %s", user.getId()), new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD)));
-            doc.add(new Paragraph(String.format("Print date: %s", new Date())));
-
+            PdfPTable table = new PdfPTable(1);
+            table.addCell(new Phrase(String.format("Check id: %s", check.getId()), new Font(Font.FontFamily.HELVETICA, FONTSIZE, Font.BOLD)));
+            table.addCell(new Phrase(String.format("Cashier id: %s", user.getId()), new Font(Font.FontFamily.HELVETICA, FONTSIZE, Font.ITALIC)));
+            table.addCell(new Phrase(String.format("Print date: %s", new Date())));
             for (Map.Entry<Product, Double> prod : prodWithPrice.entrySet()) {
-                doc.add(new Paragraph(prod.getKey().getName()));
-                doc.add(new Paragraph(String.format("   %s x %s = %s", prod.getKey().getPrice(), prod.getKey().getNumber(), prod.getValue())));
+                String text = String.format("%s\n\t%s x %s = %s",prod.getKey().getName(), prod.getKey().getPrice(), prod.getKey().getNumber(), prod.getValue());
+                table.addCell(new Phrase(text));
             }
-            doc.add(new Paragraph(String.format("Total sum: %s", req.getAttribute("totalSum"))));
-
+            table.addCell(new Phrase(String.format("Total sum: %s", req.getAttribute("totalSum"))));
+            BaseFont baseFont = BaseFont.createFont(FONT, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            String toSplit = (String) req.getSession().getAttribute("print");
+            String[] wishAndThanks = toSplit.split("///");
+            String thanks = wishAndThanks[0];
+            String wish = wishAndThanks[1];
+            Font font = new Font(baseFont, FONTSIZE, Font.NORMAL);
+            table.addCell(new Phrase(thanks, font));
+            table.addCell(new Phrase(wish, font));
+            doc.add(table);
         } catch (DocumentException | IOException e) {
             e.printStackTrace();
         } finally {

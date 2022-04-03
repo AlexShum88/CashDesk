@@ -19,13 +19,18 @@ import java.io.IOException;
  */
 public class MerchandiserServlet extends HttpServlet {
     private static final Logger LOG = LogManager.getLogger(MerchandiserServlet.class);
+    private String toWrong = "views/wrong.jsp";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DbProductManager productManager = DbProductManager.getInstance();
-        req.getSession().setAttribute("dbm", productManager);
+        try {
+            DbProductManager productManager = DbProductManager.getInstance();
+            req.getSession().setAttribute("dbm", productManager);
 
-        resp.sendRedirect("MerchPRG");
+            resp.sendRedirect("MerchPRG");
+        } catch (Exception e) {
+            req.getRequestDispatcher(toWrong).forward(req, resp);
+        }
     }
 
     @Override

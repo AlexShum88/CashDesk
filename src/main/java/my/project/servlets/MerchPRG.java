@@ -19,11 +19,16 @@ import java.util.List;
 @WebServlet(name = "MerchPRG", value = "/MerchPRG")
 public class MerchPRG extends HttpServlet {
     private static final Logger LOG = LogManager.getLogger(MerchPRG.class);
+    private String toWrong = "views/wrong.jsp";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("listOfProduct", viewProduct(req));
-        req.getRequestDispatcher("views/workPlace/merch.jsp").forward(req, resp);
+        try {
+            req.setAttribute("listOfProduct", viewProduct(req));
+            req.getRequestDispatcher("views/workPlace/merch.jsp").forward(req, resp);
+        } catch (Exception e) {
+            req.getRequestDispatcher(toWrong).forward(req, resp);
+        }
     }
 
     /**

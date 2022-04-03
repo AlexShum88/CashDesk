@@ -15,20 +15,24 @@ import java.io.IOException;
  */
 public class ChangeRoleServlet extends HttpServlet {
     private static final Logger LOG = LogManager.getLogger(ChangeRoleServlet.class);
+    private String toWrong = "views/wrong.jsp";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOG.info("in change role serv");
+        try {
+            String login = req.getParameter("login");
+            LOG.debug("useername = {}", req.getParameter("login"));
 
-        String login = req.getParameter("login");
-        LOG.debug("useername = {}", req.getParameter("login"));
-
-        String role = req.getParameter("role");
-        LOG.debug("new role  = {}", req.getParameter("role"));
+            String role = req.getParameter("role");
+            LOG.debug("new role  = {}", req.getParameter("role"));
 
 
-        var dbm = (DbManager) getServletContext().getAttribute("dbManager");
-        dbm.changeRole(login, role);
-        resp.sendRedirect("admin");
+            var dbm = (DbManager) getServletContext().getAttribute("dbManager");
+            dbm.changeRole(login, role);
+            resp.sendRedirect("admin");
+        } catch (Exception e) {
+            req.getRequestDispatcher(toWrong).forward(req, resp);
+        }
     }
 }

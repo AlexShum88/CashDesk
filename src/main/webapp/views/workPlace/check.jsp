@@ -52,7 +52,7 @@
                             <input class="w3-btn w3-blue w3-round-large w3-margin-top" type="submit" name="setNumber"
                                    value="<f:message key="Accept change" />">
                                 <%--message if cant add product--%>
-                            <c:if test="${sessionScope.cant== productEntity.key.id}">
+                            <c:if test="${sessionScope.cant == productEntity.key.id}">
                             <script>
                                 function cantAlert() {
                                     alert("<f:message key="noSuchNum" /> ${productEntity.key.name} ");
@@ -76,7 +76,8 @@
                             <%--delete product--%>
                         <c:if test="${sessionScope.redact !=null}">
                         <td>
-                            <input class="w3-btn w3-red w3-round-large w3-margin-top" type="submit" name="deleteProd" value="<f:message key="delete product" />">
+                            <input class="w3-btn w3-red w3-round-large w3-margin-top" type="submit" name="deleteProd"
+                                   value="<f:message key="delete product" />">
                         </td>
                         </c:if>
                 </tr>

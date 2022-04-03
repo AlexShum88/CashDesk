@@ -24,11 +24,14 @@ public class RegistrationServlet extends HttpServlet {
         String toGuest = "views/guest.jsp";
         String toWrong = "views/wrong.jsp";
         LOG.info("in registration servlet#doPost");
-        var dbm = (DbManager) getServletContext().getAttribute("dbManager");
-        User user = new User(req.getParameter("login"), req.getParameter("password"), "guest");
-        if (dbm.InsertUser(user)) {
-            req.getRequestDispatcher(toGuest).forward(req, resp);
-        } else req.getRequestDispatcher(toWrong).forward(req, resp);
-
+        try {
+            var dbm = (DbManager) getServletContext().getAttribute("dbManager");
+            User user = new User(req.getParameter("login"), req.getParameter("password"), "guest");
+            if (dbm.InsertUser(user)) {
+                req.getRequestDispatcher(toGuest).forward(req, resp);
+            } else req.getRequestDispatcher(toWrong).forward(req, resp);
+        } catch (Exception e) {
+            req.getRequestDispatcher(toWrong).forward(req, resp);
+        }
     }
 }

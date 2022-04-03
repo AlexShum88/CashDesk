@@ -12,11 +12,15 @@ import java.io.IOException;
  */
 @WebServlet(name = "SeniorPRG", value = "/SeniorPRG")
 public class SeniorPRG extends HttpServlet {
-    String toSenior = "/views/workPlace/senior_cashier.jsp";
+    private String toSenior = "/views/workPlace/senior_cashier.jsp";
+    private String toWrong = "views/wrong.jsp";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        req.getRequestDispatcher(toSenior).forward(req, resp);
+        try {
+            req.getRequestDispatcher(toSenior).forward(req, resp);
+        } catch (Exception e) {
+            req.getRequestDispatcher(toWrong).forward(req, resp);
+        }
     }
 }

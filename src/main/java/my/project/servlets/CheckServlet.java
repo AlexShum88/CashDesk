@@ -20,6 +20,7 @@ import java.io.IOException;
  */
 public class CheckServlet extends HttpServlet {
     private static final Logger LOG = LogManager.getLogger(CheckServlet.class);
+    private String toWrong = "views/wrong.jsp";
 
     /**
      * look for exit and redact flags end execute its commands
@@ -30,15 +31,18 @@ public class CheckServlet extends HttpServlet {
         LOG.info("checkServlet#doPost");
         LOG.debug("session id {}", req.getSession().getId());
         LOG.debug("check is {}", req.getAttribute("check"));
+        try {
+            //if exit from senior mode
+            if (req.getParameter("exit") != null) new ExitCommand(req).execute();
+            //if redact as senior
+            if (req.getParameter("redact") != null || req.getSession().getAttribute("ready") != null) {
+                new IsSeniorComand(req).execute();
+            }
 
-        //if exit from senior mode
-        if (req.getParameter("exit") != null) new ExitCommand(req).execute();
-        //if redact as senior
-        if (req.getParameter("redact") != null || req.getSession().getAttribute("ready") != null) {
-            new IsSeniorComand(req).execute();
+            resp.sendRedirect("CheckPRG");
+        } catch (Exception e) {
+            req.getRequestDispatcher(toWrong).forward(req, resp);
         }
-
-        resp.sendRedirect("CheckPRG");
     }
 
     /**
@@ -56,41 +60,42 @@ public class CheckServlet extends HttpServlet {
         LOG.debug("start log param:");
         req.getParameterMap().keySet().forEach(LOG::debug);
         LOG.debug("end log param;");
+        try {
+            //chose action
+            if (req.getParameter("createCheck") != null) new CreateCheckCommand(req).execute();
+            if (req.getParameter("selectedProduct") != null) new AddSelectedProductCommand(req).execute();
+            if (req.getParameter("setNumber") != null) new SetPriceByNumberCommand(req).execute();
+            if (req.getParameter("closeCheck") != null) new CloseCheckCommand(req, resp).execute();
+            if (req.getParameter("deleteProd") != null) new DeleteProductFromCheckCommand(req).execute();
+            if (req.getParameter("to cashier") != null) {
+                req.getRequestDispatcher(toCashierWorkPlace).forward(req, resp);
+                return;
+            }
+            if (req.getParameter("deleteCheck") != null) {
+                new DeleteCheckCommand(req).execute();
+                req.getRequestDispatcher(toCashierWorkPlace).forward(req, resp);
+                return;
+            }
 
-        //chose action
-        if (req.getParameter("createCheck") != null) new CreateCheckCommand(req).execute();
-        if (req.getParameter("selectedProduct") != null) new AddSelectedProductCommand(req).execute();
-        if (req.getParameter("setNumber") != null) new SetPriceByNumberCommand(req).execute();
-        if (req.getParameter("closeCheck") != null) new CloseCheckCommand(req, resp).execute();
-        if (req.getParameter("deleteProd") != null) new DeleteProductFromCheckCommand(req).execute();
-        if (req.getParameter("to cashier") != null) {
-            req.getRequestDispatcher(toCashierWorkPlace).forward(req, resp);
-            return;
+            if (req.getParameter("exitUser") != null) {
+                new userExitCommand(req).execute();
+                req.getRequestDispatcher(toIndex).forward(req, resp);
+                return;
+            }
+            //set total sum to db
+            new SetTotalSumCommand(req).execute();
+
+            if (req.getParameter("print") != null) {
+                req.getSession().setAttribute("print", req.getParameter("messageForPrint"));
+
+            }
+
+            //make attribute to translate to jsp
+            resp.sendRedirect("CheckPRG");
+        } catch (Exception e) {
+            req.getRequestDispatcher(toWrong).forward(req, resp);
         }
-        if (req.getParameter("deleteCheck") != null) {
-            new DeleteCheckCommand(req).execute();
-            req.getRequestDispatcher(toCashierWorkPlace).forward(req, resp);
-            return;
-        }
-
-        if (req.getParameter("exitUser") != null) {
-            new userExitCommand(req).execute();
-            req.getRequestDispatcher(toIndex).forward(req, resp);
-            return;
-        }
-        //set total sum to db
-        new SetTotalSumCommand(req).execute();
-
-        if (req.getParameter("print") != null) {
-            req.getSession().setAttribute("print", "print");
-
-        }
-
-        //make attribute to translate to jsp
-        resp.sendRedirect("CheckPRG");
     }
-
-
 
 
 }

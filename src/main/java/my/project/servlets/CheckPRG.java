@@ -21,15 +21,20 @@ import java.util.Map;
  */
 @WebServlet(name = "CheckPRG", value = "/CheckPRG")
 public class CheckPRG extends HttpServlet {
+    private String toCheck = "/views/workPlace/check.jsp";
+    private String toWrong = "views/wrong.jsp";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String toCheck = "/views/workPlace/check.jsp";
-        setAttributeForJsp(req);
-        if (req.getSession().getAttribute("print") != null) {
-            new PrintCheckCommand(req, resp).execute();
+        try {
+            setAttributeForJsp(req);
+            if (req.getSession().getAttribute("print") != null) {
+                new PrintCheckCommand(req, resp).execute();
+            }
+            req.getRequestDispatcher(toCheck).forward(req, resp);
+        } catch (Exception e) {
+            req.getRequestDispatcher(toWrong).forward(req, resp);
         }
-        req.getRequestDispatcher(toCheck).forward(req, resp);
     }
 
     /**

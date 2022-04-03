@@ -13,17 +13,25 @@ import java.io.IOException;
  * servlet to work with senior cashier main functional
  */
 public class SeniorServlet extends HttpServlet {
+    private String toWrong = "views/wrong.jsp";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("goods") != null) new CreateGoodsReportCommand(req).execute();
-        if (req.getParameter("cashiers") != null) new CreateCashiersCommand(req).execute();
-        resp.sendRedirect("SeniorPRG");
+        try {
+            if (req.getParameter("goods") != null) new CreateGoodsReportCommand(req).execute();
+            if (req.getParameter("cashiers") != null) new CreateCashiersCommand(req).execute();
+            resp.sendRedirect("SeniorPRG");
+        } catch (Exception e) {
+            req.getRequestDispatcher(toWrong).forward(req, resp);
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        resp.sendRedirect("SeniorPRG");
+        try {
+            resp.sendRedirect("SeniorPRG");
+        } catch (Exception e) {
+            req.getRequestDispatcher(toWrong).forward(req, resp);
+        }
     }
 }
