@@ -16,17 +16,22 @@
 </head>
 <f:bundle basename="locale">
 <body>
-<h3><f:message key="Hello guest"/></h3>
-<br>
-<hr>
-<br>
-<h4><f:message key="soon"/></h4>
-<br>
-<hr>
-<br>
-<div>
-    <button class="w3-btn w3-blue w3-round-large" onclick="location.href='index.jsp'"><f:message key="To login"/></button>
-</div>
-</f:bundle>
+    <div class="w3-container">
+        <h3><f:message key="Hello guest"/></h3>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="w3-container">
+        <h4><f:message key="soon"/></h4>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="w3-container">
+        <button class="w3-btn w3-blue w3-round-large" onclick="location.href='index.jsp'"><f:message
+                key="To login"/></button>
+    </div>
+    </f:bundle>
 </body>
 </html>
