@@ -41,7 +41,12 @@
                         <input type="hidden" name="productId" value="${productEntity.key.id}">
                         <td>
                                 <%--name--%>
-                            <label>${productEntity.key.name}</label>
+                            <c:if test="${productEntity.key.number == 0}">
+                                <label class="w3-text-red">${productEntity.key.name}</label>
+                            </c:if>
+                            <c:if test="${productEntity.key.number != 0}">
+                                <label class="w3-text-black">${productEntity.key.name}</label>
+                            </c:if>
                         </td>
                         <td>
                                 <%--number--%>

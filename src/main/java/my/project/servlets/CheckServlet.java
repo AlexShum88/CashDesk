@@ -93,6 +93,7 @@ public class CheckServlet extends HttpServlet {
             //make attribute to translate to jsp
             resp.sendRedirect("CheckPRG");
         } catch (Exception e) {
+            e.printStackTrace();
             req.getRequestDispatcher(toWrong).forward(req, resp);
         }
     }
